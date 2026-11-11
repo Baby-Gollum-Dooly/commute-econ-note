@@ -184,6 +184,7 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
 @media (prefers-reduced-motion: reduce) { .bar i { transition: none; } }
 </style>
 
+
 <header class="topbar">
   <div class="topbar-in">
     <div class="brand">출근길 경제노트<span>11월 11일 수</span></div>
@@ -212,10 +213,10 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
     </ol>
     <ol id="toc-issues" data-toc="issues" hidden>
       <li data-for="issues-glossary"><a href="#issues-glossary"><span class="t">2분</span>먼저 알아둘 단어</a></li>
-      <li data-for="p1"><a href="#p1"><span class="t">4분</span>국회와 부동산 세제</a></li>
+      <li data-for="p1"><a href="#p1"><span class="t">4분</span>예산 심사와 종부세</a></li>
       <li data-for="p2"><a href="#p2"><span class="t">3분</span>내란 재판 대법원</a></li>
       <li data-for="p3"><a href="#p3"><span class="t">5분</span>미국 선거와 국제 정세</a></li>
-      <li data-for="p4"><a href="#p4"><span class="t">2분</span>겨울철 생활 정책</a></li>
+      <li data-for="p4"><a href="#p4"><span class="t">2분</span>생활 정책</a></li>
     </ol>
     <ol id="toc" data-toc="econ">
       <li data-for="glossary"><a href="#glossary"><span class="t">3분</span>먼저 알아둘 단어</a></li>
@@ -224,7 +225,7 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
       <li data-for="s2"><a href="#s2"><span class="t">4분</span>미 국채금리 5% 근접</a></li>
       <li data-for="s3"><a href="#s3"><span class="t">5분</span>코스피 급등 다음 날</a></li>
       <li data-for="s4"><a href="#s4"><span class="t">4분</span>원/달러 환율</a></li>
-      <li data-for="s5"><a href="#s5"><span class="t">4분</span>엔비디아와 반도체</a></li>
+      <li data-for="s5"><a href="#s5"><span class="t">4분</span>엔비디아 급락</a></li>
       <li data-for="s6"><a href="#s6"><span class="t">3분</span>국제유가 하락</a></li>
     </ol>
   </nav>
@@ -233,11 +234,11 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
    <div id="view-issues" data-view="issues" data-base="2" data-end="issues-sources" hidden>
     <div class="head">
       <p class="date">2026년 11월 11일 수요일, 최근 1주 기사 기준</p>
-      <h1>미국 의회는 민주당으로 넘어갔고, 국내에서는 세법과 예산 심사가 한창입니다</h1>
+      <h1>예산 심사가 시작됐고, 종부세 공제를 두고 여당과 청와대 의견이 갈립니다</h1>
       <p>경제 기사는 아니지만 업무 대화나 시장 흐름에 자주 나오는 소식을 네 갈래로 묶었습니다. 단어 정리를 포함해 약 16분 분량입니다.</p>
       <div class="legend">
         <span><span class="tag fact">확정</span>결정되거나 발표된 일</span>
-        <span><span class="tag plan">진행 중</span>심사나 협상, 집계 중</span>
+        <span><span class="tag plan">진행 중</span>심사나 협상, 집계 중이거나 예정</span>
         <span><span class="tag rule">시행 중</span>이미 적용되는 대책</span>
       </div>
     </div>
@@ -245,50 +246,57 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
     <section class="end-block glossary" id="issues-glossary">
       <h2>먼저 알아둘 단어</h2>
       <dl>
-        <div class="row"><dt>정기국회</dt><dd>매년 9월부터 100일 동안 열리는 국회. 다음 해 예산안과 세법을 처리함</dd></div>
         <div class="row"><dt>예결위</dt><dd>예산결산특별위원회. 정부 예산안을 심사하고 고치는 국회 위원회</dd></div>
+        <div class="row"><dt>예산안조정소위</dt><dd>예결위 안에서 부처별 심사가 끝난 뒤 증액과 감액을 조정하는 소위원회</dd></div>
+        <div class="row"><dt>특활비</dt><dd>특수활동비. 영수증 없이 쓸 수 있어 해마다 삭감 논란이 나오는 경비</dd></div>
+        <div class="row"><dt>고위당정협의회</dt><dd>여당 지도부와 정부 고위 인사가 함께 정책을 조율하는 회의</dd></div>
         <div class="row"><dt>종부세</dt><dd>종합부동산세. 일정 금액 넘는 주택과 토지를 가진 사람에게 매기는 세금</dd></div>
-        <div class="row"><dt>공시가격</dt><dd>정부가 매년 정하는 부동산 가격. 세금 계산 기준이 됨</dd></div>
-        <div class="row"><dt>공정시장가액비율</dt><dd>공제 후 금액 중 실제 과세 대상으로 잡는 비율. 현재 종부세는 60%</dd></div>
+        <div class="row"><dt>기본공제</dt><dd>세금을 계산하기 전에 과세 대상 금액에서 빼 주는 금액</dd></div>
         <div class="row"><dt>실거주</dt><dd>집을 갖고 있으면서 실제로 그 집에 사는 것</dd></div>
         <div class="row"><dt>전원합의체</dt><dd>대법원장과 대법관 전원이 함께 심리하는 재판부</dd></div>
         <div class="row"><dt>구속기간</dt><dd>재판 중인 피고인을 가둘 수 있는 법정 기간. 넘기면 석방 후 재판 계속</dd></div>
-        <div class="row"><dt>특검</dt><dd>특별검사. 특정 사건을 맡기 위해 따로 임명된 검사와 수사팀</dd></div>
         <div class="row"><dt>중간선거</dt><dd>미국 대통령 임기 중간에 하원 전체와 상원 3분의 1을 뽑는 선거</dd></div>
         <div class="row"><dt>분점정부</dt><dd>대통령 소속 정당과 의회 다수당이 다른 상태</dd></div>
-        <div class="row"><dt>하원의장</dt><dd>미국 하원 다수당 대표가 맡는 자리. 법안 상정 순서를 정함</dd></div>
-        <div class="row"><dt>G7</dt><dd>미국, 일본, 독일, 영국, 프랑스, 이탈리아, 캐나다 7개국 모임</dd></div>
+        <div class="row"><dt>최소보장제</dt><dd>전세사기 피해자가 경매나 공매가 끝나기 전에도 보증금 일부를 먼저 지원받는 제도</dd></div>
       </dl>
     </section>
 
     <article class="story" id="p1" data-min="4">
       <div class="story-meta"><span class="n">1/4</span><span>국내 정치, 약 4분</span></div>
-      <h2>정기국회 세법 심사, 종부세는 실거주 여부로 공제가 갈립니다</h2>
-      <p>국회는 지금 내년 예산안과 세법 개정안을 심사하고 있습니다. 오늘 오후에도 예산결산특별위원회 전체회의가 잡혀 있습니다. 세법은 보통 12월 본회의에서 확정됩니다.</p>
+      <h2>예결위 비경제부처 심사 시작, 종부세 공제는 당청 이견이 이어집니다</h2>
       <ul class="items">
         <li>
-          <div class="item-head"><span class="tag plan">진행 중</span><strong>1주택 종부세 공제, 실거주 14억원과 비거주 12억원</strong></div>
-          <p>정부가 9월 국무회의에서 확정한 개편안은 1주택자 종부세 공제 기준을 공시가격 12억원에서 14억원으로 올리되, 실제로 사는 사람에게만 적용하는 구조입니다. 집을 갖고 있지만 살지 않으면 지금처럼 12억원을 공제받습니다. 처음엔 비거주자 공제를 더 줄이려 했지만 발표 29일 만에 접었습니다.</p>
-          <p>취학, 전근, 질병, 요양으로 집을 비운 경우 최대 3년을 거주로 인정하는 안이 들어 있고, 지방 발령이나 부모 봉양까지 인정할지가 국회 쟁점입니다. 여당 안에서도 비거주자 공제를 실거주 수준으로 맞추자는 의견이 나와 최종안은 바뀔 수 있습니다.</p>
+          <div class="item-head"><span class="tag plan">진행 중</span><strong>예결위, 11일과 12일 비경제부처 예산 심사</strong><span class="when">11월 11일</span></div>
+          <p>예결위는 이틀 동안 법무부, 통일부, 외교부, 국방부, 행정안전부, 경찰청, 중대범죄수사청, 인사혁신처 예산을 심사합니다. 내년 총지출 정부안은 820조9천억원으로 올해보다 12.8% 늘었습니다. 국민의힘은 청와대와 중수청 특활비 등 약 27조원을 깎겠다는 방침이고, 미래대응기금 여유자금 104조4천억원을 국채 상환에 쓰라고 주장합니다. 민주당은 예산 규모를 지키고 지역화폐 예산을 되살리겠다는 입장입니다.</p>
+          <p>예산안조정소위는 16일부터 열리고, 처리 시한은 다음 달 2일입니다.</p>
         </li>
         <li>
-          <div class="item-head"><span class="tag fact">확정</span><strong>올해 11월 고지서는 현행 기준</strong></div>
-          <p>개편안은 2027년부터 적용됩니다. 이달 나오는 종부세 고지서는 지금처럼 공제 12억원, 공정시장가액비율 60%로 계산됩니다.</p>
+          <div class="item-head"><span class="tag plan">진행 중</span><strong>1주택 종부세 기본공제, 여당은 14억원 일원화 요구</strong><span class="when">8일 당정협의</span></div>
+          <p>정부가 9월에 확정해 국회에 낸 세법 개정안은 실제로 사는 1주택자의 기본공제를 12억원에서 14억원으로 올리고, 집을 비워 둔 1주택자는 12억원을 유지하는 구조입니다. 민주당은 8일 고위당정협의회에서 거주 여부와 관계없이 14억원으로 통일하자고 정부에 강하게 건의했습니다. 청와대 관계자는 실거주와 비거주 차등을 없애면 정책 기조를 바꾸는 것이라며 부정적으로 답했고, 정부도 10일 실거주 우대 원칙을 다시 밝혔습니다.</p>
+          <p>당 안에서도 의견이 갈립니다. 최민희 최고위원은 부자 감세라며 반대했고, 정청래 전 대표도 정부 정책의 일관성이 지켜져야 한다는 취지로 글을 올렸습니다. 이재명 대통령은 11일 김민석 대표, 한병도 원내대표와 만나 부동산 세제를 포함한 현안을 조율할 예정입니다.</p>
         </li>
       </ul>
       <div class="concept">
-        <h3>알아둘 개념, 공시가격과 공정시장가액비율</h3>
-        <p>공시가격은 정부가 매년 정하는 부동산 가격으로 실제 거래가보다 낮은 편입니다. 종부세는 공시가격에서 공제액을 뺀 뒤 공정시장가액비율을 곱한 금액에 세율을 매깁니다. 비율이 60%라면 공제 후 금액의 60%만 과세 대상이 됩니다.</p>
+        <h3>알아둘 개념, 기본공제와 실거주 구분</h3>
+        <p>종부세는 공시가격 합계에서 기본공제를 뺀 금액을 기준으로 계산합니다. 공제액이 12억원에서 14억원으로 오르면 공시가격 13억원짜리 집 한 채는 과세 대상에서 빠집니다. 정부안은 이 혜택을 실제로 사는 사람에게만 주려는 것이고, 여당 일부는 서울과 수도권 민심을 이유로 모든 1주택자에게 주자고 합니다.</p>
       </div>
-      <p class="link">세법이 확정되는 12월까지 부동산 관련 기사에서 실거주 인정 범위가 계속 나올 겁니다.</p>
+      <p class="link">세법이 확정되는 12월까지 부동산 기사에서 실거주 인정 범위와 공제 일원화 여부가 계속 나올 겁니다.</p>
       <div class="story-foot"><button type="button" class="done-btn" data-done="p1" aria-pressed="false">다 읽었어요</button></div>
     </article>
 
     <article class="story" id="p2" data-min="3">
       <div class="story-meta"><span class="n">2/4</span><span>사법, 약 3분</span></div>
-      <h2>한덕수 전 총리와 이상민 전 장관, 대법원 선고 전에 구속기간이 끝날 수 있습니다</h2>
-      <p>내란 중요임무 종사 혐의로 재판을 받는 두 사람은 5월 항소심 선고를 받았습니다. 한 전 총리는 1심 징역 23년에서 2심 징역 15년으로 줄었고, 이 전 장관은 1심 징역 7년에서 2심 징역 9년으로 늘었습니다.</p>
-      <p>대법원은 8월 이 사건을 전원합의체에 넘겼고 9월 29일 첫 심리를 열었습니다. 선고 날짜는 아직 정해지지 않았습니다. 6일 보도 기준으로 한 전 총리의 구속기간은 이달 20일, 이 전 장관은 12월 18일에 끝납니다. 내란 특검팀은 5일 대법원에 구속기간이 끝나기 전에 선고해 달라는 의견서를 냈습니다.</p>
+      <h2>한덕수 전 총리 구속기간 만료 하루 전에 대법원 전원합의체가 두 번째 심리를 엽니다</h2>
+      <ul class="items">
+        <li>
+          <div class="item-head"><span class="tag plan">예정</span><strong>대법원 전원합의체, 한덕수와 이상민 사건 두 번째 심리</strong><span class="when">11월 19일</span></div>
+          <p>내란 중요임무 종사 혐의 상고심입니다. 대법원은 9월 29일 첫 심리를 열었고, 19일이 두 번째입니다. 이날은 선고기일이 아닙니다. 하급심은 한 전 총리에게 징역 15년, 이 전 장관에게 징역 9년을 선고했습니다. 선고 날짜는 아직 잡히지 않았습니다.</p>
+        </li>
+        <li>
+          <div class="item-head"><span class="tag plan">예정</span><strong>한 전 총리 구속기간 20일 만료, 석방 가능성</strong><span class="when">11월 20일</span></div>
+          <p>한 전 총리의 구속기간은 7월과 9월에 한 번씩 갱신됐고 20일에 끝납니다. 그때까지 선고가 나오지 않으면 주심인 오경미 대법관이 구속취소 결정을 하거나 직권으로 조건부 보석을 결정할 수 있어 석방 가능성이 큽니다. 이 전 장관은 12월 18일에 만료됩니다. 내란 특검은 석방되면 도주와 형 집행 차질이 우려된다는 입장이었습니다.</p>
+        </li>
+      </ul>
       <div class="concept">
         <h3>알아둘 개념, 전원합의체와 구속기간</h3>
         <p>대법원 사건은 보통 대법관 4명이 맡지만, 사회적 파장이 크거나 기존 판례를 바꿀 수 있는 사건은 대법원장과 대법관 전원이 함께 심리하는 전원합의체로 넘깁니다.</p>
@@ -299,45 +307,44 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
 
     <article class="story" id="p3" data-min="5">
       <div class="story-meta"><span class="n">3/4</span><span>국제, 약 5분</span></div>
-      <h2>미국 중간선거에서 민주당이 상하원을 모두 가져갔습니다</h2>
+      <h2>미국 중간선거에서 민주당이 상하원 다수를 확보했고, 러시아와 우크라이나 협상이 열렸습니다</h2>
       <ul class="items">
         <li>
           <div class="item-head"><span class="tag plan">집계 중</span><strong>미국 중간선거, 민주당 상하원 다수</strong><span class="when">11월 3일 선거</span></div>
-          <p>AP 집계 기준으로 하원은 민주당 254석, 공화당 162석이고 19석은 아직 확정되지 않았습니다. 상원은 민주당이 공화당 의석 7개를 뺏어 54대 44가 됐고, 미시시피와 알래스카 두 곳은 표 차이가 작아 개표가 이어지고 있습니다. 하원의장은 민주당 하킴 제프리스 원내대표가 맡을 것으로 보입니다. 새 의회는 2027년 1월 3일 열립니다.</p>
-          <p>이란 전쟁, 기름값 상승, 경제 불안에 대한 불만이 표로 나타났다는 분석이 많습니다.</p>
+          <p>집계 기관마다 의석수가 다릅니다. 로이터의 8일 집계로 하원은 민주당 250석, 공화당 157석이고, 한 국내 보도는 같은 시점 민주당 240석, 공화당 139석으로 전했습니다. 상원은 민주당 54석, 공화당 44석이고 미시시피와 알래스카는 개표가 이어지고 있습니다. 하원 과반은 218석, 상원 과반은 51석입니다. 공식 인증 전의 잠정 수치입니다.</p>
         </li>
         <li>
-          <div class="item-head"><span class="tag plan">진행 중</span><strong>러시아와 우크라이나, 9개월 만에 협상 재개</strong><span class="when">10~11일 아부다비</span></div>
-          <p>미국이 중재하는 3자 협상이 2월 이후 처음 열렸습니다. 미국 측에서는 재러드 쿠슈너 특사가 나왔고 러시아는 메딘스키 대통령 보좌관이 대표단을 이끌었습니다. 안전보장 방안, 포로 교환, 아이들 송환을 논의했습니다. 젤렌스키 대통령은 첫날 협상이 건설적이었다고 했지만, 라브로프 러시아 외무장관은 이후 계획을 모른 채 즉시 휴전에 동의하지는 않겠다고 했습니다. 영토 문제는 이번에 결론이 나지 않을 거라는 전망이 많습니다.</p>
+          <div class="item-head"><span class="tag plan">진행 중</span><strong>러시아와 우크라이나, 미국 중재로 아부다비 협상</strong><span class="when">10일부터 이틀</span></div>
+          <p>9개월 만에 열린 미국 중재 협상의 첫날 회담은 4시간 가까이 이어졌습니다. 젤렌스키 대통령은 첫날이 건설적이고 내용이 있었다고 했고, 포로 교환과 아이들 송환 같은 인도적 사안이 논의됐다고 우크라이나 고위 당국자가 전했습니다. 루비오 미 국무장관은 매우 생산적이었다면서도 인내가 필요하다고 했습니다. 양측 입장 차이가 커서 포괄적 합의를 기대하는 전망은 적습니다. 둘째 날인 오늘 결과는 확인하지 못했습니다.</p>
         </li>
         <li>
-          <div class="item-head"><span class="tag fact">확정</span><strong>G7 외교장관회의 파리 개최, 한국도 초청</strong><span class="when">9~10일</span></div>
-          <p>프랑스는 한국, 브라질, 이집트, 사우디아라비아, 우크라이나를 초청했습니다. 루비오 미 국무장관은 이 자리에서 대이란 제재와 해상 봉쇄가 효과를 내고 있어 대규모 전투는 필요 없다고 설명했습니다. 경제 탭 6번 기사의 유가 하락과 이어지는 내용입니다.</p>
+          <div class="item-head"><span class="tag plan">예정</span><strong>미국, 이란 추가 공격 보류</strong><span class="when">9일과 10일 발언</span></div>
+          <p>트럼프 대통령은 9일 카타르 총리 등 중동 국가들의 요청을 받아 이란에 대한 새 군사 공격을 보류할 계획이라고 했고, 10일에는 재공격이 필요하지 않다며 전쟁 종식을 향한 진전이 있다고 밝혔습니다. 루비오 장관은 같은 목적을 경제적 수단으로 달성하고 있다고 설명했습니다. 이란 측 고위 관계자는 미국과 협상이 진행 중이라는 주장을 부인했습니다. 경제 탭 6번 기사의 유가 하락과 이어지는 내용입니다.</p>
         </li>
       </ul>
       <div class="concept">
         <h3>알아둘 개념, 중간선거와 분점정부</h3>
         <p>미국 대통령 임기 4년 중간에 치르는 선거로 하원 전체와 상원 3분의 1을 새로 뽑습니다. 대통령과 의회 다수당이 다르면 분점정부라고 부릅니다. 법안과 예산은 의회를 통과해야 해서 대통령 정책을 밀어붙이기 어려워지고, 행정명령에 기대는 경우가 늘어납니다.</p>
       </div>
-      <p class="link">관세, 전쟁 비용, 감세처럼 의회 예산과 법이 필요한 정책은 내년 1월 이후 추진 방식이 달라질 수 있습니다. 한국 수출 기업도 영향을 받는 부분입니다.</p>
+      <p class="link">관세, 전쟁 비용, 감세처럼 의회 예산과 법이 필요한 정책은 새 의회가 열린 뒤 추진 방식이 달라질 수 있습니다. 한국 수출 기업도 영향을 받는 부분입니다.</p>
       <div class="story-foot"><button type="button" class="done-btn" data-done="p3" aria-pressed="false">다 읽었어요</button></div>
     </article>
 
     <article class="story" id="p4" data-min="2">
       <div class="story-meta"><span class="n">4/4</span><span>사회와 생활, 약 2분</span></div>
-      <h2>겨울 대책 발표, 지난겨울 한랭질환 사망자가 8명에서 14명으로 늘었습니다</h2>
+      <h2>전세사기 최소보장제가 13일 시행되고, 겨울철 대책이 나왔습니다</h2>
       <ul class="items">
         <li>
-          <div class="item-head"><span class="tag rule">시행 중</span><strong>보건복지부, 겨울철 취약계층 보호대책</strong></div>
-          <p>지난겨울 평균기온은 1.1도로 평년 0.5도보다 높았는데도 한랭질환자는 334명에서 364명으로, 사망자는 8명에서 14명으로 늘었습니다. 환자의 57.4%, 사망자의 78.6%가 65세 이상이었습니다. 정부는 위기가구 발굴, 생활 지원, 한파 건강관리를 중심으로 대책을 내놨습니다.</p>
+          <div class="item-head"><span class="tag plan">예정</span><strong>전세사기 피해자 최소보장제 시행</strong><span class="when">11월 13일</span></div>
+          <p>피해자는 경매나 공매 절차가 끝나기 전에도 임차보증금의 3분의 1을 먼저 지원받을 수 있습니다. 신청 기한은 원칙적으로 피해자로 결정된 날부터 3년 또는 경매와 공매가 끝난 뒤 1년 이내입니다. 지자체 안내 기준이라 세부 요건은 해당 부처 공고에서 확인해야 합니다.</p>
         </li>
         <li>
-          <div class="item-head"><span class="tag fact">확정</span><strong>제설제 공급 기업 3곳 첫 지정</strong></div>
-          <p>행정안전부가 10일 이포컴, 세계로케미칼, 제일트레이딩을 제설제 분야 국가재난관리지원기업으로 처음 지정했습니다. 평소에는 비축과 품질관리를 하고 폭설 때 바로 공급합니다. 올겨울부터 적용됩니다.</p>
+          <div class="item-head"><span class="tag plan">예정</span><strong>12일 시행 법령, 불법 숙박 중개 금지와 충전기 정보 제공</strong><span class="when">11월 12일</span></div>
+          <p>공중위생관리법 개정으로 온라인 플랫폼을 통한 미신고 불법 숙박업 중개가 금지됩니다. 대기환경보전법 개정으로 전기차와 수소차 충전시설 운영자는 충전기 정보를 등록하고 실시간 이용 정보를 제공해야 합니다. 법제처에 따르면 11월 한 달 동안 새로 시행되는 법령은 모두 86개입니다.</p>
         </li>
         <li>
-          <div class="item-head"><span class="tag rule">시행 중</span><strong>항만 무단 드론 비행 단속 강화</strong></div>
-          <p>해양수산부가 드론 원스톱 민원서비스에 항만 비행 금지 구역과 담당 기관 연락처를 표시하기 시작했습니다. 항만에서 드론을 날리려면 보안 책임자 승인이 필요하고, 무단 비행은 과태료 대상입니다.</p>
+          <div class="item-head"><span class="tag rule">시행 중</span><strong>보건복지부 겨울철 취약계층 보호대책, 항만 드론 단속</strong></div>
+          <p>복지부는 2026년과 2027년 겨울 보호대책으로 위기가구 집중 발굴과 생활 안정 지원 등 5대 분야를 제시했습니다. 행정안전부는 정부와 민간 기업이 협력해 폭설 때 제설제를 빠르게 확보하는 체계를 가동한다고 밝혔습니다. 해양수산부는 11일부터 항만 드론 비행 금지 정보를 표기하기 시작했고 무단 비행은 과태료 대상입니다.</p>
         </li>
       </ul>
       <div class="story-foot"><button type="button" class="done-btn" data-done="p4" aria-pressed="false">다 읽었어요</button></div>
@@ -346,28 +353,32 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
     <section class="end-block sources" id="issues-sources">
       <h2>출처</h2>
       <ul>
-        <li><a href="https://www.mt.co.kr/article/2026110608451788914" target="_blank" rel="noopener">머니투데이, 부동산 세제 국회 심사</a></li>
-        <li><a href="https://kbmaeil.com/article/20260901500597" target="_blank" rel="noopener">경북매일, 세법 개정안 국무회의 확정</a></li>
-        <li><a href="https://www.imaeil.com/page/view/2026101123070850054" target="_blank" rel="noopener">매일신문, 실거주 공제 구조</a></li>
-        <li><a href="https://www.newspim.com/news/view/20261111000018" target="_blank" rel="noopener">뉴스핌, 오늘의 정치일정</a></li>
-        <li><a href="https://www.koreancenter.or.kr/news/articleView.html?idxno=1435935" target="_blank" rel="noopener">한덕수, 이상민 구속기간 만료 보도</a></li>
-        <li><a href="https://newstomato.com/ReadNews.aspx?no=1318564" target="_blank" rel="noopener">뉴스토마토, 내란 혐의 항소심</a></li>
-        <li><a href="https://variety.com/2026/politics/news/midterm-election-results-democrats-win-house-senate-1236938473/" target="_blank" rel="noopener">Variety, 미국 중간선거 결과</a></li>
-        <li><a href="https://www.cbsnews.com/news/2026-midterm-election-house-senate-projections-toss-up/" target="_blank" rel="noopener">CBS News, 미확정 선거구</a></li>
+        <li><a href="https://fnnews.com/news/202611110501297293" target="_blank" rel="noopener">파이낸셜뉴스, 예결위 비경제부처 예산 심사</a></li>
+        <li><a href="https://fnnews.com/news/202611090500558809" target="_blank" rel="noopener">파이낸셜뉴스, 예결위 부처별 심사 착수</a></li>
+        <li><a href="https://www.hankookilbo.com/news/article/A2026111022140003876" target="_blank" rel="noopener">한국일보, 종부세 당청 이견과 대통령 면담</a></li>
+        <li><a href="https://m.sedaily.com/article/20112710" target="_blank" rel="noopener">서울경제, 종부세 14억원 요구와 청와대 기조</a></li>
+        <li><a href="https://view.asiae.co.kr/article/2026111108490125975" target="_blank" rel="noopener">아시아경제, 대통령과 여당 지도부 만찬</a></li>
+        <li><a href="https://www.hankookilbo.com/news/article/A2026111010470005890" target="_blank" rel="noopener">한국일보, 대법 전원합의체 19일 심리</a></li>
+        <li><a href="https://www.khan.co.kr/article/202611102133035/" target="_blank" rel="noopener">경향신문, 한덕수 석방 가능성</a></li>
+        <li><a href="https://www.sisajournal.com/news/articleView.html?idxno=393441" target="_blank" rel="noopener">시사저널, 구속기간 만료 하루 전 심리</a></li>
+        <li><a href="https://www.munhwa.com/article/11628884" target="_blank" rel="noopener">문화일보, 미국 중간선거 개표 현황</a></li>
+        <li><a href="https://kr.investing.com/news/economy-news/article-2157497" target="_blank" rel="noopener">Investing.com, 민주당 상하원 선두</a></li>
+        <li><a href="https://www.pbs.org/newshour/world/russia-and-ukraine-hold-nearly-4-hours-of-u-s-mediated-talks-in-abu-dhabi" target="_blank" rel="noopener">PBS, 아부다비 협상 첫날</a></li>
         <li><a href="https://www.france24.com/en/europe/20261110-live-ukraine-russia-and-us-to-resume-peace-talks-in-abu-dhabi" target="_blank" rel="noopener">France 24, 아부다비 협상</a></li>
-        <li><a href="https://www.washingtonpost.com/world/2026/11/10/russia-ukraine-begin-us-backed-peace-talks-abu-dhabi/" target="_blank" rel="noopener">Washington Post, 아부다비 협상</a></li>
-        <li><a href="https://www.diplomatie.gouv.fr/en/presse-et-ressources/decouvrir-et-informer/actualites/quelles-priorites-pour-la-reunion-des-ministres-des-affaires-etrangeres-du-g7-a-paris" target="_blank" rel="noopener">프랑스 외교부, G7 외교장관회의</a></li>
+        <li><a href="https://www.etoday.co.kr/news/view/2646499" target="_blank" rel="noopener">이투데이, 이란 재공격 우려 완화</a></li>
+        <li><a href="https://www.korea.kr/news/policyNewsView.do?newsId=148922123" target="_blank" rel="noopener">정책브리핑, 11월부터 달라지는 정책</a></li>
         <li><a href="http://www.sisunnews.co.kr/news/articleView.html?idxno=249441" target="_blank" rel="noopener">시선뉴스, 11월 11일 주요 정책</a></li>
+        <li><a href="https://www.ghnews.net/news/article.html?no=250580" target="_blank" rel="noopener">경기헤드뉴스, 전세사기 최소보장제 안내</a></li>
       </ul>
-      <p class="note">미국 선거 의석수는 개표가 이어지고 있어 바뀔 수 있습니다. 한 전 총리 구속 만료일은 보도 제목과 본문 표현이 달라 원문 확인이 필요합니다.</p>
+      <p class="note">수치는 검색 결과를 교차 확인한 값입니다. 확인 전 표시는 한 매체 보도 기준입니다. 미국 의석수는 집계 기관마다 달라 두 값을 함께 적었습니다. 아부다비 협상 둘째 날 결과와 종부세 대통령 면담 결과는 확인하지 못했습니다.</p>
     </section>
    </div>
 
    <div id="view-startup" data-view="startup" data-base="2" data-end="startup-sources" hidden>
     <div class="head">
       <p class="date">2026년 11월 11일 수요일, 최근 2주 기사 기준</p>
-      <h1>금리 부담은 커지는데 AI 반도체 쪽으로는 큰돈이 계속 들어오고 있습니다</h1>
-      <p>창업자와 스타트업 실무자가 알아둘 소식을 다섯 갈래로 나눴습니다. 단어 정리를 포함해 약 17분 분량이고, 경제 탭 기사를 먼저 읽었다면 첫 번째 항목이 더 쉽게 읽힙니다.</p>
+      <h1>정책자금이 AI 반도체에 8,200억원을 넣었고, 11월 신규 상장주는 공모가 아래로 밀렸습니다</h1>
+      <p>창업자와 스타트업 실무자가 알아둘 소식을 다섯 갈래로 나눴습니다. 단어 정리를 포함해 약 18분 분량이고, 경제 탭 기사를 먼저 읽었다면 첫 번째 항목이 더 쉽게 읽힙니다.</p>
       <div class="legend">
         <span><span class="tag fact">확정</span>발표나 완료된 일</span>
         <span><span class="tag plan">추진 중</span>보도 단계, 예정</span>
@@ -379,135 +390,126 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
       <h2>먼저 알아둘 단어</h2>
       <dl>
         <div class="row"><dt>할인율</dt><dd>미래에 벌 돈을 지금 가치로 바꿀 때 깎는 비율. 금리가 오르면 같이 커짐</dd></div>
-        <div class="row"><dt>시드, 시리즈A~D</dt><dd>투자 단계. 시드가 가장 초기이고 알파벳이 뒤로 갈수록 회사가 크고 금액도 큼</dd></div>
+        <div class="row"><dt>시드, 시리즈A부터 D</dt><dd>투자 단계. 시드가 가장 초기이고 알파벳이 뒤로 갈수록 회사가 크고 금액도 큼</dd></div>
         <div class="row"><dt>투자 전 기업가치</dt><dd>이번 투자금이 들어오기 전 회사 가치. 프리머니라고도 함</dd></div>
         <div class="row"><dt>투자 후 기업가치</dt><dd>투자 전 기업가치에 이번 투자금을 더한 값. 포스트머니라고도 함</dd></div>
-        <div class="row"><dt>리드 투자자</dt><dd>라운드 조건을 정하고 가장 앞에서 투자를 이끄는 투자자</dd></div>
-        <div class="row"><dt>상환전환우선주</dt><dd>보통주로 바꿀 권리와 투자금을 돌려받을 권리를 함께 가진 주식. RCPS</dd></div>
-        <div class="row"><dt>전환사채</dt><dd>빌려준 돈이지만 나중에 주식으로 바꿀 수 있는 채권. CB</dd></div>
-        <div class="row"><dt>모태펀드</dt><dd>정부가 민간 벤처펀드에 출자하는 펀드</dd></div>
         <div class="row"><dt>국민성장펀드</dt><dd>AI와 전략산업에 정책자금을 넣는 펀드. 기업에 직접 투자하기도 함</dd></div>
+        <div class="row"><dt>후속 투자</dt><dd>이미 투자한 주주가 다음 라운드에서 다시 돈을 넣는 것</dd></div>
         <div class="row"><dt>수요예측</dt><dd>상장 전에 기관 투자자들이 원하는 가격과 수량을 적어 내는 절차</dd></div>
         <div class="row"><dt>희망 공모가 범위</dt><dd>상장 전에 회사가 제시하는 공모가 범위. 수요예측 결과로 최종 가격이 정해짐</dd></div>
-        <div class="row"><dt>테슬라 요건</dt><dd>이익이 없어도 성장성 등을 채우면 코스닥 상장을 허용하는 제도</dd></div>
+        <div class="row"><dt>의무보유확약</dt><dd>공모주를 받은 기관이 일정 기간 팔지 않겠다고 약속하는 것</dd></div>
+        <div class="row"><dt>시초가</dt><dd>상장 첫날 장이 열리고 처음 정해지는 거래 가격</dd></div>
+        <div class="row"><dt>종합쇼핑몰</dt><dd>공공기관이 물품을 살 때 쓰는 나라장터 안의 온라인 장터</dd></div>
         <div class="row"><dt>B2G</dt><dd>정부와 공공기관을 고객으로 하는 사업</dd></div>
-        <div class="row"><dt>비희석 자금</dt><dd>지분을 내주지 않고 받는 돈. 대출이나 매출 연동 상환 등</dd></div>
       </dl>
     </section>
 
     <article class="story" id="c1" data-min="2">
       <div class="story-meta"><span class="n">1/5</span><span>시장 신호, 약 2분</span></div>
       <h2>미국 금리 인상 기대가 스타트업 기업가치에도 영향을 줍니다</h2>
-      <p>경제 탭 1, 2번 기사처럼 미국 물가가 예상보다 높게 나오면서 12월 금리 인상 가능성이 커졌고, 10년물 국채금리는 4.99%까지 올랐습니다. 어제 나스닥이 다우보다 더 떨어진 것도 이 영향입니다.</p>
+      <p>경제 탭 1, 2번 기사처럼 미국 10월 물가가 예상보다 높게 나오면서 12월 금리 인상 가능성이 커졌고, 10년물 국채금리는 4.99%까지 올랐습니다. 10일 나스닥은 0.74% 내려 다우 0.30%보다 낙폭이 컸습니다.</p>
       <p>상장 기술주 주가가 내려가면 비슷한 사업을 하는 비상장 스타트업의 기업가치를 매길 때 기준점도 같이 내려갑니다. 후기 단계 라운드와 공모가 협상에서 먼저 체감됩니다.</p>
       <div class="concept">
         <h3>알아둘 개념, 할인율</h3>
         <p>스타트업 기업가치는 대부분 몇 년 뒤 벌어들일 돈을 지금 가치로 환산한 값입니다. 금리가 오르면 환산할 때 깎는 비율, 즉 할인율이 커져서 같은 사업 계획이라도 지금 매겨지는 가치가 낮아집니다. 이익이 먼 미래에 몰린 초기 기업일수록 영향이 큽니다.</p>
       </div>
-      <p class="link">투자 유치를 준비 중이라면 12월 FOMC 결과와 국내 IPO 공모가 흐름을 같이 보는 게 좋습니다.</p>
+      <p class="link">3번 항목에서 이번 달 상장한 두 회사가 첫날 공모가 아래로 내려간 사례를 볼 수 있습니다.</p>
       <div class="story-foot"><button type="button" class="done-btn" data-done="c1" aria-pressed="false">다 읽었어요</button></div>
     </article>
 
     <article class="story" id="c2" data-min="4">
       <div class="story-meta"><span class="n">2/5</span><span>국내 투자 유치, 약 4분</span></div>
-      <h2>투자 금액은 3배로 늘었지만 소수 기업에 몰리고 있습니다</h2>
+      <h2>정책자금이 최대 투자자로 들어간 AI 반도체와 엔비디아가 들어올 예정인 AI 모델 회사</h2>
       <ul class="items">
         <li>
           <div class="item-head"><span class="tag fact">확정</span><strong>퓨리오사AI, 시리즈D 8,200억원</strong><span class="when">10월 29일</span></div>
-          <p>AI 반도체 기업 퓨리오사AI가 8,200억원 규모 시리즈D를 마쳤습니다. 투자 후 기업가치는 약 3조8천억원입니다. 1월에 목표로 잡았던 금액은 4,500억~7,500억원이었는데 이를 넘겼습니다.</p>
-          <p>최대 투자자는 3,700억원을 넣은 국민성장펀드입니다. 유암코가 400억원, 기존 주주들이 합쳐서 1,700억원을 추가로 넣었고 해외에서는 미국 인피니텀, 싱가포르 쿠다캐피탈파트너스, 시스코인베스트먼츠가 참여했습니다. 자금은 2세대 칩 레니게이드 상용화와 브로드컴과 함께 개발 중인 3세대 가속기에 쓸 계획입니다.</p>
+          <p>AI 반도체 기업 퓨리오사AI가 8,200억원 규모 시리즈D를 마쳤습니다. 투자 전 기업가치는 3조원, 투자 후는 약 3조8천억원입니다. 1월에 목표로 잡았던 금액은 4,500억원에서 7,500억원이었는데 이를 넘겼고, 회사는 국내 스타트업 투자 유치 가운데 역대 최대 규모라고 밝혔습니다.</p>
+          <p>국민성장펀드가 3,700억원을 넣어 최대 투자자가 됐고 전체의 약 45%입니다. 기존 주주들은 1,700억원을 후속 투자했고, 유암코는 400억원으로 국내 신규 투자자 중 가장 큰 금액을 냈습니다. 한국수출입은행은 설립 이후 처음으로 벤처기업에 직접 투자했습니다. 자금은 2세대 칩 레니게이드 생산과 브로드컴과 협력하는 3세대 가속기 개발에 씁니다.</p>
         </li>
         <li>
-          <div class="item-head"><span class="tag plan">추진 중</span><strong>베슬AI, 시리즈C 모집</strong><span class="when">9월 보도</span></div>
-          <p>AI 인프라 플랫폼 기업 베슬AI가 KB증권을 리드 투자자로 시리즈C 투자자를 모으고 있다는 보도가 나왔습니다. 투자 전 기업가치 약 5,000억원, 투자 후 약 7,000억원으로 거론되고, 상환전환우선주와 전환사채 형태입니다. 규모는 약 1억5천만달러로 알려졌습니다. 국민성장기금 참여를 검토한다는 보도는 한 매체에서만 확인돼 아직 확정된 내용이 아닙니다.</p>
+          <div class="item-head"><span class="tag plan">추진 중</span><strong>업스테이지, 시리즈C 2차에 엔비디아 참여 예정</strong><span class="when">11월 9일</span></div>
+          <p>업스테이지는 진행 중인 시리즈C 2차 라운드에서 엔비디아의 투자를 받을 예정이라고 밝혔습니다. 투자 규모와 조건은 공개되지 않았고 2차 라운드의 기업가치도 나오지 않았습니다. 4월에 마무리한 시리즈C 1차는 1,800억원 규모였고 기업가치 1조원 이상을 인정받았습니다. 자금은 자체 모델 솔라 고도화, 핵심 인재 확보, 미국과 일본 진출에 쓸 계획입니다.</p>
         </li>
         <li>
-          <div class="item-head"><span class="tag fact">확정</span><strong>1~9월 국내 스타트업 투자 38억6천만달러</strong><span class="when">Tracxn 집계</span></div>
-          <p>올해 1~9월 344건, 38억6천만달러가 들어왔습니다. 작년 같은 기간 171건, 12억5천만달러보다 금액은 약 3배, 건수는 약 2배입니다. 라운드 한 건당 평균 금액도 730만달러에서 1,122만달러로 커졌습니다. 다만 AI 인프라와 딥테크 몇몇 기업에 큰 금액이 몰린 결과라는 분석이 함께 나옵니다.</p>
+          <div class="item-head"><span class="tag fact">확정</span><strong>무빈, 시리즈A 100억원</strong><span class="when">11월 첫째 주</span></div>
+          <p>라이다 기반 3차원 모션 데이터 기술 기업 무빈이 100억원 규모 시리즈A를 유치했다고 합니다. 콘텐츠 제작 분야 매출과 로봇 학습 사업 확장 가능성이 투자자 관심을 끌었다는 설명입니다. 한 매체 보도 기준입니다.</p>
         </li>
       </ul>
       <div class="concept">
         <h3>알아둘 개념, 투자 전 가치와 투자 후 가치</h3>
-        <p>투자 전 기업가치에 이번에 들어온 투자금을 더한 것이 투자 후 기업가치입니다. 베슬AI 사례에서 5,000억원과 7,000억원의 차이 2,000억원이 이번 라운드 규모입니다. 투자자 지분율은 투자금을 투자 후 기업가치로 나눠서 계산합니다.</p>
+        <p>투자 전 기업가치에 이번에 들어온 투자금을 더한 것이 투자 후 기업가치입니다. 퓨리오사AI는 투자 전 3조원에 8,200억원이 더해져 약 3조8천억원이 됐습니다. 투자자 지분율은 투자금을 투자 후 기업가치로 나눠서 계산합니다.</p>
       </div>
       <div class="concept">
-        <h3>알아둘 개념, 상환전환우선주</h3>
-        <p>국내 벤처투자에서 가장 많이 쓰는 형태입니다. 투자자가 나중에 보통주로 바꿀 수 있는 권리와 일정 조건에서 투자금을 돌려받을 수 있는 권리를 같이 갖습니다. 계약 조건에 따라 창업자 지분과 회사 재무에 미치는 영향이 크게 달라서 텀시트에서 꼭 확인해야 하는 항목입니다.</p>
+        <h3>알아둘 개념, 국민성장펀드와 후속 투자</h3>
+        <p>국민성장펀드는 AI와 전략산업에 정책자금을 넣는 펀드로, 퓨리오사AI처럼 기업에 직접 투자하는 경우도 있습니다. 후속 투자는 기존 주주가 새 라운드에도 돈을 넣는 것을 말합니다. 기존 주주가 따라 들어오면 새 투자자에게는 회사를 잘 아는 사람들이 계속 믿고 있다는 신호가 됩니다.</p>
       </div>
-      <p class="link">정책펀드가 최대 투자자로 들어오는 사례가 늘고 있습니다. AI 반도체, AI 인프라 쪽은 정책자금 접근성이 다른 분야보다 높은 편입니다.</p>
+      <p class="link">정책펀드가 최대 투자자로 들어오는 사례가 보입니다. 한 분석 기사는 정책자금이 많이 들어간 만큼 기업가치를 실적으로 증명하는 과제가 남았다고 평가했습니다.</p>
       <div class="story-foot"><button type="button" class="done-btn" data-done="c2" aria-pressed="false">다 읽었어요</button></div>
     </article>
 
     <article class="story" id="c3" data-min="4">
       <div class="story-meta"><span class="n">3/5</span><span>상장과 공모, 약 4분</span></div>
-      <h2>11월 코스닥 상장, 공모가가 희망 범위 아래에서 정해진 곳도 나왔습니다</h2>
+      <h2>11월 코스닥 상장, 첫날 공모가 아래로 내려간 곳이 두 곳입니다</h2>
       <div class="facts tbl-wrap">
         <table>
           <thead><tr><th>기업</th><th>사업</th><th class="r">공모가</th><th class="r">상장일</th></tr></thead>
           <tbody>
-            <tr><td>래블업</td><td>AI 컴퓨팅 자원 관리 플랫폼</td><td class="r num">19,000원</td><td class="r num">11/3</td></tr>
-            <tr><td>바로팜</td><td>약국 의약품 주문 플랫폼</td><td class="r num">16,400원<span class="sub">희망 범위 하단</span></td><td class="r num">11/11</td></tr>
-            <tr><td>넥스아이</td><td>면역항암 신약</td><td class="r num">8,000원<span class="sub">희망 범위 아래</span></td><td class="r num">11/12</td></tr>
+            <tr><td>래블업</td><td>AI 컴퓨팅 자원 관리 소프트웨어</td><td class="r num">19,000원<span class="sub">희망 범위 하단</span></td><td class="r num">11/3<span class="sub">종가 14,220원</span></td></tr>
+            <tr><td>바로팜</td><td>약국 의약품 주문 플랫폼</td><td class="r num">16,400원</td><td class="r num">11/11<span class="sub">시초가 16,000원</span></td></tr>
+            <tr><td>넥스아이</td><td>신약 개발</td><td class="r num">8,000원<span class="sub">희망 범위 아래</span></td><td class="r num">11/12</td></tr>
             <tr><td>옵토닉스</td><td>방산용 광학부품</td><td class="r num">12,000원<span class="sub">희망 범위 상단</span></td><td class="r num">11/17</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="note">상장일은 공모주 일정표 기준이며 매체에 따라 하루씩 다르게 나오기도 합니다.</p>
+      <p class="note">옵토닉스 상장일은 한 기사가 자체 추정이라고 밝혔습니다. 상장일은 한국거래소 공지로 다시 확인하세요.</p>
       <ul class="items" style="margin-top:14px">
         <li>
-          <div class="item-head"><span class="tag fact">확정</span><strong>래블업 상장, 첫날 종가는 공모가 아래</strong></div>
-          <p>GPU 같은 AI 컴퓨팅 자원을 관리하는 Backend.AI를 만드는 회사로, 공모 금액은 약 414억원이었습니다. 공모주 집계 사이트 기준으로 상장 첫날 종가가 공모가보다 낮았습니다.</p>
+          <div class="item-head"><span class="tag fact">확정</span><strong>래블업, 상장 첫날 종가 공모가보다 25.16% 낮아</strong><span class="when">11월 3일</span></div>
+          <p>공모가와 같은 19,000원에 시작해 장중 28,350원까지 올랐다가 상승분을 반납했고 14,220원에 마감했습니다. 수요예측 경쟁률은 284.53대 1이었지만 일반 청약은 3.55대 1이었습니다.</p>
         </li>
         <li>
-          <div class="item-head"><span class="tag plan">예정</span><strong>바로팜, 테슬라 요건으로 상장</strong></div>
-          <p>전국 약국이 쓰는 의약품 주문, 결제, 반품 플랫폼입니다. 2년 사이 매출이 116억원에서 967억원으로 늘었지만 아직 이익을 내지 못해 이익미실현기업 상장 요건으로 심사를 받았습니다. 공모가는 희망 범위 1만6,400~2만200원 중 가장 낮은 값으로 정해졌고 공모 금액은 약 292억원입니다. 이익률이 낮은 유통 구조가 과제로 꼽힙니다.</p>
+          <div class="item-head"><span class="tag fact">확정</span><strong>바로팜, 시초가가 공모가보다 낮고 장중 20%대 하락</strong><span class="when">11월 11일</span></div>
+          <p>공모가 16,400원보다 2.44% 낮은 16,000원에 시작해 17,370원까지 올랐다가 하락 전환했습니다. 오전 10시 38분에는 12,810원으로 공모가보다 21.89% 낮았고, 장중 저가는 공모가 대비 28.29% 아래까지 내려갔다는 보도가 있습니다. 종가는 확인하지 못했습니다. 기관 수요예측 경쟁률은 152.36대 1, 일반 청약은 19.27대 1이었고 공모 금액은 약 292억원입니다. 같은 날 발표한 3분기 매출은 495억5천만원으로 1년 전보다 77.9% 늘었고 영업이익 23억원으로 흑자 전환했습니다.</p>
         </li>
         <li>
-          <div class="item-head"><span class="tag plan">예정</span><strong>넥스아이, 희망 범위보다 낮은 8,000원</strong></div>
-          <p>희망 공모가는 1만500~1만3,000원이었는데 그보다 낮게 확정됐습니다. 신약 후보 NXI-101을 일본 오노약품공업에 기술이전한 회사입니다.</p>
+          <div class="item-head"><span class="tag plan">예정</span><strong>넥스아이, 희망 범위보다 낮은 8,000원에 12일 상장</strong></div>
+          <p>희망 공모가 범위는 10,500원에서 13,000원이었습니다. 확정가 8,000원은 범위 하단보다 23.8% 낮습니다. 수요예측에는 506곳이 들어왔지만 경쟁률은 66.6대 1에 그쳤고, 의무보유확약 비율은 0.06%였습니다. 공모 금액은 하단 기준 525억원에서 400억원으로 줄었습니다.</p>
         </li>
         <li>
-          <div class="item-head"><span class="tag plan">예정</span><strong>옵토닉스, 기관 수요예측 1,201대 1</strong></div>
-          <p>한화에어로스페이스에 방산용 자이로스코프 부품을 공급합니다. 같은 시기 방산, 반도체 장비 부품 기업은 공모가를 희망 범위 상단으로 정한 곳이 많았습니다.</p>
+          <div class="item-head"><span class="tag plan">예정</span><strong>옵토닉스, 기관 수요예측 1,201.81대 1로 상단 확정</strong></div>
+          <p>참여 기관 2,317곳이 모두 공모가 밴드 상단 이상을 써 냈고 공모가는 희망 범위 10,000원에서 12,000원의 상단인 12,000원으로 정해졌습니다. 공모 규모는 264억원, 상장 후 예상 시가총액은 약 1,148억원입니다. 의무보유확약은 신청 수량 기준 약 5.62%로 낮은 편이었습니다.</p>
         </li>
       </ul>
       <div class="concept">
-        <h3>알아둘 개념, 테슬라 요건</h3>
-        <p>이익을 내지 못한 회사도 시가총액, 매출, 성장성 같은 조건을 채우면 코스닥에 상장할 수 있게 한 제도입니다. 적자 상태로 나스닥에 상장한 테슬라에서 이름을 땄습니다. 플랫폼처럼 매출은 빠르게 늘지만 아직 이익이 나지 않는 스타트업이 주로 씁니다.</p>
-      </div>
-      <div class="concept">
-        <h3>알아둘 개념, 희망 공모가 범위</h3>
+        <h3>알아둘 개념, 희망 공모가 범위와 의무보유확약</h3>
         <p>상장 전에 회사가 제시하는 공모가 범위입니다. 기관 수요예측 결과에 따라 이 범위 안이나 밖에서 최종 가격이 정해집니다. 하단이나 그 아래로 정해졌다면 기관 투자자들이 회사가 생각한 가치보다 낮게 봤다는 뜻입니다.</p>
+        <p>의무보유확약은 공모주를 받은 기관이 일정 기간 팔지 않겠다고 약속하는 것입니다. 비율이 낮으면 상장 직후 매물이 나올 수 있어서 첫날 주가를 가늠할 때 같이 봅니다.</p>
       </div>
-      <p class="link">같은 달에도 방산, 반도체 부품은 상단, AI 소프트웨어와 플랫폼, 바이오는 하단이나 그 아래로 엇갈렸습니다. 상장을 준비하는 회사라면 업종별 분위기 차이를 같이 봐야 합니다.</p>
+      <p class="link">같은 달에도 방산 부품 회사는 상단, AI 소프트웨어와 신약 개발 회사는 하단이나 그 아래로 엇갈렸습니다. 1번 항목의 금리 부담이 업종별 분위기에 얼마나 영향을 줬는지는 보도만으로 알 수 없습니다.</p>
       <div class="story-foot"><button type="button" class="done-btn" data-done="c3" aria-pressed="false">다 읽었어요</button></div>
     </article>
 
     <article class="story" id="c4" data-min="3">
       <div class="story-meta"><span class="n">4/5</span><span>정책과 지원사업, 약 3분</span></div>
-      <h2>하반기에 바뀐 제도, 연말까지 남은 일정</h2>
-      <p>11월 들어 새로 나온 중기부 발표는 이번 검색에서 확인하지 못했습니다. 아래는 하반기에 시행됐거나 연내 시행 예정인 항목입니다.</p>
+      <h2>창업도시 추가 공모는 30일 마감, AI 제품 공공조달 문턱은 낮아졌습니다</h2>
+      <p>11월 들어 새로 나온 중기부 통합 공고는 이번 검색에서 확인하지 못했습니다. 아래는 진행 중이거나 하반기에 시행된 항목입니다.</p>
       <ul class="items">
         <li>
-          <div class="item-head"><span class="tag rule">시행 중</span><strong>벤처투자 의무기한 3년에서 5년으로</strong><span class="when">7월 1일</span></div>
-          <p>개인투자조합과 벤처투자조합이 정해진 비율만큼 투자해야 하는 기한이 늘었고, 조합별 개별 투자 의무 20%는 없어졌습니다. 액셀러레이터가 운용하는 개인투자조합은 투자 유치 이력이 없는 업력 5년 이내 창업기업에도 투자할 수 있게 됐습니다. 초기 기업 입장에서는 첫 투자를 받을 수 있는 통로가 넓어진 셈입니다.</p>
+          <div class="item-head"><span class="tag plan">추진 중</span><strong>창업도시 6곳 추가 공모</strong><span class="when">11월 30일 마감</span></div>
+          <p>비수도권 광역지방정부 10곳이 대상이고 접수 마감은 30일 오후 3시입니다. 선정된 지역에는 2027년부터 2030년까지 4년 동안 600억원 안팎을 지원한다고 보도됐습니다.</p>
         </li>
         <li>
-          <div class="item-head"><span class="tag rule">시행 중</span><strong>R&amp;D 사업화 보증 최대 100억원</strong><span class="when">7월</span></div>
-          <p>최근 5년 안에 정부 R&amp;D 과제를 끝냈거나 공공연구기관 기술을 이전받아 사업화하는 기업이 대상입니다. 운전자금 30억원을 포함해 최대 100억원까지 보증하고 보증료는 최대 0.5% 깎아줍니다.</p>
-        </li>
-        <li>
-          <div class="item-head"><span class="tag rule">시행 중</span><strong>AI 제품 공공조달 진입 요건 완화</strong><span class="when">8월부터 단계적</span></div>
-          <p>8월부터 AI 제품을 나라장터 종합쇼핑몰에 올릴 때 3,000만원 이상 납품 실적 요건이 면제됐고, 공급업체 수 요건은 3개사 이상에서 1~2개사로 줄었습니다. 9월에는 거래 실적이 없는 AI 시제품도 혁신장터에 신청할 수 있게 됐고, 10월부터 AI 우수제품 전용 심사기준이 적용됩니다.</p>
+          <div class="item-head"><span class="tag rule">시행 중</span><strong>AI 제품 나라장터 종합쇼핑몰 진입 요건 완화</strong><span class="when">8월 1일부터</span></div>
+          <p>종합쇼핑몰에 올릴 때 요구하던 3,000만원 이상 납품 실적이 면제됐고, 필요한 업체 수는 3개사 이상에서 2개사 이상으로 줄었습니다. 계약 때 내던 신용평가등급확인서도 면제됩니다. 과기정통부 장관이 확인한 제품을 AI 제품으로 봅니다. 우수제품의 AI 분야 심사기준 시행 시점은 보도마다 달라서 조달청 공고에서 확인해야 합니다.</p>
         </li>
         <li>
           <div class="item-head"><span class="tag plan">예정</span><strong>모두의 창업, 시제품 제조기업 찾기 기능</strong><span class="when">12월</span></div>
-          <p>스타트업이 시제품을 만들어 줄 제조기업을 플랫폼에서 검색할 수 있게 됩니다. 모두의 창업 선발 인원은 8월에 5,000명에서 1만 명으로 늘었습니다.</p>
+          <p>스타트업이 시제품을 만들어 줄 제조기업을 플랫폼에서 검색할 수 있게 됩니다. 2차 통합 모집은 1만 명 규모로 8월 20일부터 9월 17일까지 접수했고 이미 마감됐습니다.</p>
         </li>
       </ul>
       <div class="concept">
-        <h3>알아둘 개념, 모태펀드와 국민성장펀드</h3>
-        <p>모태펀드는 정부가 돈을 내서 민간 벤처펀드에 출자하는 펀드입니다. 정부가 직접 스타트업에 투자하기보다 민간 운용사를 거쳐 투자합니다. 국민성장펀드는 AI와 전략산업에 정책자금을 넣는 펀드로, 퓨리오사AI처럼 기업에 직접 투자하는 경우도 있습니다.</p>
+        <h3>알아둘 개념, 종합쇼핑몰과 납품 실적</h3>
+        <p>종합쇼핑몰은 공공기관이 물품을 살 때 쓰는 나라장터 안의 온라인 장터입니다. 입점하려면 그동안 납품 실적이 필요해서 신생 업체에는 높은 문턱이었는데, AI 제품은 이 요건이 면제돼 실적 없이도 등록을 신청할 수 있습니다.</p>
       </div>
       <p class="link">B2G 사업을 하는 AI 스타트업이라면 조달 요건 완화 내용을 꼭 확인해 두세요. 세부 요건과 신청 일정은 중기부와 조달청 공고에서 확인해야 합니다.</p>
       <div class="story-foot"><button type="button" class="done-btn" data-done="c4" aria-pressed="false">다 읽었어요</button></div>
@@ -515,26 +517,25 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
 
     <article class="story" id="c5" data-min="3">
       <div class="story-meta"><span class="n">5/5</span><span>해외 투자 흐름, 약 3분</span></div>
-      <h2>어제 해외 투자 소식, AI가 회계와 법률 같은 기존 업무로 들어갑니다</h2>
+      <h2>해외 투자 소식 가운데 한 매체에서만 확인된 금액이 많습니다</h2>
       <div class="facts tbl-wrap">
         <table>
           <thead><tr><th>기업</th><th>하는 일</th><th class="r">라운드</th><th class="r">금액</th></tr></thead>
           <tbody>
-            <tr><td>Nominal<span class="sub">미국</span></td><td>엔지니어링 시험 데이터 연결, AI 에이전트 분석</td><td class="r">시리즈C</td><td class="r num">2억4천만달러</td></tr>
-            <tr><td>Project Omega<span class="sub">미국</span></td><td>사용후핵연료에서 자원 회수</td><td class="r">시리즈A</td><td class="r num">8천만달러</td></tr>
-            <tr><td>Sumary<span class="sub">덴마크</span></td><td>회계사무소용 AI 기장, 결산 자동화</td><td class="r">시드</td><td class="r num">2,500만달러</td></tr>
-            <tr><td>Coframe<span class="sub">미국</span></td><td>웹사이트와 광고 문구를 AI가 테스트하고 적용</td><td class="r">시리즈A</td><td class="r num">2,500만달러</td></tr>
-            <tr><td>Blackletter<span class="sub">미국</span></td><td>변호사와 자체 소프트웨어를 결합한 정액제 로펌</td><td class="r">시드</td><td class="r num">600만달러</td></tr>
+            <tr><td>Nominal<span class="sub">미국</span></td><td>엔지니어링 시험 데이터 연결, AI 분석</td><td class="r">시리즈C</td><td class="r num">2억4천만달러<span class="sub">확인 전</span></td></tr>
+            <tr><td>Project Omega<span class="sub">미국</span></td><td>사용후핵연료에서 자원 회수</td><td class="r">시리즈A</td><td class="r num">8천만달러<span class="sub">확인 전</span></td></tr>
+            <tr><td>Sumary<span class="sub">덴마크</span></td><td>회계사무소용 AI 기장, 결산 자동화</td><td class="r">시드</td><td class="r num">2,500만달러<span class="sub">확인 전</span></td></tr>
+            <tr><td>Mercor<span class="sub">미국</span></td><td>AI 모델 평가와 후속 학습</td><td class="r">시리즈D</td><td class="r num">7억5천만달러<span class="sub">확인 전</span></td></tr>
           </tbody>
         </table>
       </div>
-      <p style="margin-top:12px">Nominal은 기업가치 30억달러를 인정받았고 Lightspeed가 리드했습니다. 하루 동안 공개된 달러 기준 지분투자 4억1천만달러 가운데 Nominal과 Project Omega 두 곳이 약 78%를 차지했습니다.</p>
-      <p>투자자들이 돈을 넣는 방향은 두 가지로 나뉩니다. 하나는 하드웨어 시험, 핵연료 처리처럼 기술 난도가 높은 문제이고, 다른 하나는 회계, 마케팅, 법률처럼 이미 기업들이 돈을 쓰고 있는 업무에 AI를 붙이는 쪽입니다. 같은 날 초기 투자사 Stage 2 Capital은 B2B AI 스타트업에 200만~500만달러씩 투자하는 1억달러 규모 펀드 결성을 마쳤습니다.</p>
+      <p class="note">앞의 세 곳은 10일 Tech Startups 보도, Mercor는 와우테일 보도 기준입니다.</p>
+      <p style="margin-top:12px">검색으로 같은 값을 찾으려 했지만 Nominal의 시리즈C 2억4천만달러와 Sumary의 2,500만달러 시드는 다른 매체에서 확인되지 않았습니다. Nominal은 3월에 시리즈B-2로 8천만달러를 모으며 기업가치 10억달러를 인정받았다는 보도가 따로 있습니다. 한 매체 보도 기준입니다.</p>
+      <p>Mercor는 두 보도가 다릅니다. 한 매체는 시리즈D 7억5천만달러, 기업가치 200억달러를 마쳤다고 전했고, 다른 보도들은 7월 이후 기업가치 200억달러 안팎에서 약 5억달러를 모으는 협상 단계라고 전했습니다. 확정 발표인지 협상 단계인지는 확인하지 못했습니다.</p>
       <div class="concept">
-        <h3>알아둘 개념, 비희석 자금</h3>
-        <p>AI 출판 플랫폼 Spines는 지분투자 2,900만달러와 별도로 3,500만달러의 비희석 자금을 확보했습니다. 비희석 자금은 지분을 내주지 않고 받는 돈으로, 대출이나 매출 연동 상환 같은 방식입니다. 기사 제목에 합산 금액만 나오는 경우가 많아 지분투자 규모를 볼 때는 따로 나눠서 봐야 합니다.</p>
+        <h3>알아둘 개념, 협상 중 보도와 확정 발표</h3>
+        <p>해외 투자 기사는 투자자와 협상 중이라는 보도와 회사가 마쳤다고 밝힌 발표가 섞여 나옵니다. 금액과 기업가치도 두 단계에서 달라지는 일이 많아서, 기사에서 마쳤다고 쓰였는지 협상 중이라고 쓰였는지부터 확인해야 합니다.</p>
       </div>
-      <p class="link">AI 모델을 쓸 수 있다는 것만으로는 차별점이 되기 어렵고, 자체 데이터와 고객 업무에 얼마나 깊이 들어가 있는지를 투자자들이 본다는 분석이 함께 나왔습니다.</p>
       <div class="story-foot"><button type="button" class="done-btn" data-done="c5" aria-pressed="false">다 읽었어요</button></div>
     </article>
 
@@ -542,25 +543,35 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
       <h2>출처</h2>
       <ul>
         <li><a href="https://www.news1.kr/industry/sb-founded/6335956" target="_blank" rel="noopener">뉴스1, 퓨리오사AI 시리즈D</a></li>
-        <li><a href="https://www.koreancenter.or.kr/news/articleView.html?idxno=1431425" target="_blank" rel="noopener">국민성장펀드 3,700억원 참여 보도</a></li>
-        <li><a href="https://hankyung.com/article/2026092339641" target="_blank" rel="noopener">한국경제, 베슬AI 시리즈C</a></li>
-        <li><a href="https://www.newsyonhap.com/news/126955" target="_blank" rel="noopener">뉴스N연합, 2026년 한국 스타트업 자금 조달</a></li>
-        <li><a href="https://www.etoday.co.kr/news/view/2642501" target="_blank" rel="noopener">이투데이, 주간 IPO</a></li>
-        <li><a href="https://therighttrader.com/ko/ipo-calendar" target="_blank" rel="noopener">IPO 일정 2026년 11월</a></li>
-        <li><a href="https://m.dailypharm.com/user/news/338123" target="_blank" rel="noopener">데일리팜, 바로팜 IPO</a></li>
+        <li><a href="https://www.hankyung.com/article/2026102943011" target="_blank" rel="noopener">한국경제, 퓨리오사AI 8,200억원 투자 유치</a></li>
+        <li><a href="https://www.dataeconomy.co.kr/news/articleView.html?idxno=43603" target="_blank" rel="noopener">한국데이터경제신문, 퓨리오사AI 정책자금 구조</a></li>
+        <li><a href="https://www.techm.kr/news/articleView.html?idxno=157112" target="_blank" rel="noopener">테크M, 업스테이지 엔비디아 투자 예정</a></li>
+        <li><a href="https://www.fnnews.com/news/202611101440530830" target="_blank" rel="noopener">파이낸셜뉴스, 업스테이지 시리즈C 2차</a></li>
+        <li><a href="https://supple.kr/news/cmw7jxz0biu6hal9ppf9rye2v" target="_blank" rel="noopener">서플, 11월 첫째 주 투자 동향</a></li>
+        <li><a href="https://www.job-post.co.kr/news/articleView.html?idxno=236173" target="_blank" rel="noopener">잡포스트, 래블업 상장 첫날 종가</a></li>
+        <li><a href="https://www.newstopkorea.com/news/articleView.html?idxno=48732" target="_blank" rel="noopener">뉴스톱, 래블업 상장 첫날 하락</a></li>
+        <li><a href="https://www.g-enews.com/article/Securities/2026/11/20261111103711788644093b5d4e_1" target="_blank" rel="noopener">글로벌이코노믹, 바로팜 상장 첫날</a></li>
+        <li><a href="https://www.businesspost.co.kr/BP?command=article_view&amp;num=451696" target="_blank" rel="noopener">비즈니스포스트, 바로팜 상장 첫날</a></li>
+        <li><a href="https://www.jnilbo.com/news/articleView.html?idxno=90000081464" target="_blank" rel="noopener">진일보, 넥스아이 12일 상장</a></li>
+        <li><a href="https://www.issueon.co.kr/news/articleView.html?idxno=14324" target="_blank" rel="noopener">이슈온, 넥스아이 공모가 하단 밑돌아</a></li>
+        <li><a href="https://www.thelec.kr/news/articleView.html?idxno=64577" target="_blank" rel="noopener">디일렉, 옵토닉스 공모가 확정</a></li>
+        <li><a href="https://www.wolyo.co.kr/news/articleView.html?idxno=320168" target="_blank" rel="noopener">월요신문, 옵토닉스 17일 상장</a></li>
+        <li><a href="https://www.issueon.co.kr/news/articleView.html?idxno=14354" target="_blank" rel="noopener">이슈온, 창업도시 추가 공모</a></li>
+        <li><a href="https://www.issueon.co.kr/news/articleView.html?idxno=14056" target="_blank" rel="noopener">이슈온, AI 제품 나라장터 진입 완화</a></li>
         <li><a href="https://www.venturesquare.net/1099401" target="_blank" rel="noopener">벤처스퀘어, 2026년 하반기 스타트업 정책</a></li>
         <li><a href="https://techstartups.com/2026/11/10/startup-funding-news-today-november-10-2026-blackletter-nominal-project-omega-sumary-vessel-more/" target="_blank" rel="noopener">Tech Startups, 11월 10일 투자 소식</a></li>
-        <li><a href="https://prnewswire.com/news-releases/stage-2-capital-closes-100m-and-puts-ai-powered-go-to-market-at-the-center-of-early-stage-venture-302934266.html" target="_blank" rel="noopener">PR Newswire, Stage 2 Capital</a></li>
+        <li><a href="https://wowtale.net/2026/11/11/267802/" target="_blank" rel="noopener">와우테일, 머코어 투자 유치</a></li>
+        <li><a href="https://siliconangle.com/2026/03/05/hardware-testing-startup-nominal-raises-80m-1b-valuation/" target="_blank" rel="noopener">SiliconANGLE, Nominal 시리즈B-2</a></li>
       </ul>
-      <p class="note">오늘 날짜로 나온 국내 스타트업 기사가 적어 최근 2주 안의 기사를 함께 넣었습니다. 각 항목에 날짜를 적었습니다.</p>
+      <p class="note">수치는 검색 결과를 교차 확인한 값입니다. 확인 전 표시는 한 매체 보도 기준입니다. 오늘 날짜로 나온 국내 스타트업 기사가 적어 최근 2주 안의 기사를 함께 넣었고 각 항목에 날짜를 적었습니다. 바로팜 상장 첫날 종가와 11월 중기부 신규 통합 공고는 확인하지 못했습니다.</p>
     </section>
    </div>
 
    <div id="view-econ" data-view="econ" data-base="5" data-end="econ-watch">
     <div class="head">
-      <p class="date">2026년 11월 11일 수요일, 오전 9시 기준</p>
-      <h1>미국 물가가 예상보다 높게 나왔고, 코스피는 4% 급등 다음 날 숨을 고르는 중</h1>
-      <p>어젯밤 미국 시장과 오늘 아침 국내 시장 기사 여섯 개를 골랐습니다. 맨 위 단어부터 보고 순서대로 읽으면 앞 기사 내용이 뒤 기사에서 다시 쓰입니다.</p>
+      <p class="date">2026년 11월 11일 수요일, 오전 장 기준</p>
+      <h1>미국 물가가 예상보다 높게 나왔고, 코스피는 4% 급등 다음 날 보합권에서 움직입니다</h1>
+      <p>어젯밤 미국 시장과 오늘 오전 국내 시장 기사 여섯 개를 골랐습니다. 맨 위 단어부터 보고 순서대로 읽으면 앞 기사 내용이 뒤 기사에서 다시 쓰입니다.</p>
     </div>
 
     <section class="end-block glossary" id="glossary">
@@ -574,9 +585,9 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
         <div class="row"><dt>사이드카</dt><dd>선물 가격이 5% 이상 1분간 움직이면 프로그램 매매를 5분 멈추는 제도</dd></div>
         <div class="row"><dt>순매수</dt><dd>산 금액에서 판 금액을 뺀 값이 플러스인 상태</dd></div>
         <div class="row"><dt>차익실현</dt><dd>오른 주식을 팔아 이익을 확정하는 것</dd></div>
-        <div class="row"><dt>ADR</dt><dd>미국 시장에서 거래되는 외국 기업 주식 증서</dd></div>
         <div class="row"><dt>시가총액 가중</dt><dd>회사 규모가 클수록 지수에 많이 반영되는 계산 방식</dd></div>
         <div class="row"><dt>브렌트유</dt><dd>북해산 원유. 국제 유가의 대표 기준 중 하나</dd></div>
+        <div class="row"><dt>WTI</dt><dd>미국 서부 텍사스산 원유. 뉴욕 시장 유가의 기준</dd></div>
       </dl>
     </section>
 
@@ -589,26 +600,26 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
             <tr><td>코스피<span class="sub">10일 종가</span></td><td class="r num">5,239.13</td><td class="r num up">+4.39%</td></tr>
             <tr><td>코스피<span class="sub">11일 시가</span></td><td class="r num">5,209.71</td><td class="r num down">-0.56%</td></tr>
             <tr><td>코스닥<span class="sub">10일 종가</span></td><td class="r num">667.61</td><td class="r num up">+4.48%</td></tr>
-            <tr><td>S&amp;P500</td><td class="r num">7,520.93</td><td class="r num down">-0.38%</td></tr>
-            <tr><td>나스닥</td><td class="r num">25,065.87</td><td class="r num down">-0.74%</td></tr>
-            <tr><td>다우</td><td class="r num">52,231.89</td><td class="r num down">-0.30%</td></tr>
-            <tr><td>원/달러<span class="sub">10일 주간 종가</span></td><td class="r num">1,337.5원</td><td class="r num down">-9.6원</td></tr>
+            <tr><td>S&amp;P500<span class="sub">10일 마감</span></td><td class="r num">7,520.93</td><td class="r num down">-0.38%</td></tr>
+            <tr><td>나스닥<span class="sub">10일 마감</span></td><td class="r num">25,065.87</td><td class="r num down">-0.74%</td></tr>
+            <tr><td>다우<span class="sub">10일 마감</span></td><td class="r num">52,231.89</td><td class="r num down">-0.30%</td></tr>
+            <tr><td>원/달러<span class="sub">10일 종가</span></td><td class="r num">1,337.5원</td><td class="r num">이틀째 하락</td></tr>
+            <tr><td>원/달러<span class="sub">11일 개장</span></td><td class="r num">1,343.5원</td><td class="r num up">+6.0원</td></tr>
             <tr><td>미국 10년물 국채금리</td><td class="r num">4.99%</td><td class="r num up">+0.11%p</td></tr>
-            <tr><td>국고채 3년물<span class="sub">10일 마감</span></td><td class="r num">3.633%</td><td class="r num">-</td></tr>
-            <tr><td>브렌트유</td><td class="r num">91.49달러</td><td class="r num down">-1.2%</td></tr>
+            <tr><td>브렌트유<span class="sub">1월물</span></td><td class="r num">91.49달러</td><td class="r num down">-1.17%</td></tr>
+            <tr><td>WTI<span class="sub">12월물</span></td><td class="r num">86.04달러</td><td class="r num down">-0.93%</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="note">빨간색은 상승, 파란색은 하락입니다. 미국 지수와 금리, 유가는 현지 10일 마감 기준입니다.</p>
+      <p class="note">빨간색은 상승, 파란색은 하락입니다. 미국 지수와 금리, 유가는 현지 10일 마감 기준입니다. 10년물 금리는 매체에 따라 4.98%로 적기도 합니다.</p>
     </section>
 
     <!-- 1 -->
     <article class="story" id="s1" data-min="5">
       <div class="story-meta"><span class="n">1/6</span><span>미국 경제, 약 5분</span></div>
       <h2>미국 10월 소비자물가, 예상보다 0.1%p씩 높았다</h2>
-      <p>미국 노동통계국이 10일 발표한 10월 소비자물가지수(CPI)는 전월보다 0.4% 올랐습니다. 시장 예상은 0.3%였습니다. 식품과 에너지를 뺀 근원 CPI도 0.3% 올라 예상치 0.2%를 넘었습니다. 식료품과 전기요금 같은 생활비 항목 상승 폭이 컸습니다.</p>
-      <p>연준 쪽 반응도 빨랐습니다. 월러 연준 이사는 근원물가가 한 달에 0.3% 오르면 더 강한 대응이 필요할 수 있다고 미리 말해 둔 상태였는데, 이번 수치가 정확히 그 선에 걸렸습니다. 로건 댈러스 연은 총재는 0.25%p 인상이 적어도 두 번 더 필요하다고 했습니다. 지난주 금요일 10월 고용지표가 16만5천 명 증가로 예상을 크게 웃돈 뒤 CME FedWatch 기준 12월 인상 확률은 이미 80%를 넘어 있었습니다.</p>
-      <p>국내 증권가에서는 반론도 나옵니다. 키움증권은 12월 회의에서 0.5%p를 한 번에 올릴 가능성은 낮다고 봤습니다.</p>
+      <p>미국 노동부가 10일 발표한 10월 소비자물가지수(CPI)는 전월보다 0.4% 올랐습니다. 시장 예상은 0.3%였습니다. 식품과 에너지를 뺀 근원 CPI도 0.3% 올라 예상치 0.2%를 넘었습니다.</p>
+      <p>발표 몇 시간 전에는 월러 연준 이사가 물가에 빠르게 대응해야 한다고 말했고, 12월에 0.5%p 인상도 지지할 수 있다는 취지로 보도됐습니다. 수치가 나온 뒤 시장에서는 12월 금리 인상 기대가 더 커졌고, 국내에서도 12월 빅스텝 가능성이 거론됩니다. 10일 미국 3대 지수는 모두 내렸습니다.</p>
 
       <div class="concept">
         <h3>알아둘 개념, 근원 CPI</h3>
@@ -618,7 +629,7 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
 
       <div class="concept">
         <h3>알아둘 개념, 금리 인상 기대와 주가</h3>
-        <p>금리가 오르면 기업의 이자 부담이 커지고 소비가 줄어듭니다. 또 기업이 미래에 벌 돈을 지금 가치로 환산할 때 더 큰 폭으로 깎게 됩니다. 이익이 먼 미래에 몰려 있는 기술주와 성장주가 금리에 더 민감한 이유입니다. 어제 나스닥 하락 폭이 다우보다 컸던 것도 같은 맥락입니다.</p>
+        <p>금리가 오르면 기업의 이자 부담이 커지고 소비가 줄어듭니다. 또 기업이 미래에 벌 돈을 지금 가치로 환산할 때 더 큰 폭으로 깎게 됩니다. 이익이 먼 미래에 몰려 있는 기술주와 성장주가 금리에 더 민감한 이유입니다. 10일 나스닥 하락 폭이 다우보다 컸던 것도 같은 맥락입니다.</p>
       </div>
 
       <div class="quiz" data-quiz>
@@ -636,25 +647,23 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
     <!-- 2 -->
     <article class="story" id="s2" data-min="4">
       <div class="story-meta"><span class="n">2/6</span><span>채권, 약 4분</span></div>
-      <h2>미국 10년물 국채금리 4.99%, 다시 5% 앞으로</h2>
-      <p>물가 발표 뒤 미국 10년물 국채금리는 전날 4.88%에서 4.99%로 올랐습니다. 장중에는 5%를 넘기도 했습니다. 2년물은 4.7%대로 뛰었습니다. 10년물은 10월 초 5.30%를 넘었다가 내려오던 중이었는데 한 달 만에 다시 올라선 셈입니다.</p>
-      <p>금리에 가장 민감하게 반응한 건 주택건설주였습니다.</p>
+      <h2>미국 10년물 국채금리 4.99%, 장중 5%를 넘었다</h2>
+      <p>물가 발표 뒤 미국 10년물 국채금리는 블룸버그 집계로 11bp 올라 4.99%가 됐고, 장중에는 5%를 넘었습니다. 다른 매체는 4.98% 안팎에서 거래를 마쳤다고 전했습니다. 11일은 미국 재향군인의 날이라 국채시장이 쉬어서, 금리가 다시 방향을 찾기까지는 시간이 걸릴 수 있습니다.</p>
       <div class="facts tbl-wrap">
         <table>
-          <thead><tr><th>종목</th><th class="r">10일 등락</th></tr></thead>
+          <thead><tr><th>미국 10년물 국채금리</th><th class="r">값</th></tr></thead>
           <tbody>
-            <tr><td>레나</td><td class="r num down">-5.4%</td></tr>
-            <tr><td>빌더스퍼스트소스</td><td class="r num down">-4.6%</td></tr>
-            <tr><td>펄트그룹</td><td class="r num down">-3.9%</td></tr>
-            <tr><td>D.R. 호튼</td><td class="r num down">-3.8%</td></tr>
+            <tr><td>9일</td><td class="r num">약 4.88%</td></tr>
+            <tr><td>10일, 블룸버그 집계</td><td class="r num up">4.99%</td></tr>
           </tbody>
         </table>
       </div>
+      <p class="note">9일 값은 10일 상승 폭 11bp를 뺀 계산값입니다.</p>
 
       <div class="concept">
         <h3>알아둘 개념, 채권 가격과 금리는 반대로 움직인다</h3>
         <p>이미 발행된 채권은 이자가 고정돼 있습니다. 시장 금리가 오르면 새로 나오는 채권이 이자를 더 주니, 기존 채권은 값을 낮춰야 팔립니다. 그래서 금리가 오른다는 말과 채권 가격이 떨어진다는 말은 같은 뜻입니다.</p>
-        <p>2년물은 앞으로 1~2년 기준금리 예상을 빠르게 반영하고, 10년물은 미국 주택담보대출 금리의 기준 역할을 합니다. 10년물이 오르면 대출 금리가 오르고, 집을 사려는 수요가 줄 거라는 예상에 건설주가 먼저 빠집니다.</p>
+        <p>10년물은 미국 주택담보대출 금리의 기준 역할을 합니다. 10년물이 오르면 대출 금리가 오르고 집을 사려는 수요가 줄 거라는 예상이 나옵니다.</p>
       </div>
 
       <p class="link">1번 기사의 물가 발표가 금리 인상 기대를 키웠고, 그 기대가 국채금리를 밀어 올렸습니다.</p>
@@ -674,21 +683,21 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
     <!-- 3 -->
     <article class="story" id="s3" data-min="5">
       <div class="story-meta"><span class="n">3/6</span><span>국내 증시, 약 5분</span></div>
-      <h2>코스피 하루 4.39% 급등, 오늘은 5,200선에서 숨 고르기</h2>
-      <p>10일 코스피는 220.28포인트 오른 5,239.13에 마감했습니다. 장중에는 5,300.92까지 올랐습니다. 사흘 연속 떨어진 뒤라 저가 매수가 몰렸고, 전날 미국 반도체주 반등과 유가 하락도 영향을 줬습니다. 오전 9시 6분에는 매수 사이드카가 발동됐습니다.</p>
+      <h2>코스피 하루 4.39% 급등, 오늘은 5,200선에서 보합권</h2>
+      <p>10일 코스피는 4.39% 오른 5,239.13에 마감했습니다. 사흘 연속 떨어진 뒤라 저가 매수가 몰렸고, 미국 반도체주 반등과 국제유가 하락이 투자심리를 살렸습니다. 오전 9시 6분에는 코스피와 코스닥 양 시장에 매수 사이드카가 발동됐습니다.</p>
       <div class="facts tbl-wrap">
         <table>
           <thead><tr><th>10일 유가증권시장</th><th class="r">순매수</th></tr></thead>
           <tbody>
-            <tr><td>외국인<span class="sub">8거래일 만에 순매수</span></td><td class="r num up">약 3,600억원</td></tr>
-            <tr><td>기관</td><td class="r num up">약 4,890억원</td></tr>
-            <tr><td>개인</td><td class="r num down">약 -1조3,000억원</td></tr>
+            <tr><td>외국인<span class="sub">8거래일 만에 순매수</span></td><td class="r num up">약 3,590억원에서 3,970억원</td></tr>
+            <tr><td>기관</td><td class="r num up">약 4,730억원</td></tr>
+            <tr><td>개인</td><td class="r num down">약 -1조3,500억원</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="note">외국인 순매수 규모는 매체에 따라 3,586억원, 3,659억원으로 다르게 나와 약 3,600억원으로 적었습니다.</p>
-      <p style="margin-top:12px">삼성전자는 4.74% 오른 19만8,900원, SK하이닉스는 6.69% 오른 121만2,000원에 마감했습니다.</p>
-      <p>오늘은 미국 물가 부담으로 0.56% 내린 5,209.71로 출발했고, 9시 13분에는 5,239.73으로 보합권까지 회복했습니다. 이 시각 외국인은 613억원 순매도, 기관은 698억원 순매수였습니다. 코스닥은 2.36% 오른 683.35로 강했습니다. 하루 순매수만으로 외국인이 본격적으로 돌아왔다고 보기는 이르다는 평가가 많아, 며칠 더 지켜봐야 합니다.</p>
+      <p class="note">외국인 순매수는 매체에 따라 3,586억원, 3,587억원, 3,659억원, 3,965억원으로 다르고, 뉴스핌은 6,327억원으로 적어 범위로 표시했습니다. 기관과 개인은 중앙이코노미뉴스 기준입니다.</p>
+      <p style="margin-top:12px">삼성전자는 4.74% 오른 19만8,900원, SK하이닉스는 6.69% 오른 121만2,000원에 마감했습니다. 코스닥은 4.48% 오른 667.61로 마감했고 기관이 2,000억원 넘게 순매수했습니다.</p>
+      <p>오늘은 미국 물가 부담으로 0.56% 내린 5,209.71로 출발한 뒤 5,200선 초중반에서 보합권을 오갔습니다. 외국인은 오전에 다시 순매도로 돌아서 781억원에서 1,051억원가량을 팔고 있고, 삼성전자와 SK하이닉스는 소폭 약세입니다. 코스닥은 2%대 상승 중입니다. 하나증권 연구원은 외국인 매도가 10개월 넘게 이어져 굳어졌고 순매수 복귀는 최소 3개월 뒤에나 가능할 수 있다고 내다봤습니다.</p>
 
       <div class="concept">
         <h3>알아둘 개념, 사이드카</h3>
@@ -714,20 +723,20 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
     <!-- 4 -->
     <article class="story" id="s4" data-min="4">
       <div class="story-meta"><span class="n">4/6</span><span>외환, 약 4분</span></div>
-      <h2>원/달러 환율 1,337.5원, 하루 만에 9.6원 내려</h2>
-      <p>10일 원/달러 환율은 주간 거래에서 전날보다 9.6원 내린 1,337.5원에 마감했습니다. 외국인이 한국 주식을 사들인 날 원화 값도 같이 올랐습니다. 오늘 오전 9시 기준으로는 1,339.2원입니다.</p>
-      <p>다만 미국 물가 발표 뒤 달러가 다시 강해졌고 미국 국채금리도 올라서, 오늘 장에서는 환율이 다시 오를 수 있다는 전망이 나옵니다.</p>
+      <h2>원/달러 환율 1,337.5원, 이틀째 내렸다가 오늘은 1,340원 안팎</h2>
+      <p>10일 원/달러 환율은 주간 거래 마감 기준 1,337.5원으로 이틀 연속 내렸습니다. 외국인이 한국 주식을 8거래일 만에 사들인 날입니다. 오늘은 미국 물가 발표 뒤 달러가 강해져 전날보다 6.0원 높은 1,343.5원에 출발했고, 오전 9시 15분에는 1,339.7원이었습니다.</p>
+      <p>달러 강세와 미국 국채금리 상승이 환율을 밀어 올리는 쪽, 외국인 순매수가 환율을 누르는 쪽으로 같이 작용하고 있습니다.</p>
 
       <div class="concept">
         <h3>알아둘 개념, 환율이 내리면 원화가 강해진 것</h3>
-        <p>원/달러 환율은 1달러를 사는 데 필요한 원화입니다. 1,347원에서 1,337원으로 내려가면 같은 1달러를 10원 적게 주고 살 수 있으니 원화 가치가 오른 것입니다.</p>
-        <p>외국인이 한국 주식을 사려면 달러를 원화로 바꿔야 해서 원화 수요가 늘어납니다. 반대로 미국 금리가 오르면 달러 자산에 돈이 몰려 달러가 강해집니다. 어제와 오늘 이 두 힘이 반대 방향으로 작용하고 있습니다.</p>
+        <p>원/달러 환율은 1달러를 사는 데 필요한 원화입니다. 예를 들어 1,350원에서 1,340원으로 내려가면 같은 1달러를 10원 적게 주고 살 수 있으니 원화 가치가 오른 것입니다.</p>
+        <p>외국인이 한국 주식을 사려면 달러를 원화로 바꿔야 해서 원화 수요가 늘어납니다. 반대로 미국 금리가 오르면 달러 자산에 돈이 몰려 달러가 강해집니다.</p>
       </div>
 
       <p class="link">2번 기사의 미국 금리 상승은 달러 강세 쪽, 3번 기사의 외국인 순매수는 원화 강세 쪽입니다.</p>
 
       <div class="quiz" data-quiz>
-        <p class="q">원/달러 환율이 1,347원에서 1,337원으로 내렸다. 원화 가치는?</p>
+        <p class="q">원/달러 환율이 1,350원에서 1,340원으로 내렸다. 원화 가치는?</p>
         <div class="opts">
           <button type="button" data-correct>올랐다</button>
           <button type="button">내렸다</button>
@@ -740,31 +749,22 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
     <!-- 5 -->
     <article class="story" id="s5" data-min="4">
       <div class="story-meta"><span class="n">5/6</span><span>기업, 약 4분</span></div>
-      <h2>엔비디아 5.5% 하락, 이틀 새 시가총액 4,700억달러 넘게 줄 듯</h2>
-      <p>엔비디아 이사회가 젠슨 황 CEO 관련 조사에 착수했다는 보도가 나온 뒤 주가가 이틀 연속 크게 떨어졌습니다. 10일 하락률은 5.5%였고, 두 거래일 합산 시가총액 감소분은 4,700억달러를 넘을 것으로 보입니다. 엔비디아가 실제로 신고한 수출 물량과 선적량 사이에 수만 개 규모의 칩 차이가 있다는 보도도 함께 나왔습니다. 조사 결과는 아직 나오지 않았습니다.</p>
-      <p>반도체 전체가 무너지지는 않았습니다.</p>
+      <h2>엔비디아 5.5% 하락, 이사회가 CEO 관련 의혹 조사에 착수</h2>
+      <p>엔비디아 주가가 10일 5.5% 떨어져 나스닥 하락을 이끌었습니다. 젠슨 황 CEO와 외국 정보기관 접근 의혹이 보도된 뒤 이사회가 독립 조사에 착수했습니다. 회사는 현재로서는 국가안보나 회사 기밀이 유출됐다고 볼 근거가 없다는 입장입니다. 조사 결과는 아직 나오지 않았습니다.</p>
+      <p>한 보도는 엔비디아의 하루 시가총액 감소분을 1,921억달러로 집계했습니다. 9일 하락률은 4.3%라는 보도도 있는데 한 매체 기준이어서 참고만 하세요. 반도체 전체가 같이 무너지지는 않았습니다. AMD와 브로드컴은 10일 오히려 올랐습니다.</p>
       <div class="facts tbl-wrap">
         <table>
-          <thead><tr><th>종목</th><th class="r">10일 등락</th></tr></thead>
+          <thead><tr><th>종목과 지수</th><th class="r">10일 등락</th></tr></thead>
           <tbody>
             <tr><td>엔비디아</td><td class="r num down">-5.5%</td></tr>
-            <tr><td>마이크론</td><td class="r num down">-1.1%</td></tr>
-            <tr><td>AMD</td><td class="r num up">+1.3%</td></tr>
-            <tr><td>브로드컴</td><td class="r num up">+3.9%</td></tr>
-            <tr><td>필라델피아 반도체지수</td><td class="r num down">-1.05%</td></tr>
-            <tr><td>SK하이닉스 미국 ADR<span class="sub">129.66달러</span></td><td class="r num down">-3.51%</td></tr>
+            <tr><td>나스닥</td><td class="r num down">-0.74%</td></tr>
           </tbody>
         </table>
       </div>
-      <p>AI 클라우드 업체 코어위브의 매출과 수주잔고가 예상보다 좋게 나와 AI 투자 수요가 꺾일 거라는 걱정은 일부 줄었습니다. 국내에서는 SK하이닉스가 어제 6.69% 오른 상태라 오늘 변동성이 클 수 있습니다.</p>
 
       <div class="concept">
         <h3>알아둘 개념, 시가총액 가중 지수</h3>
-        <p>S&amp;P500이나 코스피는 덩치가 큰 회사일수록 지수에 더 많이 반영됩니다. 엔비디아는 S&amp;P500에서 비중이 가장 큰 종목이라, 한 종목이 5% 넘게 빠지면 나머지 종목 상당수가 올라도 지수가 내려갈 수 있습니다. 코스피에서 삼성전자와 SK하이닉스가 하는 역할과 비슷합니다.</p>
-      </div>
-      <div class="concept">
-        <h3>알아둘 개념, ADR</h3>
-        <p>외국 기업 주식을 미국 시장에서 거래할 수 있게 만든 증서입니다. 한국 시간 밤에 거래되기 때문에, 국내 투자자들은 SK하이닉스 ADR 움직임을 다음 날 아침 국내 주가를 가늠하는 데 참고합니다.</p>
+        <p>S&amp;P500이나 코스피는 덩치가 큰 회사일수록 지수에 더 많이 반영됩니다. 엔비디아는 시가총액이 4조달러 안팎인 대형주라서, 한 종목이 5% 넘게 빠지면 다른 종목 일부가 올라도 지수가 내려갈 수 있습니다. 코스피에서 삼성전자와 SK하이닉스가 하는 역할과 비슷합니다.</p>
       </div>
 
       <div class="quiz" data-quiz>
@@ -774,7 +774,7 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
           <button type="button" data-correct>시가총액이 큰 종목일수록 지수 반영 비중이 커서</button>
           <button type="button">엔비디아 주가가 가장 비싸서</button>
         </div>
-        <p class="explain" hidden>주가 자체가 아니라 시가총액 기준으로 비중이 정해집니다. 엔비디아는 현재 S&amp;P500에서 비중 1위입니다.</p>
+        <p class="explain" hidden>주가 자체가 아니라 시가총액 기준으로 비중이 정해집니다. 시가총액이 큰 종목이 흔들리면 지수에 미치는 영향도 큽니다.</p>
       </div>
       <div class="story-foot"><button type="button" class="done-btn" data-done="s5" aria-pressed="false">다 읽었어요</button></div>
     </article>
@@ -782,14 +782,13 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
     <!-- 6 -->
     <article class="story" id="s6" data-min="3">
       <div class="story-meta"><span class="n">6/6</span><span>원자재, 약 3분</span></div>
-      <h2>브렌트유 91달러, 이달 초 112달러에서 20% 가까이 내려</h2>
-      <p>브렌트유는 10일 1.2% 내린 배럴당 91.49달러였습니다. 이달 초에는 112달러를 넘었습니다. 트럼프 대통령이 이란 전쟁은 군사적으로 사실상 끝났고 추가 공습 가능성은 낮다고 말한 것이 하락 이유로 꼽힙니다. 루비오 국무장관도 G7 회의에서 제재와 해상 봉쇄가 효과를 내고 있어 대규모 전투는 필요 없다고 설명했습니다.</p>
-      <p>오늘 밤에는 OPEC 월간 보고서가 나옵니다. 산유국들이 내년 수요를 어떻게 보는지 확인할 수 있습니다.</p>
+      <h2>브렌트유 91.49달러, 8월 말 이후 가장 낮은 종가</h2>
+      <p>1월물 브렌트유는 10일 1.17% 내린 배럴당 91.49달러에 마감해 8월 31일 90.49달러 이후 가장 낮았습니다. WTI 12월물은 0.93% 내린 86.04달러였습니다. 트럼프 대통령이 이란 재공격은 필요하지 않다고 말하고 전쟁 종식을 향한 진전이 있다고 하면서 공급 차질 우려가 누그러졌습니다. 이란 측이 미국과 협상 중이라는 주장을 부인하면서 하락 폭은 제한됐고, 추세적 하락으로 단정하기는 이르다는 시각도 있습니다.</p>
+      <p>미국 에너지정보청은 브렌트유 평균 가격이 올해 97달러에서 내년 86달러로 내려갈 것으로 전망했습니다.</p>
 
       <div class="concept">
         <h3>알아둘 개념, 유가와 한국 경제</h3>
         <p>한국은 원유를 거의 전부 수입합니다. 유가가 내리면 기름값과 원자재 비용이 줄어 물가 부담이 낮아지고, 수입 대금이 줄어 무역수지에도 도움이 됩니다. 원/달러 환율까지 내리면 원화로 계산한 원유 수입 가격은 더 내려갑니다.</p>
-        <p>미국 10월 CPI에는 이달 들어 나타난 유가 하락이 아직 반영되지 않았습니다. 11월 물가에서 이 효과가 얼마나 나올지가 다음 관전 포인트입니다.</p>
       </div>
 
       <p class="link">3번 기사에서 어제 코스피 급등 이유 중 하나로 유가 하락이 꼽혔습니다.</p>
@@ -809,30 +808,42 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
     <section class="end-block watch" id="econ-watch">
       <h2>오늘 이후 볼 것</h2>
       <ul>
-        <li>코스피가 5,200선 위에서 버티는지, 외국인 순매수가 이어지는지</li>
-        <li>오늘 밤 OPEC 월간 보고서와 미국 주택담보대출 신청 지표</li>
+        <li>코스피가 5,200선 위에서 버티는지, 외국인이 순매도에서 다시 순매수로 돌아서는지</li>
         <li>엔비디아 이사회 조사 진행 상황</li>
         <li>12월 FOMC에서 0.25%p 인상인지 0.5%p 인상인지</li>
-        <li>러시아와 우크라이나가 10일 아부다비에서 2월 이후 첫 평화 협상을 시작했습니다. 유가와 유럽 시장에 영향을 줄 수 있습니다.</li>
+        <li>11월 26일 한국은행 금융통화위원회. 기준금리는 연 3.00%이고, 우리금융경영연구소와 하나금융연구소는 0.25%p 인상을 예상했습니다</li>
+        <li>러시아와 우크라이나 아부다비 협상 둘째 날 결과와 이란 관련 미국 발언이 유가에 주는 영향</li>
       </ul>
     </section>
 
     <section class="end-block sources">
       <h2>출처</h2>
       <ul>
-        <li><a href="https://www.upkoreanews.kr/news/articleView.html?idxno=101110" target="_blank" rel="noopener">업코리아, 오늘 증시 전망</a></li>
-        <li><a href="https://www.topstarnews.net/news/articleView.html?idxno=16273403" target="_blank" rel="noopener">톱스타뉴스, 국내증시 전망</a></li>
-        <li><a href="https://www.blockmedia.co.kr/archives/1164228" target="_blank" rel="noopener">블록미디어, 개장시황</a></li>
-        <li><a href="https://www.fnnews.com/news/202611110859102723" target="_blank" rel="noopener">파이낸셜뉴스, 코스피 개장</a></li>
-        <li><a href="https://www.bnnbloomberg.ca/markets/dow-jones/2026/11/10/wall-street-mixed-in-early-trading-ahead-of-a-new-peek-at-inflation/" target="_blank" rel="noopener">BNN Bloomberg, Markets today</a></li>
-        <li><a href="https://www.thestandard.com.hk/news/article/348128/Morning-Recap-November-11-2026" target="_blank" rel="noopener">The Standard, Morning Recap</a></li>
-        <li><a href="https://www.investing.com/news/stock-market-news/us-economic-calendar-light-on-wednesday-with-mortgage-data-in-focus-93CH-5016580" target="_blank" rel="noopener">Investing.com, 미국 경제 일정</a></li>
+        <li><a href="https://www.ddaily.co.kr/page/view/2026111016020139469" target="_blank" rel="noopener">디지털데일리, 코스피 4.4% 급등</a></li>
+        <li><a href="https://www.newspim.com/news/view/20261110001216" target="_blank" rel="noopener">뉴스핌, 10일 마감시황</a></li>
+        <li><a href="https://www.joongangenews.com/news/articleView.html?idxno=562702" target="_blank" rel="noopener">중앙이코노미뉴스, 코스피 5239 마감</a></li>
+        <li><a href="https://www.idaegu.co.kr/news/articleView.html?idxno=564987" target="_blank" rel="noopener">대구신문, 코스닥과 코스피 급등 마감</a></li>
+        <li><a href="https://www.segye.com/newsView/20261111504487" target="_blank" rel="noopener">세계일보, 11일 코스피 보합권</a></li>
+        <li><a href="https://biz.heraldcorp.com/article/10933166" target="_blank" rel="noopener">헤럴드경제, 외국인 순매도 전환</a></li>
+        <li><a href="https://www.joongangenews.com/news/articleView.html?idxno=562884" target="_blank" rel="noopener">중앙이코노미뉴스, 11일 개장시황</a></li>
+        <li><a href="https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-nov-10-2026" target="_blank" rel="noopener">TheStreet, 11월 10일 미국 증시</a></li>
+        <li><a href="https://eurasiabusinessnews.com/2026/11/11/stock-market-today-dow-jones-nasdaq-sp-500-fall-on-november-10-2026-oil-and-gold-retreat/" target="_blank" rel="noopener">Eurasia Business News, 11월 10일 미국 증시</a></li>
+        <li><a href="https://gulfnews.com/business/markets/us-stocks-fall-on-hot-inflation-report-as-nvidia-tumbles-again-1.500741892" target="_blank" rel="noopener">Gulf News, 물가 발표와 엔비디아</a></li>
+        <li><a href="https://www.newspim.com/news/view/20261111000043" target="_blank" rel="noopener">뉴스핌, 채권과 외환 시황</a></li>
+        <li><a href="https://www.ajunews.com/view/20261111093704323" target="_blank" rel="noopener">아주경제, 환율 1340원 안팎</a></li>
+        <li><a href="https://www.news1.kr/finance/market-exr/6350053" target="_blank" rel="noopener">뉴스1, 달러원 1343.5원 출발</a></li>
+        <li><a href="https://www.junggi.co.kr/news/articleView.html?idxno=38451" target="_blank" rel="noopener">중기이코노미, 환율 이틀째 하락</a></li>
+        <li><a href="https://www.etoday.co.kr/news/view/2646499" target="_blank" rel="noopener">이투데이, 브렌트유 하락</a></li>
+        <li><a href="https://www.joongangenews.com/news/articleView.html?idxno=562815" target="_blank" rel="noopener">중앙이코노미뉴스, 국제유가 8월 말 이후 최저</a></li>
+        <li><a href="https://news.jkn.co.kr/post/1084991" target="_blank" rel="noopener">재경일보, 엔비디아 시가총액 감소</a></li>
+        <li><a href="https://www.getnews.co.kr/news/articleView.html?idxno=886539" target="_blank" rel="noopener">우리금융연구소 11월 금통위 전망</a></li>
       </ul>
-      <p class="note">장 시작 직후 자료라 마감 수치와 다를 수 있습니다. 매체마다 수치가 다른 경우 본문에 따로 적었습니다.</p>
+      <p class="note">수치는 검색 결과를 교차 확인한 값입니다. 확인 전 표시는 한 매체 보도 기준입니다. 장중 자료라 마감 수치와 다를 수 있고, 매체마다 값이 다른 곳은 본문에 범위로 적었습니다. 국고채 금리와 오늘 오후 코스피 수치는 확인하지 못했습니다.</p>
     </section>
    </div>
   </main>
 </div>
+
 
 <script>
 (function () {

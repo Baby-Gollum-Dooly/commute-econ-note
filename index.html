@@ -3,198 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<style>
-:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-body{margin:0}
-img{max-width:100%}
-[hidden]{display:none!important}
-</style>
 <title>출근길 경제노트</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<style>
-/* 레이아웃: 증권사 모닝노트 형식. 데스크톱은 왼쪽 목차 + 본문 한 단, 폰은 본문 한 단과 상단 진행 바 */
-:root {
-  --bg: #ffffff;
-  --fg: #16191c;
-  --muted: #5b6168;
-  --rule: #dde0e3;
-  --tint: #f2f4f3;
-  --accent: #1e5e4a;
-  --accent-fg: #ffffff;
-  --up: #c8102e;
-  --down: #1f4fb8;
-  --ok-bg: #e5f2ec;
-  --no-bg: #fbe9ea;
-  --soon: #8a5a00;
-  --font-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
-  --font-num: "IBM Plex Mono", ui-monospace, "Consolas", monospace;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #111416; --fg: #e6e8ea; --muted: #9aa1a8; --rule: #2b3034; --tint: #1a1e21;
-    --accent: #5fbf9c; --accent-fg: #0d1a15; --up: #ff6b6b; --down: #6ea0ff;
-    --ok-bg: #16302a; --no-bg: #3a1c20; --soon: #e0b25c; color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #111416; --fg: #e6e8ea; --muted: #9aa1a8; --rule: #2b3034; --tint: #1a1e21;
-  --accent: #5fbf9c; --accent-fg: #0d1a15; --up: #ff6b6b; --down: #6ea0ff;
-  --ok-bg: #16302a; --no-bg: #3a1c20; --soon: #e0b25c; color-scheme: dark;
-}
-
-* { box-sizing: border-box; }
-body {
-  background: var(--bg); color: var(--fg);
-  font-family: var(--font-body); font-size: 16px; line-height: 1.7;
-  -webkit-text-size-adjust: 100%;
-}
-body::before {
-  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
-  z-index: 10; background: var(--bg);
-}
-a { color: var(--accent); }
-.num { font-family: var(--font-num); font-variant-numeric: tabular-nums; }
-.up { color: var(--up); }
-.down { color: var(--down); }
-
-/* 상단 바 */
-.topbar {
-  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
-  background: var(--bg); border-bottom: 1px solid var(--rule);
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
-}
-.topbar-in {
-  max-width: 1080px; margin: 0 auto; padding-block: 10px;
-  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
-}
-.brand { font-weight: 700; font-size: 15px; }
-.brand span { color: var(--muted); font-weight: 400; margin-left: 8px; }
-.progress { margin-left: auto; display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); }
-.bar { width: 96px; height: 4px; background: var(--rule); }
-.bar i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .3s; }
-
-/* 전체 틀 */
-.wrap {
-  max-width: 1080px; margin: 0 auto;
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
-  padding-block: 24px 64px;
-  display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 48px;
-}
-@media (max-width: 860px) { .wrap { grid-template-columns: minmax(0, 1fr); gap: 0; } .toc { display: none; } }
-
-/* 목차 */
-.toc { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 72px); align-self: start; font-size: 14px; }
-.toc h2 { font-size: 12px; letter-spacing: .08em; color: var(--muted); font-weight: 500; margin: 0 0 8px; }
-.toc ol { list-style: none; margin: 0; padding: 0; }
-.toc li a {
-  display: grid; grid-template-columns: 36px 1fr; gap: 4px; padding: 7px 0;
-  color: var(--fg); text-decoration: none; border-bottom: 1px solid var(--rule); line-height: 1.45;
-}
-.toc li a .t { color: var(--muted); font-family: var(--font-num); font-size: 12px; padding-top: 2px; }
-.toc li.done a { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--rule); }
-
-main { min-width: 0; max-width: 680px; }
-
-/* 머리 */
-.head { margin-bottom: 28px; }
-.head .date { font-size: 14px; color: var(--muted); margin: 0; }
-.head h1 { font-size: 26px; line-height: 1.35; margin: 4px 0 10px; text-wrap: balance; letter-spacing: -0.01em; }
-.head p { margin: 0; color: var(--muted); font-size: 15px; }
-
-/* 숫자표 */
-.quotes { margin-bottom: 40px; }
-.sec-label { font-size: 12px; letter-spacing: .08em; color: var(--muted); font-weight: 500; margin: 0 0 6px; }
-.tbl-wrap { overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
-th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--rule); vertical-align: top; }
-thead th { font-size: 12px; font-weight: 500; color: var(--muted); border-bottom: 1px solid var(--fg); }
-td.r, th.r { text-align: right; white-space: nowrap; }
-td .sub { display: block; font-size: 12px; color: var(--muted); }
-.note { font-size: 13px; color: var(--muted); margin: 8px 0 0; }
-
-/* 기사 */
-.story { padding-top: 28px; border-top: 2px solid var(--fg); margin-bottom: 44px; scroll-margin-top: 64px; }
-.story-meta { display: flex; gap: 12px; font-size: 13px; color: var(--muted); margin-bottom: 4px; }
-.story-meta .n { font-family: var(--font-num); color: var(--fg); }
-.story h2 { font-size: 21px; line-height: 1.4; margin: 0 0 14px; text-wrap: balance; }
-.story p { margin: 0 0 12px; }
-.story h3 { font-size: 15px; margin: 22px 0 6px; }
-.facts { margin: 14px 0 6px; }
-.facts table { font-size: 14px; }
-
-.concept { background: var(--tint); padding: 14px 16px; margin: 20px 0 0; }
-.concept h3 { margin: 0 0 6px; font-size: 14px; color: var(--accent); }
-.concept p { font-size: 15px; margin: 0 0 8px; }
-.concept p:last-child { margin-bottom: 0; }
-
-.link { font-size: 14.5px; color: var(--muted); border-left: 2px solid var(--rule); padding-left: 12px; margin: 18px 0 0; }
-
-/* 퀴즈 */
-.quiz { margin-top: 22px; }
-.quiz .q { font-weight: 500; margin: 0 0 8px; }
-.opts { display: flex; flex-direction: column; gap: 6px; }
-.opts button {
-  text-align: left; font: inherit; font-size: 15px; color: var(--fg);
-  background: var(--bg); border: 1px solid var(--rule); padding: 9px 12px; cursor: pointer;
-}
-.opts button:hover:not(:disabled) { border-color: var(--fg); }
-.opts button:focus-visible, .done-btn:focus-visible, .toc a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.opts button.right { background: var(--ok-bg); border-color: var(--accent); }
-.opts button.wrong { background: var(--no-bg); border-color: var(--up); }
-.opts button:disabled { cursor: default; }
-.explain { font-size: 14.5px; margin: 10px 0 0; color: var(--muted); }
-
-.story-foot { display: flex; justify-content: flex-end; margin-top: 22px; }
-.done-btn {
-  font: inherit; font-size: 14px; padding: 8px 16px; cursor: pointer;
-  background: var(--accent); color: var(--accent-fg); border: 1px solid var(--accent);
-}
-.done-btn[aria-pressed="true"] { background: transparent; color: var(--muted); border-color: var(--rule); }
-
-/* 단어장, 일정, 출처 */
-.glossary dl { margin: 0; }
-.glossary .row { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--rule); font-size: 15px; }
-.glossary dt { font-weight: 500; }
-.glossary dd { margin: 0; color: var(--fg); }
-@media (max-width: 480px) { .glossary .row { grid-template-columns: minmax(0, 1fr); gap: 2px; } }
-.watch ul, .sources ul { margin: 0; padding-left: 18px; }
-.watch li, .sources li { margin-bottom: 6px; }
-.sources { font-size: 13.5px; color: var(--muted); }
-.end-block { padding-top: 24px; border-top: 1px solid var(--fg); margin-bottom: 36px; }
-.end-block h2 { font-size: 18px; margin: 0 0 10px; }
-
-/* 탭 */
-.tabs { display: flex; gap: 4px; }
-.tabs a {
-  padding: 4px 10px; font-size: 14px; color: var(--muted); text-decoration: none;
-  border-bottom: 2px solid transparent;
-}
-.tabs a[aria-current="page"] { color: var(--fg); border-bottom-color: var(--fg); font-weight: 500; }
-.tabs a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-
-/* 스타트업 항목 목록 */
-.items { list-style: none; margin: 6px 0 0; padding: 0; }
-.items li { padding: 13px 0; border-bottom: 1px solid var(--rule); }
-.items li:first-child { border-top: 1px solid var(--rule); }
-.item-head { display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
-.item-head strong { font-size: 16px; }
-.item-head .when { font-size: 12.5px; color: var(--muted); font-family: var(--font-num); }
-.tag { font-size: 11.5px; line-height: 1.5; padding: 0 6px; border: 1px solid currentColor; white-space: nowrap; }
-.tag.fact { color: var(--accent); }
-.tag.plan { color: var(--soon); }
-.tag.rule { color: var(--muted); }
-.items p { margin: 5px 0 0; font-size: 15px; }
-.legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 13px; color: var(--muted); margin: 10px 0 0; }
-.legend span { display: inline-flex; gap: 6px; align-items: center; }
-
-@media (prefers-reduced-motion: reduce) { .bar i { transition: none; } }
-</style>
-
+<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 <header class="topbar">
@@ -212,10 +26,10 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
   </div>
 </header>
 
-<div class="wrap">
+<div class="wrap" data-date="2026-11-11">
   <nav class="toc" aria-label="오늘 읽을 순서">
     <h2>읽는 순서</h2>
-    <ol id="toc-startup" hidden>
+    <ol id="toc-startup" data-toc="startup" hidden>
       <li data-for="startup-glossary"><a href="#startup-glossary"><span class="t">2분</span>먼저 알아둘 단어</a></li>
       <li data-for="c1"><a href="#c1"><span class="t">2분</span>시장 신호</a></li>
       <li data-for="c2"><a href="#c2"><span class="t">4분</span>국내 투자 유치</a></li>
@@ -223,14 +37,14 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
       <li data-for="c4"><a href="#c4"><span class="t">3분</span>정책과 지원사업</a></li>
       <li data-for="c5"><a href="#c5"><span class="t">3분</span>해외 투자 흐름</a></li>
     </ol>
-    <ol id="toc-issues" hidden>
+    <ol id="toc-issues" data-toc="issues" hidden>
       <li data-for="issues-glossary"><a href="#issues-glossary"><span class="t">2분</span>먼저 알아둘 단어</a></li>
       <li data-for="p1"><a href="#p1"><span class="t">4분</span>국회와 부동산 세제</a></li>
       <li data-for="p2"><a href="#p2"><span class="t">3분</span>내란 재판 대법원</a></li>
       <li data-for="p3"><a href="#p3"><span class="t">5분</span>미국 선거와 국제 정세</a></li>
       <li data-for="p4"><a href="#p4"><span class="t">2분</span>겨울철 생활 정책</a></li>
     </ol>
-    <ol id="toc">
+    <ol id="toc" data-toc="econ">
       <li data-for="glossary"><a href="#glossary"><span class="t">3분</span>먼저 알아둘 단어</a></li>
       <li data-for="quotes"><a href="#quotes"><span class="t">2분</span>개장 전 숫자</a></li>
       <li data-for="s1"><a href="#s1"><span class="t">5분</span>미국 10월 물가</a></li>
@@ -243,7 +57,7 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
   </nav>
 
   <main>
-   <div id="view-issues" hidden>
+   <div id="view-issues" data-view="issues" data-base="2" data-end="issues-sources" hidden>
     <div class="head">
       <p class="date">2026년 11월 11일 수요일, 최근 1주 기사 기준</p>
       <h1>미국 의회는 민주당으로 넘어갔고, 국내에서는 세법과 예산 심사가 한창입니다</h1>
@@ -274,7 +88,7 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
       </dl>
     </section>
 
-    <article class="story" id="p1">
+    <article class="story" id="p1" data-min="4">
       <div class="story-meta"><span class="n">1/4</span><span>국내 정치, 약 4분</span></div>
       <h2>정기국회 세법 심사, 종부세는 실거주 여부로 공제가 갈립니다</h2>
       <p>국회는 지금 내년 예산안과 세법 개정안을 심사하고 있습니다. 오늘 오후에도 예산결산특별위원회 전체회의가 잡혀 있습니다. 세법은 보통 12월 본회의에서 확정됩니다.</p>
@@ -297,7 +111,7 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
       <div class="story-foot"><button type="button" class="done-btn" data-done="p1" aria-pressed="false">다 읽었어요</button></div>
     </article>
 
-    <article class="story" id="p2">
+    <article class="story" id="p2" data-min="3">
       <div class="story-meta"><span class="n">2/4</span><span>사법, 약 3분</span></div>
       <h2>한덕수 전 총리와 이상민 전 장관, 대법원 선고 전에 구속기간이 끝날 수 있습니다</h2>
       <p>내란 중요임무 종사 혐의로 재판을 받는 두 사람은 5월 항소심 선고를 받았습니다. 한 전 총리는 1심 징역 23년에서 2심 징역 15년으로 줄었고, 이 전 장관은 1심 징역 7년에서 2심 징역 9년으로 늘었습니다.</p>
@@ -310,7 +124,7 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
       <div class="story-foot"><button type="button" class="done-btn" data-done="p2" aria-pressed="false">다 읽었어요</button></div>
     </article>
 
-    <article class="story" id="p3">
+    <article class="story" id="p3" data-min="5">
       <div class="story-meta"><span class="n">3/4</span><span>국제, 약 5분</span></div>
       <h2>미국 중간선거에서 민주당이 상하원을 모두 가져갔습니다</h2>
       <ul class="items">
@@ -336,7 +150,7 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
       <div class="story-foot"><button type="button" class="done-btn" data-done="p3" aria-pressed="false">다 읽었어요</button></div>
     </article>
 
-    <article class="story" id="p4">
+    <article class="story" id="p4" data-min="2">
       <div class="story-meta"><span class="n">4/4</span><span>사회와 생활, 약 2분</span></div>
       <h2>겨울 대책 발표, 지난겨울 한랭질환 사망자가 8명에서 14명으로 늘었습니다</h2>
       <ul class="items">
@@ -376,7 +190,7 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
     </section>
    </div>
 
-   <div id="view-startup" hidden>
+   <div id="view-startup" data-view="startup" data-base="2" data-end="startup-sources" hidden>
     <div class="head">
       <p class="date">2026년 11월 11일 수요일, 최근 2주 기사 기준</p>
       <h1>금리 부담은 커지는데 AI 반도체 쪽으로는 큰돈이 계속 들어오고 있습니다</h1>
@@ -408,7 +222,7 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
       </dl>
     </section>
 
-    <article class="story" id="c1">
+    <article class="story" id="c1" data-min="2">
       <div class="story-meta"><span class="n">1/5</span><span>시장 신호, 약 2분</span></div>
       <h2>미국 금리 인상 기대가 스타트업 기업가치에도 영향을 줍니다</h2>
       <p>경제 탭 1, 2번 기사처럼 미국 물가가 예상보다 높게 나오면서 12월 금리 인상 가능성이 커졌고, 10년물 국채금리는 4.99%까지 올랐습니다. 어제 나스닥이 다우보다 더 떨어진 것도 이 영향입니다.</p>
@@ -421,7 +235,7 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
       <div class="story-foot"><button type="button" class="done-btn" data-done="c1" aria-pressed="false">다 읽었어요</button></div>
     </article>
 
-    <article class="story" id="c2">
+    <article class="story" id="c2" data-min="4">
       <div class="story-meta"><span class="n">2/5</span><span>국내 투자 유치, 약 4분</span></div>
       <h2>투자 금액은 3배로 늘었지만 소수 기업에 몰리고 있습니다</h2>
       <ul class="items">
@@ -451,7 +265,7 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
       <div class="story-foot"><button type="button" class="done-btn" data-done="c2" aria-pressed="false">다 읽었어요</button></div>
     </article>
 
-    <article class="story" id="c3">
+    <article class="story" id="c3" data-min="4">
       <div class="story-meta"><span class="n">3/5</span><span>상장과 공모, 약 4분</span></div>
       <h2>11월 코스닥 상장, 공모가가 희망 범위 아래에서 정해진 곳도 나왔습니다</h2>
       <div class="facts tbl-wrap">
@@ -496,7 +310,7 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
       <div class="story-foot"><button type="button" class="done-btn" data-done="c3" aria-pressed="false">다 읽었어요</button></div>
     </article>
 
-    <article class="story" id="c4">
+    <article class="story" id="c4" data-min="3">
       <div class="story-meta"><span class="n">4/5</span><span>정책과 지원사업, 약 3분</span></div>
       <h2>하반기에 바뀐 제도, 연말까지 남은 일정</h2>
       <p>11월 들어 새로 나온 중기부 발표는 이번 검색에서 확인하지 못했습니다. 아래는 하반기에 시행됐거나 연내 시행 예정인 항목입니다.</p>
@@ -526,7 +340,7 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
       <div class="story-foot"><button type="button" class="done-btn" data-done="c4" aria-pressed="false">다 읽었어요</button></div>
     </article>
 
-    <article class="story" id="c5">
+    <article class="story" id="c5" data-min="3">
       <div class="story-meta"><span class="n">5/5</span><span>해외 투자 흐름, 약 3분</span></div>
       <h2>어제 해외 투자 소식, AI가 회계와 법률 같은 기존 업무로 들어갑니다</h2>
       <div class="facts tbl-wrap">
@@ -569,7 +383,7 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
     </section>
    </div>
 
-   <div id="view-econ">
+   <div id="view-econ" data-view="econ" data-base="5" data-end="econ-watch">
     <div class="head">
       <p class="date">2026년 11월 11일 수요일, 오전 9시 기준</p>
       <h1>미국 물가가 예상보다 높게 나왔고, 코스피는 4% 급등 다음 날 숨을 고르는 중</h1>
@@ -616,7 +430,7 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
     </section>
 
     <!-- 1 -->
-    <article class="story" id="s1">
+    <article class="story" id="s1" data-min="5">
       <div class="story-meta"><span class="n">1/6</span><span>미국 경제, 약 5분</span></div>
       <h2>미국 10월 소비자물가, 예상보다 0.1%p씩 높았다</h2>
       <p>미국 노동통계국이 10일 발표한 10월 소비자물가지수(CPI)는 전월보다 0.4% 올랐습니다. 시장 예상은 0.3%였습니다. 식품과 에너지를 뺀 근원 CPI도 0.3% 올라 예상치 0.2%를 넘었습니다. 식료품과 전기요금 같은 생활비 항목 상승 폭이 컸습니다.</p>
@@ -647,7 +461,7 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
     </article>
 
     <!-- 2 -->
-    <article class="story" id="s2">
+    <article class="story" id="s2" data-min="4">
       <div class="story-meta"><span class="n">2/6</span><span>채권, 약 4분</span></div>
       <h2>미국 10년물 국채금리 4.99%, 다시 5% 앞으로</h2>
       <p>물가 발표 뒤 미국 10년물 국채금리는 전날 4.88%에서 4.99%로 올랐습니다. 장중에는 5%를 넘기도 했습니다. 2년물은 4.7%대로 뛰었습니다. 10년물은 10월 초 5.30%를 넘었다가 내려오던 중이었는데 한 달 만에 다시 올라선 셈입니다.</p>
@@ -685,7 +499,7 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
     </article>
 
     <!-- 3 -->
-    <article class="story" id="s3">
+    <article class="story" id="s3" data-min="5">
       <div class="story-meta"><span class="n">3/6</span><span>국내 증시, 약 5분</span></div>
       <h2>코스피 하루 4.39% 급등, 오늘은 5,200선에서 숨 고르기</h2>
       <p>10일 코스피는 220.28포인트 오른 5,239.13에 마감했습니다. 장중에는 5,300.92까지 올랐습니다. 사흘 연속 떨어진 뒤라 저가 매수가 몰렸고, 전날 미국 반도체주 반등과 유가 하락도 영향을 줬습니다. 오전 9시 6분에는 매수 사이드카가 발동됐습니다.</p>
@@ -725,7 +539,7 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
     </article>
 
     <!-- 4 -->
-    <article class="story" id="s4">
+    <article class="story" id="s4" data-min="4">
       <div class="story-meta"><span class="n">4/6</span><span>외환, 약 4분</span></div>
       <h2>원/달러 환율 1,337.5원, 하루 만에 9.6원 내려</h2>
       <p>10일 원/달러 환율은 주간 거래에서 전날보다 9.6원 내린 1,337.5원에 마감했습니다. 외국인이 한국 주식을 사들인 날 원화 값도 같이 올랐습니다. 오늘 오전 9시 기준으로는 1,339.2원입니다.</p>
@@ -751,7 +565,7 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
     </article>
 
     <!-- 5 -->
-    <article class="story" id="s5">
+    <article class="story" id="s5" data-min="4">
       <div class="story-meta"><span class="n">5/6</span><span>기업, 약 4분</span></div>
       <h2>엔비디아 5.5% 하락, 이틀 새 시가총액 4,700억달러 넘게 줄 듯</h2>
       <p>엔비디아 이사회가 젠슨 황 CEO 관련 조사에 착수했다는 보도가 나온 뒤 주가가 이틀 연속 크게 떨어졌습니다. 10일 하락률은 5.5%였고, 두 거래일 합산 시가총액 감소분은 4,700억달러를 넘을 것으로 보입니다. 엔비디아가 실제로 신고한 수출 물량과 선적량 사이에 수만 개 규모의 칩 차이가 있다는 보도도 함께 나왔습니다. 조사 결과는 아직 나오지 않았습니다.</p>
@@ -793,7 +607,7 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
     </article>
 
     <!-- 6 -->
-    <article class="story" id="s6">
+    <article class="story" id="s6" data-min="3">
       <div class="story-meta"><span class="n">6/6</span><span>원자재, 약 3분</span></div>
       <h2>브렌트유 91달러, 이달 초 112달러에서 20% 가까이 내려</h2>
       <p>브렌트유는 10일 1.2% 내린 배럴당 91.49달러였습니다. 이달 초에는 112달러를 넘었습니다. 트럼프 대통령이 이란 전쟁은 군사적으로 사실상 끝났고 추가 공습 가능성은 낮다고 말한 것이 하락 이유로 꼽힙니다. 루비오 국무장관도 G7 회의에서 제재와 해상 봉쇄가 효과를 내고 있어 대규모 전투는 필요 없다고 설명했습니다.</p>
@@ -846,108 +660,6 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
    </div>
   </main>
 </div>
-
-<script>
-(function () {
-  var KEY = "econ-note-2026-11-11";
-  var VIEWS = {
-    econ: { ids: ["s1", "s2", "s3", "s4", "s5", "s6"], minutes: { s1: 5, s2: 4, s3: 5, s4: 4, s5: 4, s6: 3 }, base: 5, toc: "toc", end: "econ-watch" },
-    startup: { ids: ["c1", "c2", "c3", "c4", "c5"], minutes: { c1: 2, c2: 4, c3: 4, c4: 3, c5: 3 }, base: 2, toc: "toc-startup", end: "startup-sources" },
-    issues: { ids: ["p1", "p2", "p3", "p4"], minutes: { p1: 4, p2: 3, p3: 5, p4: 2 }, base: 2, toc: "toc-issues", end: "issues-sources" }
-  };
-  var current = "econ";
-  var done = {};
-  try { done = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { done = {}; }
-
-  function save() { try { localStorage.setItem(KEY, JSON.stringify(done)); } catch (e) {} }
-
-  function viewFor(id) {
-    if (id.indexOf("startup") === 0 || /^c\d$/.test(id)) return "startup";
-    if (id.indexOf("issues") === 0 || /^p\d$/.test(id)) return "issues";
-    return "econ";
-  }
-
-  function render() {
-    Object.keys(VIEWS).forEach(function (name) {
-      var v = VIEWS[name];
-      v.ids.forEach(function (id) {
-        var btn = document.querySelector('[data-done="' + id + '"]');
-        var li = document.querySelector('#' + v.toc + ' li[data-for="' + id + '"]');
-        if (btn) {
-          btn.setAttribute("aria-pressed", done[id] ? "true" : "false");
-          btn.textContent = done[id] ? "읽음 표시 취소" : "다 읽었어요";
-        }
-        if (li) li.classList.toggle("done", !!done[id]);
-      });
-    });
-    var v = VIEWS[current], count = 0, left = v.base, total = v.ids.length;
-    v.ids.forEach(function (id) { if (done[id]) count++; else left += v.minutes[id]; });
-    document.getElementById("progress-text").textContent =
-      count === total ? total + "/" + total + " 다 읽었습니다" : count + "/" + total + " 읽음, 남은 시간 약 " + left + "분";
-    document.getElementById("progress-bar").style.width = (count / total * 100) + "%";
-  }
-
-  function show(name) {
-    current = name;
-    document.getElementById("view-econ").hidden = name !== "econ";
-    document.getElementById("view-startup").hidden = name !== "startup";
-    document.getElementById("view-issues").hidden = name !== "issues";
-    document.getElementById("toc").hidden = name !== "econ";
-    document.getElementById("toc-startup").hidden = name !== "startup";
-    document.getElementById("toc-issues").hidden = name !== "issues";
-    document.querySelectorAll("[data-tab]").forEach(function (a) {
-      if (a.getAttribute("data-tab") === name) a.setAttribute("aria-current", "page");
-      else a.removeAttribute("aria-current");
-    });
-    render();
-  }
-
-  function route() {
-    var id = (location.hash || "").replace("#", "");
-    var name = viewFor(id);
-    var changed = name !== current;
-    show(name);
-    var isTab = id === "econ" || id === "startup" || id === "issues";
-    var target = id && !isTab ? document.getElementById(id) : null;
-    if (target) target.scrollIntoView();
-    else if (changed || isTab) window.scrollTo(0, 0);
-  }
-
-  document.querySelectorAll("[data-done]").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      var id = btn.getAttribute("data-done");
-      var v = VIEWS[viewFor(id)];
-      done[id] = !done[id];
-      save(); render();
-      if (done[id]) {
-        var next = v.ids[v.ids.indexOf(id) + 1];
-        var target = document.getElementById(next || v.end);
-        if (target) target.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
-      }
-    });
-  });
-
-  window.addEventListener("hashchange", route);
-
-  document.querySelectorAll("[data-quiz]").forEach(function (quiz) {
-    var buttons = quiz.querySelectorAll(".opts button");
-    var explain = quiz.querySelector(".explain");
-    buttons.forEach(function (b) {
-      b.addEventListener("click", function () {
-        buttons.forEach(function (x) {
-          x.disabled = true;
-          if (x.hasAttribute("data-correct")) x.classList.add("right");
-        });
-        if (!b.hasAttribute("data-correct")) b.classList.add("wrong");
-        explain.textContent = (b.hasAttribute("data-correct") ? "맞습니다. " : "정답은 초록색 보기입니다. ") + explain.textContent;
-        explain.hidden = false;
-      });
-    });
-  });
-
-  route();
-})();
-</script>
-
+<script src="assets/js/app.js"></script>
 </body>
 </html>

@@ -1,0 +1,953 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<title>출근길 경제노트</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* 레이아웃: 증권사 모닝노트 형식. 데스크톱은 왼쪽 목차 + 본문 한 단, 폰은 본문 한 단과 상단 진행 바 */
+:root {
+  --bg: #ffffff;
+  --fg: #16191c;
+  --muted: #5b6168;
+  --rule: #dde0e3;
+  --tint: #f2f4f3;
+  --accent: #1e5e4a;
+  --accent-fg: #ffffff;
+  --up: #c8102e;
+  --down: #1f4fb8;
+  --ok-bg: #e5f2ec;
+  --no-bg: #fbe9ea;
+  --soon: #8a5a00;
+  --font-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-num: "IBM Plex Mono", ui-monospace, "Consolas", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111416; --fg: #e6e8ea; --muted: #9aa1a8; --rule: #2b3034; --tint: #1a1e21;
+    --accent: #5fbf9c; --accent-fg: #0d1a15; --up: #ff6b6b; --down: #6ea0ff;
+    --ok-bg: #16302a; --no-bg: #3a1c20; --soon: #e0b25c; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111416; --fg: #e6e8ea; --muted: #9aa1a8; --rule: #2b3034; --tint: #1a1e21;
+  --accent: #5fbf9c; --accent-fg: #0d1a15; --up: #ff6b6b; --down: #6ea0ff;
+  --ok-bg: #16302a; --no-bg: #3a1c20; --soon: #e0b25c; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: 16px; line-height: 1.7;
+  -webkit-text-size-adjust: 100%;
+}
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+  z-index: 10; background: var(--bg);
+}
+a { color: var(--accent); }
+.num { font-family: var(--font-num); font-variant-numeric: tabular-nums; }
+.up { color: var(--up); }
+.down { color: var(--down); }
+
+/* 상단 바 */
+.topbar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: var(--bg); border-bottom: 1px solid var(--rule);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.topbar-in {
+  max-width: 1080px; margin: 0 auto; padding-block: 10px;
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+}
+.brand { font-weight: 700; font-size: 15px; }
+.brand span { color: var(--muted); font-weight: 400; margin-left: 8px; }
+.progress { margin-left: auto; display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); }
+.bar { width: 96px; height: 4px; background: var(--rule); }
+.bar i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .3s; }
+
+/* 전체 틀 */
+.wrap {
+  max-width: 1080px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 24px 64px;
+  display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 48px;
+}
+@media (max-width: 860px) { .wrap { grid-template-columns: minmax(0, 1fr); gap: 0; } .toc { display: none; } }
+
+/* 목차 */
+.toc { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 72px); align-self: start; font-size: 14px; }
+.toc h2 { font-size: 12px; letter-spacing: .08em; color: var(--muted); font-weight: 500; margin: 0 0 8px; }
+.toc ol { list-style: none; margin: 0; padding: 0; }
+.toc li a {
+  display: grid; grid-template-columns: 36px 1fr; gap: 4px; padding: 7px 0;
+  color: var(--fg); text-decoration: none; border-bottom: 1px solid var(--rule); line-height: 1.45;
+}
+.toc li a .t { color: var(--muted); font-family: var(--font-num); font-size: 12px; padding-top: 2px; }
+.toc li.done a { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--rule); }
+
+main { min-width: 0; max-width: 680px; }
+
+/* 머리 */
+.head { margin-bottom: 28px; }
+.head .date { font-size: 14px; color: var(--muted); margin: 0; }
+.head h1 { font-size: 26px; line-height: 1.35; margin: 4px 0 10px; text-wrap: balance; letter-spacing: -0.01em; }
+.head p { margin: 0; color: var(--muted); font-size: 15px; }
+
+/* 숫자표 */
+.quotes { margin-bottom: 40px; }
+.sec-label { font-size: 12px; letter-spacing: .08em; color: var(--muted); font-weight: 500; margin: 0 0 6px; }
+.tbl-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+thead th { font-size: 12px; font-weight: 500; color: var(--muted); border-bottom: 1px solid var(--fg); }
+td.r, th.r { text-align: right; white-space: nowrap; }
+td .sub { display: block; font-size: 12px; color: var(--muted); }
+.note { font-size: 13px; color: var(--muted); margin: 8px 0 0; }
+
+/* 기사 */
+.story { padding-top: 28px; border-top: 2px solid var(--fg); margin-bottom: 44px; scroll-margin-top: 64px; }
+.story-meta { display: flex; gap: 12px; font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+.story-meta .n { font-family: var(--font-num); color: var(--fg); }
+.story h2 { font-size: 21px; line-height: 1.4; margin: 0 0 14px; text-wrap: balance; }
+.story p { margin: 0 0 12px; }
+.story h3 { font-size: 15px; margin: 22px 0 6px; }
+.facts { margin: 14px 0 6px; }
+.facts table { font-size: 14px; }
+
+.concept { background: var(--tint); padding: 14px 16px; margin: 20px 0 0; }
+.concept h3 { margin: 0 0 6px; font-size: 14px; color: var(--accent); }
+.concept p { font-size: 15px; margin: 0 0 8px; }
+.concept p:last-child { margin-bottom: 0; }
+
+.link { font-size: 14.5px; color: var(--muted); border-left: 2px solid var(--rule); padding-left: 12px; margin: 18px 0 0; }
+
+/* 퀴즈 */
+.quiz { margin-top: 22px; }
+.quiz .q { font-weight: 500; margin: 0 0 8px; }
+.opts { display: flex; flex-direction: column; gap: 6px; }
+.opts button {
+  text-align: left; font: inherit; font-size: 15px; color: var(--fg);
+  background: var(--bg); border: 1px solid var(--rule); padding: 9px 12px; cursor: pointer;
+}
+.opts button:hover:not(:disabled) { border-color: var(--fg); }
+.opts button:focus-visible, .done-btn:focus-visible, .toc a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.opts button.right { background: var(--ok-bg); border-color: var(--accent); }
+.opts button.wrong { background: var(--no-bg); border-color: var(--up); }
+.opts button:disabled { cursor: default; }
+.explain { font-size: 14.5px; margin: 10px 0 0; color: var(--muted); }
+
+.story-foot { display: flex; justify-content: flex-end; margin-top: 22px; }
+.done-btn {
+  font: inherit; font-size: 14px; padding: 8px 16px; cursor: pointer;
+  background: var(--accent); color: var(--accent-fg); border: 1px solid var(--accent);
+}
+.done-btn[aria-pressed="true"] { background: transparent; color: var(--muted); border-color: var(--rule); }
+
+/* 단어장, 일정, 출처 */
+.glossary dl { margin: 0; }
+.glossary .row { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--rule); font-size: 15px; }
+.glossary dt { font-weight: 500; }
+.glossary dd { margin: 0; color: var(--fg); }
+@media (max-width: 480px) { .glossary .row { grid-template-columns: minmax(0, 1fr); gap: 2px; } }
+.watch ul, .sources ul { margin: 0; padding-left: 18px; }
+.watch li, .sources li { margin-bottom: 6px; }
+.sources { font-size: 13.5px; color: var(--muted); }
+.end-block { padding-top: 24px; border-top: 1px solid var(--fg); margin-bottom: 36px; }
+.end-block h2 { font-size: 18px; margin: 0 0 10px; }
+
+/* 탭 */
+.tabs { display: flex; gap: 4px; }
+.tabs a {
+  padding: 4px 10px; font-size: 14px; color: var(--muted); text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+.tabs a[aria-current="page"] { color: var(--fg); border-bottom-color: var(--fg); font-weight: 500; }
+.tabs a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* 스타트업 항목 목록 */
+.items { list-style: none; margin: 6px 0 0; padding: 0; }
+.items li { padding: 13px 0; border-bottom: 1px solid var(--rule); }
+.items li:first-child { border-top: 1px solid var(--rule); }
+.item-head { display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.item-head strong { font-size: 16px; }
+.item-head .when { font-size: 12.5px; color: var(--muted); font-family: var(--font-num); }
+.tag { font-size: 11.5px; line-height: 1.5; padding: 0 6px; border: 1px solid currentColor; white-space: nowrap; }
+.tag.fact { color: var(--accent); }
+.tag.plan { color: var(--soon); }
+.tag.rule { color: var(--muted); }
+.items p { margin: 5px 0 0; font-size: 15px; }
+.legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 13px; color: var(--muted); margin: 10px 0 0; }
+.legend span { display: inline-flex; gap: 6px; align-items: center; }
+
+@media (prefers-reduced-motion: reduce) { .bar i { transition: none; } }
+</style>
+
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-in">
+    <div class="brand">출근길 경제노트<span>11월 11일 수</span></div>
+    <nav class="tabs" aria-label="노트 선택">
+      <a href="#econ" data-tab="econ" aria-current="page">경제</a>
+      <a href="#startup" data-tab="startup">스타트업</a>
+      <a href="#issues" data-tab="issues">시사</a>
+    </nav>
+    <div class="progress" aria-live="polite">
+      <span id="progress-text">0/6 읽음, 약 30분</span>
+      <div class="bar" aria-hidden="true"><i id="progress-bar"></i></div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav class="toc" aria-label="오늘 읽을 순서">
+    <h2>읽는 순서</h2>
+    <ol id="toc-startup" hidden>
+      <li data-for="startup-glossary"><a href="#startup-glossary"><span class="t">2분</span>먼저 알아둘 단어</a></li>
+      <li data-for="c1"><a href="#c1"><span class="t">2분</span>시장 신호</a></li>
+      <li data-for="c2"><a href="#c2"><span class="t">4분</span>국내 투자 유치</a></li>
+      <li data-for="c3"><a href="#c3"><span class="t">4분</span>상장과 공모</a></li>
+      <li data-for="c4"><a href="#c4"><span class="t">3분</span>정책과 지원사업</a></li>
+      <li data-for="c5"><a href="#c5"><span class="t">3분</span>해외 투자 흐름</a></li>
+    </ol>
+    <ol id="toc-issues" hidden>
+      <li data-for="issues-glossary"><a href="#issues-glossary"><span class="t">2분</span>먼저 알아둘 단어</a></li>
+      <li data-for="p1"><a href="#p1"><span class="t">4분</span>국회와 부동산 세제</a></li>
+      <li data-for="p2"><a href="#p2"><span class="t">3분</span>내란 재판 대법원</a></li>
+      <li data-for="p3"><a href="#p3"><span class="t">5분</span>미국 선거와 국제 정세</a></li>
+      <li data-for="p4"><a href="#p4"><span class="t">2분</span>겨울철 생활 정책</a></li>
+    </ol>
+    <ol id="toc">
+      <li data-for="glossary"><a href="#glossary"><span class="t">3분</span>먼저 알아둘 단어</a></li>
+      <li data-for="quotes"><a href="#quotes"><span class="t">2분</span>개장 전 숫자</a></li>
+      <li data-for="s1"><a href="#s1"><span class="t">5분</span>미국 10월 물가</a></li>
+      <li data-for="s2"><a href="#s2"><span class="t">4분</span>미 국채금리 5% 근접</a></li>
+      <li data-for="s3"><a href="#s3"><span class="t">5분</span>코스피 급등 다음 날</a></li>
+      <li data-for="s4"><a href="#s4"><span class="t">4분</span>원/달러 환율</a></li>
+      <li data-for="s5"><a href="#s5"><span class="t">4분</span>엔비디아와 반도체</a></li>
+      <li data-for="s6"><a href="#s6"><span class="t">3분</span>국제유가 하락</a></li>
+    </ol>
+  </nav>
+
+  <main>
+   <div id="view-issues" hidden>
+    <div class="head">
+      <p class="date">2026년 11월 11일 수요일, 최근 1주 기사 기준</p>
+      <h1>미국 의회는 민주당으로 넘어갔고, 국내에서는 세법과 예산 심사가 한창입니다</h1>
+      <p>경제 기사는 아니지만 업무 대화나 시장 흐름에 자주 나오는 소식을 네 갈래로 묶었습니다. 단어 정리를 포함해 약 16분 분량입니다.</p>
+      <div class="legend">
+        <span><span class="tag fact">확정</span>결정되거나 발표된 일</span>
+        <span><span class="tag plan">진행 중</span>심사나 협상, 집계 중</span>
+        <span><span class="tag rule">시행 중</span>이미 적용되는 대책</span>
+      </div>
+    </div>
+
+    <section class="end-block glossary" id="issues-glossary">
+      <h2>먼저 알아둘 단어</h2>
+      <dl>
+        <div class="row"><dt>정기국회</dt><dd>매년 9월부터 100일 동안 열리는 국회. 다음 해 예산안과 세법을 처리함</dd></div>
+        <div class="row"><dt>예결위</dt><dd>예산결산특별위원회. 정부 예산안을 심사하고 고치는 국회 위원회</dd></div>
+        <div class="row"><dt>종부세</dt><dd>종합부동산세. 일정 금액 넘는 주택과 토지를 가진 사람에게 매기는 세금</dd></div>
+        <div class="row"><dt>공시가격</dt><dd>정부가 매년 정하는 부동산 가격. 세금 계산 기준이 됨</dd></div>
+        <div class="row"><dt>공정시장가액비율</dt><dd>공제 후 금액 중 실제 과세 대상으로 잡는 비율. 현재 종부세는 60%</dd></div>
+        <div class="row"><dt>실거주</dt><dd>집을 갖고 있으면서 실제로 그 집에 사는 것</dd></div>
+        <div class="row"><dt>전원합의체</dt><dd>대법원장과 대법관 전원이 함께 심리하는 재판부</dd></div>
+        <div class="row"><dt>구속기간</dt><dd>재판 중인 피고인을 가둘 수 있는 법정 기간. 넘기면 석방 후 재판 계속</dd></div>
+        <div class="row"><dt>특검</dt><dd>특별검사. 특정 사건을 맡기 위해 따로 임명된 검사와 수사팀</dd></div>
+        <div class="row"><dt>중간선거</dt><dd>미국 대통령 임기 중간에 하원 전체와 상원 3분의 1을 뽑는 선거</dd></div>
+        <div class="row"><dt>분점정부</dt><dd>대통령 소속 정당과 의회 다수당이 다른 상태</dd></div>
+        <div class="row"><dt>하원의장</dt><dd>미국 하원 다수당 대표가 맡는 자리. 법안 상정 순서를 정함</dd></div>
+        <div class="row"><dt>G7</dt><dd>미국, 일본, 독일, 영국, 프랑스, 이탈리아, 캐나다 7개국 모임</dd></div>
+      </dl>
+    </section>
+
+    <article class="story" id="p1">
+      <div class="story-meta"><span class="n">1/4</span><span>국내 정치, 약 4분</span></div>
+      <h2>정기국회 세법 심사, 종부세는 실거주 여부로 공제가 갈립니다</h2>
+      <p>국회는 지금 내년 예산안과 세법 개정안을 심사하고 있습니다. 오늘 오후에도 예산결산특별위원회 전체회의가 잡혀 있습니다. 세법은 보통 12월 본회의에서 확정됩니다.</p>
+      <ul class="items">
+        <li>
+          <div class="item-head"><span class="tag plan">진행 중</span><strong>1주택 종부세 공제, 실거주 14억원과 비거주 12억원</strong></div>
+          <p>정부가 9월 국무회의에서 확정한 개편안은 1주택자 종부세 공제 기준을 공시가격 12억원에서 14억원으로 올리되, 실제로 사는 사람에게만 적용하는 구조입니다. 집을 갖고 있지만 살지 않으면 지금처럼 12억원을 공제받습니다. 처음엔 비거주자 공제를 더 줄이려 했지만 발표 29일 만에 접었습니다.</p>
+          <p>취학, 전근, 질병, 요양으로 집을 비운 경우 최대 3년을 거주로 인정하는 안이 들어 있고, 지방 발령이나 부모 봉양까지 인정할지가 국회 쟁점입니다. 여당 안에서도 비거주자 공제를 실거주 수준으로 맞추자는 의견이 나와 최종안은 바뀔 수 있습니다.</p>
+        </li>
+        <li>
+          <div class="item-head"><span class="tag fact">확정</span><strong>올해 11월 고지서는 현행 기준</strong></div>
+          <p>개편안은 2027년부터 적용됩니다. 이달 나오는 종부세 고지서는 지금처럼 공제 12억원, 공정시장가액비율 60%로 계산됩니다.</p>
+        </li>
+      </ul>
+      <div class="concept">
+        <h3>알아둘 개념, 공시가격과 공정시장가액비율</h3>
+        <p>공시가격은 정부가 매년 정하는 부동산 가격으로 실제 거래가보다 낮은 편입니다. 종부세는 공시가격에서 공제액을 뺀 뒤 공정시장가액비율을 곱한 금액에 세율을 매깁니다. 비율이 60%라면 공제 후 금액의 60%만 과세 대상이 됩니다.</p>
+      </div>
+      <p class="link">세법이 확정되는 12월까지 부동산 관련 기사에서 실거주 인정 범위가 계속 나올 겁니다.</p>
+      <div class="story-foot"><button type="button" class="done-btn" data-done="p1" aria-pressed="false">다 읽었어요</button></div>
+    </article>
+
+    <article class="story" id="p2">
+      <div class="story-meta"><span class="n">2/4</span><span>사법, 약 3분</span></div>
+      <h2>한덕수 전 총리와 이상민 전 장관, 대법원 선고 전에 구속기간이 끝날 수 있습니다</h2>
+      <p>내란 중요임무 종사 혐의로 재판을 받는 두 사람은 5월 항소심 선고를 받았습니다. 한 전 총리는 1심 징역 23년에서 2심 징역 15년으로 줄었고, 이 전 장관은 1심 징역 7년에서 2심 징역 9년으로 늘었습니다.</p>
+      <p>대법원은 8월 이 사건을 전원합의체에 넘겼고 9월 29일 첫 심리를 열었습니다. 선고 날짜는 아직 정해지지 않았습니다. 6일 보도 기준으로 한 전 총리의 구속기간은 이달 20일, 이 전 장관은 12월 18일에 끝납니다. 내란 특검팀은 5일 대법원에 구속기간이 끝나기 전에 선고해 달라는 의견서를 냈습니다.</p>
+      <div class="concept">
+        <h3>알아둘 개념, 전원합의체와 구속기간</h3>
+        <p>대법원 사건은 보통 대법관 4명이 맡지만, 사회적 파장이 크거나 기존 판례를 바꿀 수 있는 사건은 대법원장과 대법관 전원이 함께 심리하는 전원합의체로 넘깁니다.</p>
+        <p>재판 중인 피고인을 무기한 가둘 수 없어서 심급마다 구속할 수 있는 기간이 법으로 정해져 있습니다. 그 안에 선고가 안 나오면 석방돼 불구속 상태로 재판을 받게 됩니다. 무죄가 됐다는 뜻은 아닙니다.</p>
+      </div>
+      <div class="story-foot"><button type="button" class="done-btn" data-done="p2" aria-pressed="false">다 읽었어요</button></div>
+    </article>
+
+    <article class="story" id="p3">
+      <div class="story-meta"><span class="n">3/4</span><span>국제, 약 5분</span></div>
+      <h2>미국 중간선거에서 민주당이 상하원을 모두 가져갔습니다</h2>
+      <ul class="items">
+        <li>
+          <div class="item-head"><span class="tag plan">집계 중</span><strong>미국 중간선거, 민주당 상하원 다수</strong><span class="when">11월 3일 선거</span></div>
+          <p>AP 집계 기준으로 하원은 민주당 254석, 공화당 162석이고 19석은 아직 확정되지 않았습니다. 상원은 민주당이 공화당 의석 7개를 뺏어 54대 44가 됐고, 미시시피와 알래스카 두 곳은 표 차이가 작아 개표가 이어지고 있습니다. 하원의장은 민주당 하킴 제프리스 원내대표가 맡을 것으로 보입니다. 새 의회는 2027년 1월 3일 열립니다.</p>
+          <p>이란 전쟁, 기름값 상승, 경제 불안에 대한 불만이 표로 나타났다는 분석이 많습니다.</p>
+        </li>
+        <li>
+          <div class="item-head"><span class="tag plan">진행 중</span><strong>러시아와 우크라이나, 9개월 만에 협상 재개</strong><span class="when">10~11일 아부다비</span></div>
+          <p>미국이 중재하는 3자 협상이 2월 이후 처음 열렸습니다. 미국 측에서는 재러드 쿠슈너 특사가 나왔고 러시아는 메딘스키 대통령 보좌관이 대표단을 이끌었습니다. 안전보장 방안, 포로 교환, 아이들 송환을 논의했습니다. 젤렌스키 대통령은 첫날 협상이 건설적이었다고 했지만, 라브로프 러시아 외무장관은 이후 계획을 모른 채 즉시 휴전에 동의하지는 않겠다고 했습니다. 영토 문제는 이번에 결론이 나지 않을 거라는 전망이 많습니다.</p>
+        </li>
+        <li>
+          <div class="item-head"><span class="tag fact">확정</span><strong>G7 외교장관회의 파리 개최, 한국도 초청</strong><span class="when">9~10일</span></div>
+          <p>프랑스는 한국, 브라질, 이집트, 사우디아라비아, 우크라이나를 초청했습니다. 루비오 미 국무장관은 이 자리에서 대이란 제재와 해상 봉쇄가 효과를 내고 있어 대규모 전투는 필요 없다고 설명했습니다. 경제 탭 6번 기사의 유가 하락과 이어지는 내용입니다.</p>
+        </li>
+      </ul>
+      <div class="concept">
+        <h3>알아둘 개념, 중간선거와 분점정부</h3>
+        <p>미국 대통령 임기 4년 중간에 치르는 선거로 하원 전체와 상원 3분의 1을 새로 뽑습니다. 대통령과 의회 다수당이 다르면 분점정부라고 부릅니다. 법안과 예산은 의회를 통과해야 해서 대통령 정책을 밀어붙이기 어려워지고, 행정명령에 기대는 경우가 늘어납니다.</p>
+      </div>
+      <p class="link">관세, 전쟁 비용, 감세처럼 의회 예산과 법이 필요한 정책은 내년 1월 이후 추진 방식이 달라질 수 있습니다. 한국 수출 기업도 영향을 받는 부분입니다.</p>
+      <div class="story-foot"><button type="button" class="done-btn" data-done="p3" aria-pressed="false">다 읽었어요</button></div>
+    </article>
+
+    <article class="story" id="p4">
+      <div class="story-meta"><span class="n">4/4</span><span>사회와 생활, 약 2분</span></div>
+      <h2>겨울 대책 발표, 지난겨울 한랭질환 사망자가 8명에서 14명으로 늘었습니다</h2>
+      <ul class="items">
+        <li>
+          <div class="item-head"><span class="tag rule">시행 중</span><strong>보건복지부, 겨울철 취약계층 보호대책</strong></div>
+          <p>지난겨울 평균기온은 1.1도로 평년 0.5도보다 높았는데도 한랭질환자는 334명에서 364명으로, 사망자는 8명에서 14명으로 늘었습니다. 환자의 57.4%, 사망자의 78.6%가 65세 이상이었습니다. 정부는 위기가구 발굴, 생활 지원, 한파 건강관리를 중심으로 대책을 내놨습니다.</p>
+        </li>
+        <li>
+          <div class="item-head"><span class="tag fact">확정</span><strong>제설제 공급 기업 3곳 첫 지정</strong></div>
+          <p>행정안전부가 10일 이포컴, 세계로케미칼, 제일트레이딩을 제설제 분야 국가재난관리지원기업으로 처음 지정했습니다. 평소에는 비축과 품질관리를 하고 폭설 때 바로 공급합니다. 올겨울부터 적용됩니다.</p>
+        </li>
+        <li>
+          <div class="item-head"><span class="tag rule">시행 중</span><strong>항만 무단 드론 비행 단속 강화</strong></div>
+          <p>해양수산부가 드론 원스톱 민원서비스에 항만 비행 금지 구역과 담당 기관 연락처를 표시하기 시작했습니다. 항만에서 드론을 날리려면 보안 책임자 승인이 필요하고, 무단 비행은 과태료 대상입니다.</p>
+        </li>
+      </ul>
+      <div class="story-foot"><button type="button" class="done-btn" data-done="p4" aria-pressed="false">다 읽었어요</button></div>
+    </article>
+
+    <section class="end-block sources" id="issues-sources">
+      <h2>출처</h2>
+      <ul>
+        <li><a href="https://www.mt.co.kr/article/2026110608451788914" target="_blank" rel="noopener">머니투데이, 부동산 세제 국회 심사</a></li>
+        <li><a href="https://kbmaeil.com/article/20260901500597" target="_blank" rel="noopener">경북매일, 세법 개정안 국무회의 확정</a></li>
+        <li><a href="https://www.imaeil.com/page/view/2026101123070850054" target="_blank" rel="noopener">매일신문, 실거주 공제 구조</a></li>
+        <li><a href="https://www.newspim.com/news/view/20261111000018" target="_blank" rel="noopener">뉴스핌, 오늘의 정치일정</a></li>
+        <li><a href="https://www.koreancenter.or.kr/news/articleView.html?idxno=1435935" target="_blank" rel="noopener">한덕수, 이상민 구속기간 만료 보도</a></li>
+        <li><a href="https://newstomato.com/ReadNews.aspx?no=1318564" target="_blank" rel="noopener">뉴스토마토, 내란 혐의 항소심</a></li>
+        <li><a href="https://variety.com/2026/politics/news/midterm-election-results-democrats-win-house-senate-1236938473/" target="_blank" rel="noopener">Variety, 미국 중간선거 결과</a></li>
+        <li><a href="https://www.cbsnews.com/news/2026-midterm-election-house-senate-projections-toss-up/" target="_blank" rel="noopener">CBS News, 미확정 선거구</a></li>
+        <li><a href="https://www.france24.com/en/europe/20261110-live-ukraine-russia-and-us-to-resume-peace-talks-in-abu-dhabi" target="_blank" rel="noopener">France 24, 아부다비 협상</a></li>
+        <li><a href="https://www.washingtonpost.com/world/2026/11/10/russia-ukraine-begin-us-backed-peace-talks-abu-dhabi/" target="_blank" rel="noopener">Washington Post, 아부다비 협상</a></li>
+        <li><a href="https://www.diplomatie.gouv.fr/en/presse-et-ressources/decouvrir-et-informer/actualites/quelles-priorites-pour-la-reunion-des-ministres-des-affaires-etrangeres-du-g7-a-paris" target="_blank" rel="noopener">프랑스 외교부, G7 외교장관회의</a></li>
+        <li><a href="http://www.sisunnews.co.kr/news/articleView.html?idxno=249441" target="_blank" rel="noopener">시선뉴스, 11월 11일 주요 정책</a></li>
+      </ul>
+      <p class="note">미국 선거 의석수는 개표가 이어지고 있어 바뀔 수 있습니다. 한 전 총리 구속 만료일은 보도 제목과 본문 표현이 달라 원문 확인이 필요합니다.</p>
+    </section>
+   </div>
+
+   <div id="view-startup" hidden>
+    <div class="head">
+      <p class="date">2026년 11월 11일 수요일, 최근 2주 기사 기준</p>
+      <h1>금리 부담은 커지는데 AI 반도체 쪽으로는 큰돈이 계속 들어오고 있습니다</h1>
+      <p>창업자와 스타트업 실무자가 알아둘 소식을 다섯 갈래로 나눴습니다. 단어 정리를 포함해 약 17분 분량이고, 경제 탭 기사를 먼저 읽었다면 첫 번째 항목이 더 쉽게 읽힙니다.</p>
+      <div class="legend">
+        <span><span class="tag fact">확정</span>발표나 완료된 일</span>
+        <span><span class="tag plan">추진 중</span>보도 단계, 예정</span>
+        <span><span class="tag rule">시행 중</span>이미 적용되는 제도</span>
+      </div>
+    </div>
+
+    <section class="end-block glossary" id="startup-glossary">
+      <h2>먼저 알아둘 단어</h2>
+      <dl>
+        <div class="row"><dt>할인율</dt><dd>미래에 벌 돈을 지금 가치로 바꿀 때 깎는 비율. 금리가 오르면 같이 커짐</dd></div>
+        <div class="row"><dt>시드, 시리즈A~D</dt><dd>투자 단계. 시드가 가장 초기이고 알파벳이 뒤로 갈수록 회사가 크고 금액도 큼</dd></div>
+        <div class="row"><dt>투자 전 기업가치</dt><dd>이번 투자금이 들어오기 전 회사 가치. 프리머니라고도 함</dd></div>
+        <div class="row"><dt>투자 후 기업가치</dt><dd>투자 전 기업가치에 이번 투자금을 더한 값. 포스트머니라고도 함</dd></div>
+        <div class="row"><dt>리드 투자자</dt><dd>라운드 조건을 정하고 가장 앞에서 투자를 이끄는 투자자</dd></div>
+        <div class="row"><dt>상환전환우선주</dt><dd>보통주로 바꿀 권리와 투자금을 돌려받을 권리를 함께 가진 주식. RCPS</dd></div>
+        <div class="row"><dt>전환사채</dt><dd>빌려준 돈이지만 나중에 주식으로 바꿀 수 있는 채권. CB</dd></div>
+        <div class="row"><dt>모태펀드</dt><dd>정부가 민간 벤처펀드에 출자하는 펀드</dd></div>
+        <div class="row"><dt>국민성장펀드</dt><dd>AI와 전략산업에 정책자금을 넣는 펀드. 기업에 직접 투자하기도 함</dd></div>
+        <div class="row"><dt>수요예측</dt><dd>상장 전에 기관 투자자들이 원하는 가격과 수량을 적어 내는 절차</dd></div>
+        <div class="row"><dt>희망 공모가 범위</dt><dd>상장 전에 회사가 제시하는 공모가 범위. 수요예측 결과로 최종 가격이 정해짐</dd></div>
+        <div class="row"><dt>테슬라 요건</dt><dd>이익이 없어도 성장성 등을 채우면 코스닥 상장을 허용하는 제도</dd></div>
+        <div class="row"><dt>B2G</dt><dd>정부와 공공기관을 고객으로 하는 사업</dd></div>
+        <div class="row"><dt>비희석 자금</dt><dd>지분을 내주지 않고 받는 돈. 대출이나 매출 연동 상환 등</dd></div>
+      </dl>
+    </section>
+
+    <article class="story" id="c1">
+      <div class="story-meta"><span class="n">1/5</span><span>시장 신호, 약 2분</span></div>
+      <h2>미국 금리 인상 기대가 스타트업 기업가치에도 영향을 줍니다</h2>
+      <p>경제 탭 1, 2번 기사처럼 미국 물가가 예상보다 높게 나오면서 12월 금리 인상 가능성이 커졌고, 10년물 국채금리는 4.99%까지 올랐습니다. 어제 나스닥이 다우보다 더 떨어진 것도 이 영향입니다.</p>
+      <p>상장 기술주 주가가 내려가면 비슷한 사업을 하는 비상장 스타트업의 기업가치를 매길 때 기준점도 같이 내려갑니다. 후기 단계 라운드와 공모가 협상에서 먼저 체감됩니다.</p>
+      <div class="concept">
+        <h3>알아둘 개념, 할인율</h3>
+        <p>스타트업 기업가치는 대부분 몇 년 뒤 벌어들일 돈을 지금 가치로 환산한 값입니다. 금리가 오르면 환산할 때 깎는 비율, 즉 할인율이 커져서 같은 사업 계획이라도 지금 매겨지는 가치가 낮아집니다. 이익이 먼 미래에 몰린 초기 기업일수록 영향이 큽니다.</p>
+      </div>
+      <p class="link">투자 유치를 준비 중이라면 12월 FOMC 결과와 국내 IPO 공모가 흐름을 같이 보는 게 좋습니다.</p>
+      <div class="story-foot"><button type="button" class="done-btn" data-done="c1" aria-pressed="false">다 읽었어요</button></div>
+    </article>
+
+    <article class="story" id="c2">
+      <div class="story-meta"><span class="n">2/5</span><span>국내 투자 유치, 약 4분</span></div>
+      <h2>투자 금액은 3배로 늘었지만 소수 기업에 몰리고 있습니다</h2>
+      <ul class="items">
+        <li>
+          <div class="item-head"><span class="tag fact">확정</span><strong>퓨리오사AI, 시리즈D 8,200억원</strong><span class="when">10월 29일</span></div>
+          <p>AI 반도체 기업 퓨리오사AI가 8,200억원 규모 시리즈D를 마쳤습니다. 투자 후 기업가치는 약 3조8천억원입니다. 1월에 목표로 잡았던 금액은 4,500억~7,500억원이었는데 이를 넘겼습니다.</p>
+          <p>최대 투자자는 3,700억원을 넣은 국민성장펀드입니다. 유암코가 400억원, 기존 주주들이 합쳐서 1,700억원을 추가로 넣었고 해외에서는 미국 인피니텀, 싱가포르 쿠다캐피탈파트너스, 시스코인베스트먼츠가 참여했습니다. 자금은 2세대 칩 레니게이드 상용화와 브로드컴과 함께 개발 중인 3세대 가속기에 쓸 계획입니다.</p>
+        </li>
+        <li>
+          <div class="item-head"><span class="tag plan">추진 중</span><strong>베슬AI, 시리즈C 모집</strong><span class="when">9월 보도</span></div>
+          <p>AI 인프라 플랫폼 기업 베슬AI가 KB증권을 리드 투자자로 시리즈C 투자자를 모으고 있다는 보도가 나왔습니다. 투자 전 기업가치 약 5,000억원, 투자 후 약 7,000억원으로 거론되고, 상환전환우선주와 전환사채 형태입니다. 규모는 약 1억5천만달러로 알려졌습니다. 국민성장기금 참여를 검토한다는 보도는 한 매체에서만 확인돼 아직 확정된 내용이 아닙니다.</p>
+        </li>
+        <li>
+          <div class="item-head"><span class="tag fact">확정</span><strong>1~9월 국내 스타트업 투자 38억6천만달러</strong><span class="when">Tracxn 집계</span></div>
+          <p>올해 1~9월 344건, 38억6천만달러가 들어왔습니다. 작년 같은 기간 171건, 12억5천만달러보다 금액은 약 3배, 건수는 약 2배입니다. 라운드 한 건당 평균 금액도 730만달러에서 1,122만달러로 커졌습니다. 다만 AI 인프라와 딥테크 몇몇 기업에 큰 금액이 몰린 결과라는 분석이 함께 나옵니다.</p>
+        </li>
+      </ul>
+      <div class="concept">
+        <h3>알아둘 개념, 투자 전 가치와 투자 후 가치</h3>
+        <p>투자 전 기업가치에 이번에 들어온 투자금을 더한 것이 투자 후 기업가치입니다. 베슬AI 사례에서 5,000억원과 7,000억원의 차이 2,000억원이 이번 라운드 규모입니다. 투자자 지분율은 투자금을 투자 후 기업가치로 나눠서 계산합니다.</p>
+      </div>
+      <div class="concept">
+        <h3>알아둘 개념, 상환전환우선주</h3>
+        <p>국내 벤처투자에서 가장 많이 쓰는 형태입니다. 투자자가 나중에 보통주로 바꿀 수 있는 권리와 일정 조건에서 투자금을 돌려받을 수 있는 권리를 같이 갖습니다. 계약 조건에 따라 창업자 지분과 회사 재무에 미치는 영향이 크게 달라서 텀시트에서 꼭 확인해야 하는 항목입니다.</p>
+      </div>
+      <p class="link">정책펀드가 최대 투자자로 들어오는 사례가 늘고 있습니다. AI 반도체, AI 인프라 쪽은 정책자금 접근성이 다른 분야보다 높은 편입니다.</p>
+      <div class="story-foot"><button type="button" class="done-btn" data-done="c2" aria-pressed="false">다 읽었어요</button></div>
+    </article>
+
+    <article class="story" id="c3">
+      <div class="story-meta"><span class="n">3/5</span><span>상장과 공모, 약 4분</span></div>
+      <h2>11월 코스닥 상장, 공모가가 희망 범위 아래에서 정해진 곳도 나왔습니다</h2>
+      <div class="facts tbl-wrap">
+        <table>
+          <thead><tr><th>기업</th><th>사업</th><th class="r">공모가</th><th class="r">상장일</th></tr></thead>
+          <tbody>
+            <tr><td>래블업</td><td>AI 컴퓨팅 자원 관리 플랫폼</td><td class="r num">19,000원</td><td class="r num">11/3</td></tr>
+            <tr><td>바로팜</td><td>약국 의약품 주문 플랫폼</td><td class="r num">16,400원<span class="sub">희망 범위 하단</span></td><td class="r num">11/11</td></tr>
+            <tr><td>넥스아이</td><td>면역항암 신약</td><td class="r num">8,000원<span class="sub">희망 범위 아래</span></td><td class="r num">11/12</td></tr>
+            <tr><td>옵토닉스</td><td>방산용 광학부품</td><td class="r num">12,000원<span class="sub">희망 범위 상단</span></td><td class="r num">11/17</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">상장일은 공모주 일정표 기준이며 매체에 따라 하루씩 다르게 나오기도 합니다.</p>
+      <ul class="items" style="margin-top:14px">
+        <li>
+          <div class="item-head"><span class="tag fact">확정</span><strong>래블업 상장, 첫날 종가는 공모가 아래</strong></div>
+          <p>GPU 같은 AI 컴퓨팅 자원을 관리하는 Backend.AI를 만드는 회사로, 공모 금액은 약 414억원이었습니다. 공모주 집계 사이트 기준으로 상장 첫날 종가가 공모가보다 낮았습니다.</p>
+        </li>
+        <li>
+          <div class="item-head"><span class="tag plan">예정</span><strong>바로팜, 테슬라 요건으로 상장</strong></div>
+          <p>전국 약국이 쓰는 의약품 주문, 결제, 반품 플랫폼입니다. 2년 사이 매출이 116억원에서 967억원으로 늘었지만 아직 이익을 내지 못해 이익미실현기업 상장 요건으로 심사를 받았습니다. 공모가는 희망 범위 1만6,400~2만200원 중 가장 낮은 값으로 정해졌고 공모 금액은 약 292억원입니다. 이익률이 낮은 유통 구조가 과제로 꼽힙니다.</p>
+        </li>
+        <li>
+          <div class="item-head"><span class="tag plan">예정</span><strong>넥스아이, 희망 범위보다 낮은 8,000원</strong></div>
+          <p>희망 공모가는 1만500~1만3,000원이었는데 그보다 낮게 확정됐습니다. 신약 후보 NXI-101을 일본 오노약품공업에 기술이전한 회사입니다.</p>
+        </li>
+        <li>
+          <div class="item-head"><span class="tag plan">예정</span><strong>옵토닉스, 기관 수요예측 1,201대 1</strong></div>
+          <p>한화에어로스페이스에 방산용 자이로스코프 부품을 공급합니다. 같은 시기 방산, 반도체 장비 부품 기업은 공모가를 희망 범위 상단으로 정한 곳이 많았습니다.</p>
+        </li>
+      </ul>
+      <div class="concept">
+        <h3>알아둘 개념, 테슬라 요건</h3>
+        <p>이익을 내지 못한 회사도 시가총액, 매출, 성장성 같은 조건을 채우면 코스닥에 상장할 수 있게 한 제도입니다. 적자 상태로 나스닥에 상장한 테슬라에서 이름을 땄습니다. 플랫폼처럼 매출은 빠르게 늘지만 아직 이익이 나지 않는 스타트업이 주로 씁니다.</p>
+      </div>
+      <div class="concept">
+        <h3>알아둘 개념, 희망 공모가 범위</h3>
+        <p>상장 전에 회사가 제시하는 공모가 범위입니다. 기관 수요예측 결과에 따라 이 범위 안이나 밖에서 최종 가격이 정해집니다. 하단이나 그 아래로 정해졌다면 기관 투자자들이 회사가 생각한 가치보다 낮게 봤다는 뜻입니다.</p>
+      </div>
+      <p class="link">같은 달에도 방산, 반도체 부품은 상단, AI 소프트웨어와 플랫폼, 바이오는 하단이나 그 아래로 엇갈렸습니다. 상장을 준비하는 회사라면 업종별 분위기 차이를 같이 봐야 합니다.</p>
+      <div class="story-foot"><button type="button" class="done-btn" data-done="c3" aria-pressed="false">다 읽었어요</button></div>
+    </article>
+
+    <article class="story" id="c4">
+      <div class="story-meta"><span class="n">4/5</span><span>정책과 지원사업, 약 3분</span></div>
+      <h2>하반기에 바뀐 제도, 연말까지 남은 일정</h2>
+      <p>11월 들어 새로 나온 중기부 발표는 이번 검색에서 확인하지 못했습니다. 아래는 하반기에 시행됐거나 연내 시행 예정인 항목입니다.</p>
+      <ul class="items">
+        <li>
+          <div class="item-head"><span class="tag rule">시행 중</span><strong>벤처투자 의무기한 3년에서 5년으로</strong><span class="when">7월 1일</span></div>
+          <p>개인투자조합과 벤처투자조합이 정해진 비율만큼 투자해야 하는 기한이 늘었고, 조합별 개별 투자 의무 20%는 없어졌습니다. 액셀러레이터가 운용하는 개인투자조합은 투자 유치 이력이 없는 업력 5년 이내 창업기업에도 투자할 수 있게 됐습니다. 초기 기업 입장에서는 첫 투자를 받을 수 있는 통로가 넓어진 셈입니다.</p>
+        </li>
+        <li>
+          <div class="item-head"><span class="tag rule">시행 중</span><strong>R&amp;D 사업화 보증 최대 100억원</strong><span class="when">7월</span></div>
+          <p>최근 5년 안에 정부 R&amp;D 과제를 끝냈거나 공공연구기관 기술을 이전받아 사업화하는 기업이 대상입니다. 운전자금 30억원을 포함해 최대 100억원까지 보증하고 보증료는 최대 0.5% 깎아줍니다.</p>
+        </li>
+        <li>
+          <div class="item-head"><span class="tag rule">시행 중</span><strong>AI 제품 공공조달 진입 요건 완화</strong><span class="when">8월부터 단계적</span></div>
+          <p>8월부터 AI 제품을 나라장터 종합쇼핑몰에 올릴 때 3,000만원 이상 납품 실적 요건이 면제됐고, 공급업체 수 요건은 3개사 이상에서 1~2개사로 줄었습니다. 9월에는 거래 실적이 없는 AI 시제품도 혁신장터에 신청할 수 있게 됐고, 10월부터 AI 우수제품 전용 심사기준이 적용됩니다.</p>
+        </li>
+        <li>
+          <div class="item-head"><span class="tag plan">예정</span><strong>모두의 창업, 시제품 제조기업 찾기 기능</strong><span class="when">12월</span></div>
+          <p>스타트업이 시제품을 만들어 줄 제조기업을 플랫폼에서 검색할 수 있게 됩니다. 모두의 창업 선발 인원은 8월에 5,000명에서 1만 명으로 늘었습니다.</p>
+        </li>
+      </ul>
+      <div class="concept">
+        <h3>알아둘 개념, 모태펀드와 국민성장펀드</h3>
+        <p>모태펀드는 정부가 돈을 내서 민간 벤처펀드에 출자하는 펀드입니다. 정부가 직접 스타트업에 투자하기보다 민간 운용사를 거쳐 투자합니다. 국민성장펀드는 AI와 전략산업에 정책자금을 넣는 펀드로, 퓨리오사AI처럼 기업에 직접 투자하는 경우도 있습니다.</p>
+      </div>
+      <p class="link">B2G 사업을 하는 AI 스타트업이라면 조달 요건 완화 내용을 꼭 확인해 두세요. 세부 요건과 신청 일정은 중기부와 조달청 공고에서 확인해야 합니다.</p>
+      <div class="story-foot"><button type="button" class="done-btn" data-done="c4" aria-pressed="false">다 읽었어요</button></div>
+    </article>
+
+    <article class="story" id="c5">
+      <div class="story-meta"><span class="n">5/5</span><span>해외 투자 흐름, 약 3분</span></div>
+      <h2>어제 해외 투자 소식, AI가 회계와 법률 같은 기존 업무로 들어갑니다</h2>
+      <div class="facts tbl-wrap">
+        <table>
+          <thead><tr><th>기업</th><th>하는 일</th><th class="r">라운드</th><th class="r">금액</th></tr></thead>
+          <tbody>
+            <tr><td>Nominal<span class="sub">미국</span></td><td>엔지니어링 시험 데이터 연결, AI 에이전트 분석</td><td class="r">시리즈C</td><td class="r num">2억4천만달러</td></tr>
+            <tr><td>Project Omega<span class="sub">미국</span></td><td>사용후핵연료에서 자원 회수</td><td class="r">시리즈A</td><td class="r num">8천만달러</td></tr>
+            <tr><td>Sumary<span class="sub">덴마크</span></td><td>회계사무소용 AI 기장, 결산 자동화</td><td class="r">시드</td><td class="r num">2,500만달러</td></tr>
+            <tr><td>Coframe<span class="sub">미국</span></td><td>웹사이트와 광고 문구를 AI가 테스트하고 적용</td><td class="r">시리즈A</td><td class="r num">2,500만달러</td></tr>
+            <tr><td>Blackletter<span class="sub">미국</span></td><td>변호사와 자체 소프트웨어를 결합한 정액제 로펌</td><td class="r">시드</td><td class="r num">600만달러</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:12px">Nominal은 기업가치 30억달러를 인정받았고 Lightspeed가 리드했습니다. 하루 동안 공개된 달러 기준 지분투자 4억1천만달러 가운데 Nominal과 Project Omega 두 곳이 약 78%를 차지했습니다.</p>
+      <p>투자자들이 돈을 넣는 방향은 두 가지로 나뉩니다. 하나는 하드웨어 시험, 핵연료 처리처럼 기술 난도가 높은 문제이고, 다른 하나는 회계, 마케팅, 법률처럼 이미 기업들이 돈을 쓰고 있는 업무에 AI를 붙이는 쪽입니다. 같은 날 초기 투자사 Stage 2 Capital은 B2B AI 스타트업에 200만~500만달러씩 투자하는 1억달러 규모 펀드 결성을 마쳤습니다.</p>
+      <div class="concept">
+        <h3>알아둘 개념, 비희석 자금</h3>
+        <p>AI 출판 플랫폼 Spines는 지분투자 2,900만달러와 별도로 3,500만달러의 비희석 자금을 확보했습니다. 비희석 자금은 지분을 내주지 않고 받는 돈으로, 대출이나 매출 연동 상환 같은 방식입니다. 기사 제목에 합산 금액만 나오는 경우가 많아 지분투자 규모를 볼 때는 따로 나눠서 봐야 합니다.</p>
+      </div>
+      <p class="link">AI 모델을 쓸 수 있다는 것만으로는 차별점이 되기 어렵고, 자체 데이터와 고객 업무에 얼마나 깊이 들어가 있는지를 투자자들이 본다는 분석이 함께 나왔습니다.</p>
+      <div class="story-foot"><button type="button" class="done-btn" data-done="c5" aria-pressed="false">다 읽었어요</button></div>
+    </article>
+
+    <section class="end-block sources" id="startup-sources">
+      <h2>출처</h2>
+      <ul>
+        <li><a href="https://www.news1.kr/industry/sb-founded/6335956" target="_blank" rel="noopener">뉴스1, 퓨리오사AI 시리즈D</a></li>
+        <li><a href="https://www.koreancenter.or.kr/news/articleView.html?idxno=1431425" target="_blank" rel="noopener">국민성장펀드 3,700억원 참여 보도</a></li>
+        <li><a href="https://hankyung.com/article/2026092339641" target="_blank" rel="noopener">한국경제, 베슬AI 시리즈C</a></li>
+        <li><a href="https://www.newsyonhap.com/news/126955" target="_blank" rel="noopener">뉴스N연합, 2026년 한국 스타트업 자금 조달</a></li>
+        <li><a href="https://www.etoday.co.kr/news/view/2642501" target="_blank" rel="noopener">이투데이, 주간 IPO</a></li>
+        <li><a href="https://therighttrader.com/ko/ipo-calendar" target="_blank" rel="noopener">IPO 일정 2026년 11월</a></li>
+        <li><a href="https://m.dailypharm.com/user/news/338123" target="_blank" rel="noopener">데일리팜, 바로팜 IPO</a></li>
+        <li><a href="https://www.venturesquare.net/1099401" target="_blank" rel="noopener">벤처스퀘어, 2026년 하반기 스타트업 정책</a></li>
+        <li><a href="https://techstartups.com/2026/11/10/startup-funding-news-today-november-10-2026-blackletter-nominal-project-omega-sumary-vessel-more/" target="_blank" rel="noopener">Tech Startups, 11월 10일 투자 소식</a></li>
+        <li><a href="https://prnewswire.com/news-releases/stage-2-capital-closes-100m-and-puts-ai-powered-go-to-market-at-the-center-of-early-stage-venture-302934266.html" target="_blank" rel="noopener">PR Newswire, Stage 2 Capital</a></li>
+      </ul>
+      <p class="note">오늘 날짜로 나온 국내 스타트업 기사가 적어 최근 2주 안의 기사를 함께 넣었습니다. 각 항목에 날짜를 적었습니다.</p>
+    </section>
+   </div>
+
+   <div id="view-econ">
+    <div class="head">
+      <p class="date">2026년 11월 11일 수요일, 오전 9시 기준</p>
+      <h1>미국 물가가 예상보다 높게 나왔고, 코스피는 4% 급등 다음 날 숨을 고르는 중</h1>
+      <p>어젯밤 미국 시장과 오늘 아침 국내 시장 기사 여섯 개를 골랐습니다. 맨 위 단어부터 보고 순서대로 읽으면 앞 기사 내용이 뒤 기사에서 다시 쓰입니다.</p>
+    </div>
+
+    <section class="end-block glossary" id="glossary">
+      <h2>먼저 알아둘 단어</h2>
+      <dl>
+        <div class="row"><dt>CPI</dt><dd>소비자물가지수. 소비자가 사는 상품과 서비스 가격의 변화를 보여주는 지표</dd></div>
+        <div class="row"><dt>근원 CPI</dt><dd>CPI에서 변동이 큰 식품과 에너지를 뺀 수치</dd></div>
+        <div class="row"><dt>%p</dt><dd>퍼센트끼리의 차이. 0.3%에서 0.4%로 오르면 0.1%p 상승</dd></div>
+        <div class="row"><dt>FOMC</dt><dd>미국 기준금리를 정하는 연준 회의. 다음 회의는 12월</dd></div>
+        <div class="row"><dt>국채금리</dt><dd>정부가 빌린 돈에 붙는 이자율. 채권 가격과 반대로 움직임</dd></div>
+        <div class="row"><dt>사이드카</dt><dd>선물 가격이 5% 이상 1분간 움직이면 프로그램 매매를 5분 멈추는 제도</dd></div>
+        <div class="row"><dt>순매수</dt><dd>산 금액에서 판 금액을 뺀 값이 플러스인 상태</dd></div>
+        <div class="row"><dt>차익실현</dt><dd>오른 주식을 팔아 이익을 확정하는 것</dd></div>
+        <div class="row"><dt>ADR</dt><dd>미국 시장에서 거래되는 외국 기업 주식 증서</dd></div>
+        <div class="row"><dt>시가총액 가중</dt><dd>회사 규모가 클수록 지수에 많이 반영되는 계산 방식</dd></div>
+        <div class="row"><dt>브렌트유</dt><dd>북해산 원유. 국제 유가의 대표 기준 중 하나</dd></div>
+      </dl>
+    </section>
+
+    <section class="quotes" id="quotes">
+      <p class="sec-label">개장 전 숫자</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>항목</th><th class="r">값</th><th class="r">전일 대비</th></tr></thead>
+          <tbody>
+            <tr><td>코스피<span class="sub">10일 종가</span></td><td class="r num">5,239.13</td><td class="r num up">+4.39%</td></tr>
+            <tr><td>코스피<span class="sub">11일 시가</span></td><td class="r num">5,209.71</td><td class="r num down">-0.56%</td></tr>
+            <tr><td>코스닥<span class="sub">10일 종가</span></td><td class="r num">667.61</td><td class="r num up">+4.48%</td></tr>
+            <tr><td>S&amp;P500</td><td class="r num">7,520.93</td><td class="r num down">-0.38%</td></tr>
+            <tr><td>나스닥</td><td class="r num">25,065.87</td><td class="r num down">-0.74%</td></tr>
+            <tr><td>다우</td><td class="r num">52,231.89</td><td class="r num down">-0.30%</td></tr>
+            <tr><td>원/달러<span class="sub">10일 주간 종가</span></td><td class="r num">1,337.5원</td><td class="r num down">-9.6원</td></tr>
+            <tr><td>미국 10년물 국채금리</td><td class="r num">4.99%</td><td class="r num up">+0.11%p</td></tr>
+            <tr><td>국고채 3년물<span class="sub">10일 마감</span></td><td class="r num">3.633%</td><td class="r num">-</td></tr>
+            <tr><td>브렌트유</td><td class="r num">91.49달러</td><td class="r num down">-1.2%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">빨간색은 상승, 파란색은 하락입니다. 미국 지수와 금리, 유가는 현지 10일 마감 기준입니다.</p>
+    </section>
+
+    <!-- 1 -->
+    <article class="story" id="s1">
+      <div class="story-meta"><span class="n">1/6</span><span>미국 경제, 약 5분</span></div>
+      <h2>미국 10월 소비자물가, 예상보다 0.1%p씩 높았다</h2>
+      <p>미국 노동통계국이 10일 발표한 10월 소비자물가지수(CPI)는 전월보다 0.4% 올랐습니다. 시장 예상은 0.3%였습니다. 식품과 에너지를 뺀 근원 CPI도 0.3% 올라 예상치 0.2%를 넘었습니다. 식료품과 전기요금 같은 생활비 항목 상승 폭이 컸습니다.</p>
+      <p>연준 쪽 반응도 빨랐습니다. 월러 연준 이사는 근원물가가 한 달에 0.3% 오르면 더 강한 대응이 필요할 수 있다고 미리 말해 둔 상태였는데, 이번 수치가 정확히 그 선에 걸렸습니다. 로건 댈러스 연은 총재는 0.25%p 인상이 적어도 두 번 더 필요하다고 했습니다. 지난주 금요일 10월 고용지표가 16만5천 명 증가로 예상을 크게 웃돈 뒤 CME FedWatch 기준 12월 인상 확률은 이미 80%를 넘어 있었습니다.</p>
+      <p>국내 증권가에서는 반론도 나옵니다. 키움증권은 12월 회의에서 0.5%p를 한 번에 올릴 가능성은 낮다고 봤습니다.</p>
+
+      <div class="concept">
+        <h3>알아둘 개념, 근원 CPI</h3>
+        <p>식품과 에너지는 날씨나 전쟁 같은 일로 가격이 크게 흔들립니다. 그래서 물가의 흐름을 보려고 이 둘을 뺀 근원 CPI를 따로 봅니다. 연준이 금리를 정할 때 더 무게를 두는 쪽도 근원 수치입니다.</p>
+        <p>월간 0.1%p 차이가 작아 보이지만 1년으로 환산하면 1.2%p 안팎입니다. 연준 목표가 연 2%인 걸 생각하면 큰 차이입니다.</p>
+      </div>
+
+      <div class="concept">
+        <h3>알아둘 개념, 금리 인상 기대와 주가</h3>
+        <p>금리가 오르면 기업의 이자 부담이 커지고 소비가 줄어듭니다. 또 기업이 미래에 벌 돈을 지금 가치로 환산할 때 더 큰 폭으로 깎게 됩니다. 이익이 먼 미래에 몰려 있는 기술주와 성장주가 금리에 더 민감한 이유입니다. 어제 나스닥 하락 폭이 다우보다 컸던 것도 같은 맥락입니다.</p>
+      </div>
+
+      <div class="quiz" data-quiz>
+        <p class="q">연준이 금리를 정할 때 더 주목하는 근원 CPI에서 빼는 항목은?</p>
+        <div class="opts">
+          <button type="button">주거비와 의료비</button>
+          <button type="button" data-correct>식품과 에너지</button>
+          <button type="button">수입품과 서비스</button>
+        </div>
+        <p class="explain" hidden>가격 변동이 큰 식품과 에너지를 빼고 봅니다. 이번 10월 근원 CPI는 전월 대비 0.3%였습니다.</p>
+      </div>
+      <div class="story-foot"><button type="button" class="done-btn" data-done="s1" aria-pressed="false">다 읽었어요</button></div>
+    </article>
+
+    <!-- 2 -->
+    <article class="story" id="s2">
+      <div class="story-meta"><span class="n">2/6</span><span>채권, 약 4분</span></div>
+      <h2>미국 10년물 국채금리 4.99%, 다시 5% 앞으로</h2>
+      <p>물가 발표 뒤 미국 10년물 국채금리는 전날 4.88%에서 4.99%로 올랐습니다. 장중에는 5%를 넘기도 했습니다. 2년물은 4.7%대로 뛰었습니다. 10년물은 10월 초 5.30%를 넘었다가 내려오던 중이었는데 한 달 만에 다시 올라선 셈입니다.</p>
+      <p>금리에 가장 민감하게 반응한 건 주택건설주였습니다.</p>
+      <div class="facts tbl-wrap">
+        <table>
+          <thead><tr><th>종목</th><th class="r">10일 등락</th></tr></thead>
+          <tbody>
+            <tr><td>레나</td><td class="r num down">-5.4%</td></tr>
+            <tr><td>빌더스퍼스트소스</td><td class="r num down">-4.6%</td></tr>
+            <tr><td>펄트그룹</td><td class="r num down">-3.9%</td></tr>
+            <tr><td>D.R. 호튼</td><td class="r num down">-3.8%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="concept">
+        <h3>알아둘 개념, 채권 가격과 금리는 반대로 움직인다</h3>
+        <p>이미 발행된 채권은 이자가 고정돼 있습니다. 시장 금리가 오르면 새로 나오는 채권이 이자를 더 주니, 기존 채권은 값을 낮춰야 팔립니다. 그래서 금리가 오른다는 말과 채권 가격이 떨어진다는 말은 같은 뜻입니다.</p>
+        <p>2년물은 앞으로 1~2년 기준금리 예상을 빠르게 반영하고, 10년물은 미국 주택담보대출 금리의 기준 역할을 합니다. 10년물이 오르면 대출 금리가 오르고, 집을 사려는 수요가 줄 거라는 예상에 건설주가 먼저 빠집니다.</p>
+      </div>
+
+      <p class="link">1번 기사의 물가 발표가 금리 인상 기대를 키웠고, 그 기대가 국채금리를 밀어 올렸습니다.</p>
+
+      <div class="quiz" data-quiz>
+        <p class="q">이미 발행된 국채의 가격이 떨어졌다면 그 국채의 금리는?</p>
+        <div class="opts">
+          <button type="button" data-correct>올랐다</button>
+          <button type="button">내렸다</button>
+          <button type="button">변하지 않는다</button>
+        </div>
+        <p class="explain" hidden>받는 이자는 그대로인데 더 싸게 살 수 있으니 투자금 대비 수익률, 즉 금리는 오른 것입니다.</p>
+      </div>
+      <div class="story-foot"><button type="button" class="done-btn" data-done="s2" aria-pressed="false">다 읽었어요</button></div>
+    </article>
+
+    <!-- 3 -->
+    <article class="story" id="s3">
+      <div class="story-meta"><span class="n">3/6</span><span>국내 증시, 약 5분</span></div>
+      <h2>코스피 하루 4.39% 급등, 오늘은 5,200선에서 숨 고르기</h2>
+      <p>10일 코스피는 220.28포인트 오른 5,239.13에 마감했습니다. 장중에는 5,300.92까지 올랐습니다. 사흘 연속 떨어진 뒤라 저가 매수가 몰렸고, 전날 미국 반도체주 반등과 유가 하락도 영향을 줬습니다. 오전 9시 6분에는 매수 사이드카가 발동됐습니다.</p>
+      <div class="facts tbl-wrap">
+        <table>
+          <thead><tr><th>10일 유가증권시장</th><th class="r">순매수</th></tr></thead>
+          <tbody>
+            <tr><td>외국인<span class="sub">8거래일 만에 순매수</span></td><td class="r num up">약 3,600억원</td></tr>
+            <tr><td>기관</td><td class="r num up">약 4,890억원</td></tr>
+            <tr><td>개인</td><td class="r num down">약 -1조3,000억원</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">외국인 순매수 규모는 매체에 따라 3,586억원, 3,659억원으로 다르게 나와 약 3,600억원으로 적었습니다.</p>
+      <p style="margin-top:12px">삼성전자는 4.74% 오른 19만8,900원, SK하이닉스는 6.69% 오른 121만2,000원에 마감했습니다.</p>
+      <p>오늘은 미국 물가 부담으로 0.56% 내린 5,209.71로 출발했고, 9시 13분에는 5,239.73으로 보합권까지 회복했습니다. 이 시각 외국인은 613억원 순매도, 기관은 698억원 순매수였습니다. 코스닥은 2.36% 오른 683.35로 강했습니다. 하루 순매수만으로 외국인이 본격적으로 돌아왔다고 보기는 이르다는 평가가 많아, 며칠 더 지켜봐야 합니다.</p>
+
+      <div class="concept">
+        <h3>알아둘 개념, 사이드카</h3>
+        <p>코스피200 선물 가격이 전일보다 5% 이상 오르거나 내린 상태가 1분 동안 이어지면 프로그램 매매 주문 효력을 5분간 멈추는 장치입니다. 컴퓨터가 자동으로 내는 대량 주문이 시장을 한쪽으로 몰아가는 걸 잠시 막는 용도이고, 하루에 한 번만 발동됩니다. 어제는 상승 쪽이라 매수 사이드카였습니다.</p>
+      </div>
+      <div class="concept">
+        <h3>알아둘 개념, 수급과 차익실현</h3>
+        <p>수급은 누가 사고 누가 팔았는지를 말합니다. 국내 시장은 외국인 매매 방향에 지수가 크게 좌우돼서 기사에 자주 나옵니다. 차익실현은 오른 주식을 팔아 이익을 확정하는 것입니다. 하루에 4% 넘게 오르면 다음 날 이런 매물이 나오기 쉽습니다.</p>
+      </div>
+
+      <div class="quiz" data-quiz>
+        <p class="q">매수 사이드카가 발동되면 5분간 멈추는 것은?</p>
+        <div class="opts">
+          <button type="button">코스피 시장 전체 거래</button>
+          <button type="button" data-correct>프로그램 매매 매수 주문</button>
+          <button type="button">외국인 투자자 주문</button>
+        </div>
+        <p class="explain" hidden>시장 전체 거래를 멈추는 건 서킷브레이커이고, 사이드카는 프로그램 매매 주문만 잠시 멈춥니다.</p>
+      </div>
+      <div class="story-foot"><button type="button" class="done-btn" data-done="s3" aria-pressed="false">다 읽었어요</button></div>
+    </article>
+
+    <!-- 4 -->
+    <article class="story" id="s4">
+      <div class="story-meta"><span class="n">4/6</span><span>외환, 약 4분</span></div>
+      <h2>원/달러 환율 1,337.5원, 하루 만에 9.6원 내려</h2>
+      <p>10일 원/달러 환율은 주간 거래에서 전날보다 9.6원 내린 1,337.5원에 마감했습니다. 외국인이 한국 주식을 사들인 날 원화 값도 같이 올랐습니다. 오늘 오전 9시 기준으로는 1,339.2원입니다.</p>
+      <p>다만 미국 물가 발표 뒤 달러가 다시 강해졌고 미국 국채금리도 올라서, 오늘 장에서는 환율이 다시 오를 수 있다는 전망이 나옵니다.</p>
+
+      <div class="concept">
+        <h3>알아둘 개념, 환율이 내리면 원화가 강해진 것</h3>
+        <p>원/달러 환율은 1달러를 사는 데 필요한 원화입니다. 1,347원에서 1,337원으로 내려가면 같은 1달러를 10원 적게 주고 살 수 있으니 원화 가치가 오른 것입니다.</p>
+        <p>외국인이 한국 주식을 사려면 달러를 원화로 바꿔야 해서 원화 수요가 늘어납니다. 반대로 미국 금리가 오르면 달러 자산에 돈이 몰려 달러가 강해집니다. 어제와 오늘 이 두 힘이 반대 방향으로 작용하고 있습니다.</p>
+      </div>
+
+      <p class="link">2번 기사의 미국 금리 상승은 달러 강세 쪽, 3번 기사의 외국인 순매수는 원화 강세 쪽입니다.</p>
+
+      <div class="quiz" data-quiz>
+        <p class="q">원/달러 환율이 1,347원에서 1,337원으로 내렸다. 원화 가치는?</p>
+        <div class="opts">
+          <button type="button" data-correct>올랐다</button>
+          <button type="button">내렸다</button>
+        </div>
+        <p class="explain" hidden>1달러를 사는 데 원화가 덜 들어가니 원화 가치가 오른 것입니다. 해외 직구나 수입 원자재 가격에는 유리합니다.</p>
+      </div>
+      <div class="story-foot"><button type="button" class="done-btn" data-done="s4" aria-pressed="false">다 읽었어요</button></div>
+    </article>
+
+    <!-- 5 -->
+    <article class="story" id="s5">
+      <div class="story-meta"><span class="n">5/6</span><span>기업, 약 4분</span></div>
+      <h2>엔비디아 5.5% 하락, 이틀 새 시가총액 4,700억달러 넘게 줄 듯</h2>
+      <p>엔비디아 이사회가 젠슨 황 CEO 관련 조사에 착수했다는 보도가 나온 뒤 주가가 이틀 연속 크게 떨어졌습니다. 10일 하락률은 5.5%였고, 두 거래일 합산 시가총액 감소분은 4,700억달러를 넘을 것으로 보입니다. 엔비디아가 실제로 신고한 수출 물량과 선적량 사이에 수만 개 규모의 칩 차이가 있다는 보도도 함께 나왔습니다. 조사 결과는 아직 나오지 않았습니다.</p>
+      <p>반도체 전체가 무너지지는 않았습니다.</p>
+      <div class="facts tbl-wrap">
+        <table>
+          <thead><tr><th>종목</th><th class="r">10일 등락</th></tr></thead>
+          <tbody>
+            <tr><td>엔비디아</td><td class="r num down">-5.5%</td></tr>
+            <tr><td>마이크론</td><td class="r num down">-1.1%</td></tr>
+            <tr><td>AMD</td><td class="r num up">+1.3%</td></tr>
+            <tr><td>브로드컴</td><td class="r num up">+3.9%</td></tr>
+            <tr><td>필라델피아 반도체지수</td><td class="r num down">-1.05%</td></tr>
+            <tr><td>SK하이닉스 미국 ADR<span class="sub">129.66달러</span></td><td class="r num down">-3.51%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>AI 클라우드 업체 코어위브의 매출과 수주잔고가 예상보다 좋게 나와 AI 투자 수요가 꺾일 거라는 걱정은 일부 줄었습니다. 국내에서는 SK하이닉스가 어제 6.69% 오른 상태라 오늘 변동성이 클 수 있습니다.</p>
+
+      <div class="concept">
+        <h3>알아둘 개념, 시가총액 가중 지수</h3>
+        <p>S&amp;P500이나 코스피는 덩치가 큰 회사일수록 지수에 더 많이 반영됩니다. 엔비디아는 S&amp;P500에서 비중이 가장 큰 종목이라, 한 종목이 5% 넘게 빠지면 나머지 종목 상당수가 올라도 지수가 내려갈 수 있습니다. 코스피에서 삼성전자와 SK하이닉스가 하는 역할과 비슷합니다.</p>
+      </div>
+      <div class="concept">
+        <h3>알아둘 개념, ADR</h3>
+        <p>외국 기업 주식을 미국 시장에서 거래할 수 있게 만든 증서입니다. 한국 시간 밤에 거래되기 때문에, 국내 투자자들은 SK하이닉스 ADR 움직임을 다음 날 아침 국내 주가를 가늠하는 데 참고합니다.</p>
+      </div>
+
+      <div class="quiz" data-quiz>
+        <p class="q">엔비디아 한 종목 하락이 S&amp;P500 지수 전체를 끌어내릴 수 있는 이유는?</p>
+        <div class="opts">
+          <button type="button">S&amp;P500은 기술주로만 구성돼 있어서</button>
+          <button type="button" data-correct>시가총액이 큰 종목일수록 지수 반영 비중이 커서</button>
+          <button type="button">엔비디아 주가가 가장 비싸서</button>
+        </div>
+        <p class="explain" hidden>주가 자체가 아니라 시가총액 기준으로 비중이 정해집니다. 엔비디아는 현재 S&amp;P500에서 비중 1위입니다.</p>
+      </div>
+      <div class="story-foot"><button type="button" class="done-btn" data-done="s5" aria-pressed="false">다 읽었어요</button></div>
+    </article>
+
+    <!-- 6 -->
+    <article class="story" id="s6">
+      <div class="story-meta"><span class="n">6/6</span><span>원자재, 약 3분</span></div>
+      <h2>브렌트유 91달러, 이달 초 112달러에서 20% 가까이 내려</h2>
+      <p>브렌트유는 10일 1.2% 내린 배럴당 91.49달러였습니다. 이달 초에는 112달러를 넘었습니다. 트럼프 대통령이 이란 전쟁은 군사적으로 사실상 끝났고 추가 공습 가능성은 낮다고 말한 것이 하락 이유로 꼽힙니다. 루비오 국무장관도 G7 회의에서 제재와 해상 봉쇄가 효과를 내고 있어 대규모 전투는 필요 없다고 설명했습니다.</p>
+      <p>오늘 밤에는 OPEC 월간 보고서가 나옵니다. 산유국들이 내년 수요를 어떻게 보는지 확인할 수 있습니다.</p>
+
+      <div class="concept">
+        <h3>알아둘 개념, 유가와 한국 경제</h3>
+        <p>한국은 원유를 거의 전부 수입합니다. 유가가 내리면 기름값과 원자재 비용이 줄어 물가 부담이 낮아지고, 수입 대금이 줄어 무역수지에도 도움이 됩니다. 원/달러 환율까지 내리면 원화로 계산한 원유 수입 가격은 더 내려갑니다.</p>
+        <p>미국 10월 CPI에는 이달 들어 나타난 유가 하락이 아직 반영되지 않았습니다. 11월 물가에서 이 효과가 얼마나 나올지가 다음 관전 포인트입니다.</p>
+      </div>
+
+      <p class="link">3번 기사에서 어제 코스피 급등 이유 중 하나로 유가 하락이 꼽혔습니다.</p>
+
+      <div class="quiz" data-quiz>
+        <p class="q">유가 하락과 원/달러 환율 하락이 같이 일어나면 국내 원유 수입 가격은?</p>
+        <div class="opts">
+          <button type="button" data-correct>두 효과가 겹쳐 더 많이 내린다</button>
+          <button type="button">서로 상쇄돼 거의 변하지 않는다</button>
+          <button type="button">오히려 오른다</button>
+        </div>
+        <p class="explain" hidden>달러로 표시된 원유값이 내리고, 그 달러를 사는 데 드는 원화도 줄어드니 두 효과가 같은 방향입니다.</p>
+      </div>
+      <div class="story-foot"><button type="button" class="done-btn" data-done="s6" aria-pressed="false">다 읽었어요</button></div>
+    </article>
+
+    <section class="end-block watch" id="econ-watch">
+      <h2>오늘 이후 볼 것</h2>
+      <ul>
+        <li>코스피가 5,200선 위에서 버티는지, 외국인 순매수가 이어지는지</li>
+        <li>오늘 밤 OPEC 월간 보고서와 미국 주택담보대출 신청 지표</li>
+        <li>엔비디아 이사회 조사 진행 상황</li>
+        <li>12월 FOMC에서 0.25%p 인상인지 0.5%p 인상인지</li>
+        <li>러시아와 우크라이나가 10일 아부다비에서 2월 이후 첫 평화 협상을 시작했습니다. 유가와 유럽 시장에 영향을 줄 수 있습니다.</li>
+      </ul>
+    </section>
+
+    <section class="end-block sources">
+      <h2>출처</h2>
+      <ul>
+        <li><a href="https://www.upkoreanews.kr/news/articleView.html?idxno=101110" target="_blank" rel="noopener">업코리아, 오늘 증시 전망</a></li>
+        <li><a href="https://www.topstarnews.net/news/articleView.html?idxno=16273403" target="_blank" rel="noopener">톱스타뉴스, 국내증시 전망</a></li>
+        <li><a href="https://www.blockmedia.co.kr/archives/1164228" target="_blank" rel="noopener">블록미디어, 개장시황</a></li>
+        <li><a href="https://www.fnnews.com/news/202611110859102723" target="_blank" rel="noopener">파이낸셜뉴스, 코스피 개장</a></li>
+        <li><a href="https://www.bnnbloomberg.ca/markets/dow-jones/2026/11/10/wall-street-mixed-in-early-trading-ahead-of-a-new-peek-at-inflation/" target="_blank" rel="noopener">BNN Bloomberg, Markets today</a></li>
+        <li><a href="https://www.thestandard.com.hk/news/article/348128/Morning-Recap-November-11-2026" target="_blank" rel="noopener">The Standard, Morning Recap</a></li>
+        <li><a href="https://www.investing.com/news/stock-market-news/us-economic-calendar-light-on-wednesday-with-mortgage-data-in-focus-93CH-5016580" target="_blank" rel="noopener">Investing.com, 미국 경제 일정</a></li>
+      </ul>
+      <p class="note">장 시작 직후 자료라 마감 수치와 다를 수 있습니다. 매체마다 수치가 다른 경우 본문에 따로 적었습니다.</p>
+    </section>
+   </div>
+  </main>
+</div>
+
+<script>
+(function () {
+  var KEY = "econ-note-2026-11-11";
+  var VIEWS = {
+    econ: { ids: ["s1", "s2", "s3", "s4", "s5", "s6"], minutes: { s1: 5, s2: 4, s3: 5, s4: 4, s5: 4, s6: 3 }, base: 5, toc: "toc", end: "econ-watch" },
+    startup: { ids: ["c1", "c2", "c3", "c4", "c5"], minutes: { c1: 2, c2: 4, c3: 4, c4: 3, c5: 3 }, base: 2, toc: "toc-startup", end: "startup-sources" },
+    issues: { ids: ["p1", "p2", "p3", "p4"], minutes: { p1: 4, p2: 3, p3: 5, p4: 2 }, base: 2, toc: "toc-issues", end: "issues-sources" }
+  };
+  var current = "econ";
+  var done = {};
+  try { done = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { done = {}; }
+
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(done)); } catch (e) {} }
+
+  function viewFor(id) {
+    if (id.indexOf("startup") === 0 || /^c\d$/.test(id)) return "startup";
+    if (id.indexOf("issues") === 0 || /^p\d$/.test(id)) return "issues";
+    return "econ";
+  }
+
+  function render() {
+    Object.keys(VIEWS).forEach(function (name) {
+      var v = VIEWS[name];
+      v.ids.forEach(function (id) {
+        var btn = document.querySelector('[data-done="' + id + '"]');
+        var li = document.querySelector('#' + v.toc + ' li[data-for="' + id + '"]');
+        if (btn) {
+          btn.setAttribute("aria-pressed", done[id] ? "true" : "false");
+          btn.textContent = done[id] ? "읽음 표시 취소" : "다 읽었어요";
+        }
+        if (li) li.classList.toggle("done", !!done[id]);
+      });
+    });
+    var v = VIEWS[current], count = 0, left = v.base, total = v.ids.length;
+    v.ids.forEach(function (id) { if (done[id]) count++; else left += v.minutes[id]; });
+    document.getElementById("progress-text").textContent =
+      count === total ? total + "/" + total + " 다 읽었습니다" : count + "/" + total + " 읽음, 남은 시간 약 " + left + "분";
+    document.getElementById("progress-bar").style.width = (count / total * 100) + "%";
+  }
+
+  function show(name) {
+    current = name;
+    document.getElementById("view-econ").hidden = name !== "econ";
+    document.getElementById("view-startup").hidden = name !== "startup";
+    document.getElementById("view-issues").hidden = name !== "issues";
+    document.getElementById("toc").hidden = name !== "econ";
+    document.getElementById("toc-startup").hidden = name !== "startup";
+    document.getElementById("toc-issues").hidden = name !== "issues";
+    document.querySelectorAll("[data-tab]").forEach(function (a) {
+      if (a.getAttribute("data-tab") === name) a.setAttribute("aria-current", "page");
+      else a.removeAttribute("aria-current");
+    });
+    render();
+  }
+
+  function route() {
+    var id = (location.hash || "").replace("#", "");
+    var name = viewFor(id);
+    var changed = name !== current;
+    show(name);
+    var isTab = id === "econ" || id === "startup" || id === "issues";
+    var target = id && !isTab ? document.getElementById(id) : null;
+    if (target) target.scrollIntoView();
+    else if (changed || isTab) window.scrollTo(0, 0);
+  }
+
+  document.querySelectorAll("[data-done]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-done");
+      var v = VIEWS[viewFor(id)];
+      done[id] = !done[id];
+      save(); render();
+      if (done[id]) {
+        var next = v.ids[v.ids.indexOf(id) + 1];
+        var target = document.getElementById(next || v.end);
+        if (target) target.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+      }
+    });
+  });
+
+  window.addEventListener("hashchange", route);
+
+  document.querySelectorAll("[data-quiz]").forEach(function (quiz) {
+    var buttons = quiz.querySelectorAll(".opts button");
+    var explain = quiz.querySelector(".explain");
+    buttons.forEach(function (b) {
+      b.addEventListener("click", function () {
+        buttons.forEach(function (x) {
+          x.disabled = true;
+          if (x.hasAttribute("data-correct")) x.classList.add("right");
+        });
+        if (!b.hasAttribute("data-correct")) b.classList.add("wrong");
+        explain.textContent = (b.hasAttribute("data-correct") ? "맞습니다. " : "정답은 초록색 보기입니다. ") + explain.textContent;
+        explain.hidden = false;
+      });
+    });
+  });
+
+  route();
+})();
+</script>
+
+</body>
+</html>

@@ -39,6 +39,7 @@ body {
   background: var(--bg); color: var(--fg);
   font-family: var(--font-body); font-size: 16px; line-height: 1.7;
   -webkit-text-size-adjust: 100%;
+  word-break: keep-all; overflow-wrap: break-word;
 }
 body::before {
   content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
@@ -100,7 +101,7 @@ main { min-width: 0; max-width: 680px; }
 .sec-label { font-size: 12px; letter-spacing: .08em; color: var(--muted); font-weight: 500; margin: 0 0 6px; }
 .tbl-wrap { overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
-th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th, td { word-break: normal; text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--rule); vertical-align: top; }
 thead th { font-size: 12px; font-weight: 500; color: var(--muted); border-bottom: 1px solid var(--fg); }
 td.r, th.r { text-align: right; white-space: nowrap; }
 td .sub { display: block; font-size: 12px; color: var(--muted); }
@@ -182,5 +183,30 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
 .items p { margin: 5px 0 0; font-size: 15px; }
 .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 13px; color: var(--muted); margin: 10px 0 0; }
 .legend span { display: inline-flex; gap: 6px; align-items: center; }
+
+/* 폰: 가로 375px까지 한 화면에 맞춘다 */
+@media (max-width: 480px) {
+  body { font-size: 15.5px; }
+  .topbar-in { gap: 6px 10px; padding-block: 8px 0; }
+  .brand { font-size: 15px; white-space: nowrap; }
+  .brand span { display: none; }
+  .progress { gap: 8px; font-size: 12px; white-space: nowrap; }
+  .bar { width: 40px; }
+  .tabs { justify-content: space-between; gap: 2px; }
+  .tabs a { padding: 6px 2px 8px; }
+  .wrap { padding-block: 18px 48px; }
+  .head { margin-bottom: 24px; }
+  .head h1 { font-size: 22px; }
+  .head p { font-size: 14.5px; }
+  .story { padding-top: 22px; margin-bottom: 36px; scroll-margin-top: 96px; }
+  .story h2 { font-size: 19px; }
+  .concept { padding: 12px 14px; }
+  .concept p { font-size: 14.5px; }
+  table { font-size: 14px; }
+  th, td { padding: 8px 4px; }
+  .opts button { min-height: 44px; padding: 10px 12px; }
+  .done-btn { min-height: 44px; }
+  .glossary .row { font-size: 14.5px; }
+}
 
 @media (prefers-reduced-motion: reduce) { .bar i { transition: none; } }

@@ -1,6 +1,6 @@
 # 출근길 경제노트
 
-- 출근 30분 동안 읽는 경제, 스타트업, 시사 뉴스 정리 페이지
+- 출근 30분 동안 읽는 경제, 스타트업, 시사, 국제, IT과학, 산업, 부동산 뉴스 정리 페이지
 - 배포 주소 https://commute-econ-note.vercel.app
 - main 브랜치에 올라오면 Vercel이 자동 배포
 - 매일 아침 7시에 그날 뉴스로 갱신
@@ -27,7 +27,7 @@
 
 ## 페이지 구성 규칙
 
-- 탭은 `data-view` 속성으로 구분 (econ, startup, issues)
+- 탭은 `data-view` 속성으로 구분 (econ, startup, issues, world, tech, industry, realty)
 - 기사와 카테고리는 `article.story`, 읽는 시간은 `data-min` 에 분 단위로 기록
 - 탭별 기본 시간은 `data-base`, 마지막 섹션 id는 `data-end`
 - 날짜는 `.wrap` 의 `data-date` 에 기록, 읽음 표시는 날짜별로 따로 저장

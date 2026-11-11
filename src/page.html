@@ -158,10 +158,12 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
 .end-block h2 { font-size: 18px; margin: 0 0 10px; }
 
 /* 탭 */
-.tabs { display: flex; gap: 4px; }
+.tabs { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; max-width: 100%; }
+.tabs::-webkit-scrollbar { display: none; }
+@media (max-width: 720px) { .tabs { order: 3; width: 100%; } }
 .tabs a {
   padding: 4px 10px; font-size: 14px; color: var(--muted); text-decoration: none;
-  border-bottom: 2px solid transparent;
+  border-bottom: 2px solid transparent; white-space: nowrap; flex: none;
 }
 .tabs a[aria-current="page"] { color: var(--fg); border-bottom-color: var(--fg); font-weight: 500; }
 .tabs a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
@@ -192,6 +194,10 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
       <a href="#econ" data-tab="econ" aria-current="page">경제</a>
       <a href="#startup" data-tab="startup">스타트업</a>
       <a href="#issues" data-tab="issues">시사</a>
+      <a href="#world" data-tab="world">국제</a>
+      <a href="#tech" data-tab="tech">IT과학</a>
+      <a href="#industry" data-tab="industry">산업</a>
+      <a href="#realty" data-tab="realty">부동산</a>
     </nav>
     <div class="progress" aria-live="polite">
       <span id="progress-text">0/6 읽음, 약 30분</span>
@@ -215,8 +221,34 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
       <li data-for="issues-glossary"><a href="#issues-glossary"><span class="t">2분</span>먼저 알아둘 단어</a></li>
       <li data-for="p1"><a href="#p1"><span class="t">4분</span>예산 심사와 종부세</a></li>
       <li data-for="p2"><a href="#p2"><span class="t">3분</span>내란 재판 대법원</a></li>
-      <li data-for="p3"><a href="#p3"><span class="t">5분</span>미국 선거와 국제 정세</a></li>
-      <li data-for="p4"><a href="#p4"><span class="t">2분</span>생활 정책</a></li>
+      <li data-for="p3"><a href="#p3"><span class="t">2분</span>생활 정책</a></li>
+    </ol>
+    <ol id="toc-world" data-toc="world" hidden>
+      <li data-for="world-glossary"><a href="#world-glossary"><span class="t">2분</span>먼저 알아둘 단어</a></li>
+      <li data-for="w1"><a href="#w1"><span class="t">4분</span>미국 중간선거</a></li>
+      <li data-for="w2"><a href="#w2"><span class="t">2분</span>중국과 아시아</a></li>
+      <li data-for="w3"><a href="#w3"><span class="t">4분</span>전쟁과 협상</a></li>
+    </ol>
+    <ol id="toc-tech" data-toc="tech" hidden>
+      <li data-for="tech-glossary"><a href="#tech-glossary"><span class="t">2분</span>먼저 알아둘 단어</a></li>
+      <li data-for="t1"><a href="#t1"><span class="t">3분</span>AI</a></li>
+      <li data-for="t2"><a href="#t2"><span class="t">3분</span>반도체와 하드웨어</a></li>
+      <li data-for="t3"><a href="#t3"><span class="t">2분</span>빅테크와 플랫폼</a></li>
+      <li data-for="t4"><a href="#t4"><span class="t">2분</span>과학과 우주</a></li>
+    </ol>
+    <ol id="toc-industry" data-toc="industry" hidden>
+      <li data-for="industry-glossary"><a href="#industry-glossary"><span class="t">2분</span>먼저 알아둘 단어</a></li>
+      <li data-for="i1"><a href="#i1"><span class="t">3분</span>실적과 공시</a></li>
+      <li data-for="i2"><a href="#i2"><span class="t">3분</span>자동차와 배터리</a></li>
+      <li data-for="i3"><a href="#i3"><span class="t">2분</span>조선과 중공업</a></li>
+      <li data-for="i4"><a href="#i4"><span class="t">2분</span>유통과 소비재</a></li>
+    </ol>
+    <ol id="toc-realty" data-toc="realty" hidden>
+      <li data-for="realty-glossary"><a href="#realty-glossary"><span class="t">2분</span>먼저 알아둘 단어</a></li>
+      <li data-for="r1"><a href="#r1"><span class="t">3분</span>집값과 거래</a></li>
+      <li data-for="r2"><a href="#r2"><span class="t">3분</span>정책과 세제</a></li>
+      <li data-for="r3"><a href="#r3"><span class="t">2분</span>분양과 청약</a></li>
+      <li data-for="r4"><a href="#r4"><span class="t">2분</span>대출과 금리</a></li>
     </ol>
     <ol id="toc" data-toc="econ">
       <li data-for="glossary"><a href="#glossary"><span class="t">3분</span>먼저 알아둘 단어</a></li>
@@ -235,7 +267,7 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
     <div class="head">
       <p class="date">2026년 11월 11일 수요일, 최근 1주 기사 기준</p>
       <h1>예산 심사가 시작됐고, 종부세 공제를 두고 여당과 청와대 의견이 갈립니다</h1>
-      <p>경제 기사는 아니지만 업무 대화나 시장 흐름에 자주 나오는 소식을 네 갈래로 묶었습니다. 단어 정리를 포함해 약 16분 분량입니다.</p>
+      <p>경제 기사는 아니지만 업무 대화나 시장 흐름에 자주 나오는 국내 소식을 세 갈래로 묶었습니다. 국제 소식은 국제 탭에 있습니다. 단어 정리를 포함해 약 11분 분량입니다.</p>
       <div class="legend">
         <span><span class="tag fact">확정</span>결정되거나 발표된 일</span>
         <span><span class="tag plan">진행 중</span>심사나 협상, 집계 중이거나 예정</span>
@@ -255,14 +287,12 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
         <div class="row"><dt>실거주</dt><dd>집을 갖고 있으면서 실제로 그 집에 사는 것</dd></div>
         <div class="row"><dt>전원합의체</dt><dd>대법원장과 대법관 전원이 함께 심리하는 재판부</dd></div>
         <div class="row"><dt>구속기간</dt><dd>재판 중인 피고인을 가둘 수 있는 법정 기간. 넘기면 석방 후 재판 계속</dd></div>
-        <div class="row"><dt>중간선거</dt><dd>미국 대통령 임기 중간에 하원 전체와 상원 3분의 1을 뽑는 선거</dd></div>
-        <div class="row"><dt>분점정부</dt><dd>대통령 소속 정당과 의회 다수당이 다른 상태</dd></div>
         <div class="row"><dt>최소보장제</dt><dd>전세사기 피해자가 경매나 공매가 끝나기 전에도 보증금 일부를 먼저 지원받는 제도</dd></div>
       </dl>
     </section>
 
     <article class="story" id="p1" data-min="4">
-      <div class="story-meta"><span class="n">1/4</span><span>국내 정치, 약 4분</span></div>
+      <div class="story-meta"><span class="n">1/3</span><span>국내 정치, 약 4분</span></div>
       <h2>예결위 비경제부처 심사 시작, 종부세 공제는 당청 이견이 이어집니다</h2>
       <ul class="items">
         <li>
@@ -285,7 +315,7 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
     </article>
 
     <article class="story" id="p2" data-min="3">
-      <div class="story-meta"><span class="n">2/4</span><span>사법, 약 3분</span></div>
+      <div class="story-meta"><span class="n">2/3</span><span>사법, 약 3분</span></div>
       <h2>한덕수 전 총리 구속기간 만료 하루 전에 대법원 전원합의체가 두 번째 심리를 엽니다</h2>
       <ul class="items">
         <li>
@@ -305,33 +335,8 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
       <div class="story-foot"><button type="button" class="done-btn" data-done="p2" aria-pressed="false">다 읽었어요</button></div>
     </article>
 
-    <article class="story" id="p3" data-min="5">
-      <div class="story-meta"><span class="n">3/4</span><span>국제, 약 5분</span></div>
-      <h2>미국 중간선거에서 민주당이 상하원 다수를 확보했고, 러시아와 우크라이나 협상이 열렸습니다</h2>
-      <ul class="items">
-        <li>
-          <div class="item-head"><span class="tag plan">집계 중</span><strong>미국 중간선거, 민주당 상하원 다수</strong><span class="when">11월 3일 선거</span></div>
-          <p>집계 기관마다 의석수가 다릅니다. 로이터의 8일 집계로 하원은 민주당 250석, 공화당 157석이고, 한 국내 보도는 같은 시점 민주당 240석, 공화당 139석으로 전했습니다. 상원은 민주당 54석, 공화당 44석이고 미시시피와 알래스카는 개표가 이어지고 있습니다. 하원 과반은 218석, 상원 과반은 51석입니다. 공식 인증 전의 잠정 수치입니다.</p>
-        </li>
-        <li>
-          <div class="item-head"><span class="tag plan">진행 중</span><strong>러시아와 우크라이나, 미국 중재로 아부다비 협상</strong><span class="when">10일부터 이틀</span></div>
-          <p>9개월 만에 열린 미국 중재 협상의 첫날 회담은 4시간 가까이 이어졌습니다. 젤렌스키 대통령은 첫날이 건설적이고 내용이 있었다고 했고, 포로 교환과 아이들 송환 같은 인도적 사안이 논의됐다고 우크라이나 고위 당국자가 전했습니다. 루비오 미 국무장관은 매우 생산적이었다면서도 인내가 필요하다고 했습니다. 양측 입장 차이가 커서 포괄적 합의를 기대하는 전망은 적습니다. 둘째 날인 오늘 결과는 확인하지 못했습니다.</p>
-        </li>
-        <li>
-          <div class="item-head"><span class="tag plan">예정</span><strong>미국, 이란 추가 공격 보류</strong><span class="when">9일과 10일 발언</span></div>
-          <p>트럼프 대통령은 9일 카타르 총리 등 중동 국가들의 요청을 받아 이란에 대한 새 군사 공격을 보류할 계획이라고 했고, 10일에는 재공격이 필요하지 않다며 전쟁 종식을 향한 진전이 있다고 밝혔습니다. 루비오 장관은 같은 목적을 경제적 수단으로 달성하고 있다고 설명했습니다. 이란 측 고위 관계자는 미국과 협상이 진행 중이라는 주장을 부인했습니다. 경제 탭 6번 기사의 유가 하락과 이어지는 내용입니다.</p>
-        </li>
-      </ul>
-      <div class="concept">
-        <h3>알아둘 개념, 중간선거와 분점정부</h3>
-        <p>미국 대통령 임기 4년 중간에 치르는 선거로 하원 전체와 상원 3분의 1을 새로 뽑습니다. 대통령과 의회 다수당이 다르면 분점정부라고 부릅니다. 법안과 예산은 의회를 통과해야 해서 대통령 정책을 밀어붙이기 어려워지고, 행정명령에 기대는 경우가 늘어납니다.</p>
-      </div>
-      <p class="link">관세, 전쟁 비용, 감세처럼 의회 예산과 법이 필요한 정책은 새 의회가 열린 뒤 추진 방식이 달라질 수 있습니다. 한국 수출 기업도 영향을 받는 부분입니다.</p>
-      <div class="story-foot"><button type="button" class="done-btn" data-done="p3" aria-pressed="false">다 읽었어요</button></div>
-    </article>
-
-    <article class="story" id="p4" data-min="2">
-      <div class="story-meta"><span class="n">4/4</span><span>사회와 생활, 약 2분</span></div>
+    <article class="story" id="p3" data-min="2">
+      <div class="story-meta"><span class="n">3/3</span><span>사회와 생활, 약 2분</span></div>
       <h2>전세사기 최소보장제가 13일 시행되고, 겨울철 대책이 나왔습니다</h2>
       <ul class="items">
         <li>
@@ -347,7 +352,7 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
           <p>복지부는 2026년과 2027년 겨울 보호대책으로 위기가구 집중 발굴과 생활 안정 지원 등 5대 분야를 제시했습니다. 행정안전부는 정부와 민간 기업이 협력해 폭설 때 제설제를 빠르게 확보하는 체계를 가동한다고 밝혔습니다. 해양수산부는 11일부터 항만 드론 비행 금지 정보를 표기하기 시작했고 무단 비행은 과태료 대상입니다.</p>
         </li>
       </ul>
-      <div class="story-foot"><button type="button" class="done-btn" data-done="p4" aria-pressed="false">다 읽었어요</button></div>
+      <div class="story-foot"><button type="button" class="done-btn" data-done="p3" aria-pressed="false">다 읽었어요</button></div>
     </article>
 
     <section class="end-block sources" id="issues-sources">
@@ -361,16 +366,314 @@ td .sub { display: block; font-size: 12px; color: var(--muted); }
         <li><a href="https://www.hankookilbo.com/news/article/A2026111010470005890" target="_blank" rel="noopener">한국일보, 대법 전원합의체 19일 심리</a></li>
         <li><a href="https://www.khan.co.kr/article/202611102133035/" target="_blank" rel="noopener">경향신문, 한덕수 석방 가능성</a></li>
         <li><a href="https://www.sisajournal.com/news/articleView.html?idxno=393441" target="_blank" rel="noopener">시사저널, 구속기간 만료 하루 전 심리</a></li>
+        <li><a href="https://www.korea.kr/news/policyNewsView.do?newsId=148922123" target="_blank" rel="noopener">정책브리핑, 11월부터 달라지는 정책</a></li>
+        <li><a href="http://www.sisunnews.co.kr/news/articleView.html?idxno=249441" target="_blank" rel="noopener">시선뉴스, 11월 11일 주요 정책</a></li>
+        <li><a href="https://www.ghnews.net/news/article.html?no=250580" target="_blank" rel="noopener">경기헤드뉴스, 전세사기 최소보장제 안내</a></li>
+      </ul>
+      <p class="note">수치는 검색 결과를 교차 확인한 값입니다. 확인 전 표시는 한 매체 보도 기준입니다. 종부세 대통령 면담 결과는 확인하지 못했습니다.</p>
+    </section>
+   </div>
+
+   <div id="view-world" data-view="world" data-base="2" data-end="world-sources" hidden>
+    <div class="head">
+      <p class="date">2026년 11월 11일 수요일, 최근 1주 기사 기준</p>
+      <h1>미국 중간선거에서 민주당이 상하원 다수를 확보했고, 러시아와 우크라이나 협상이 열렸습니다</h1>
+      <p>미국, 중국과 아시아, 유럽, 전쟁과 협상처럼 국내 시장에도 영향을 주는 해외 소식을 모았습니다. 단어 정리를 포함해 약 12분 분량입니다.</p>
+      <div class="legend">
+        <span><span class="tag fact">확정</span>결정되거나 발표된 일</span>
+        <span><span class="tag plan">진행 중</span>심사나 협상, 집계 중이거나 예정</span>
+        <span><span class="tag rule">시행 중</span>이미 적용되는 대책</span>
+      </div>
+    </div>
+
+    <section class="end-block glossary" id="world-glossary">
+      <h2>먼저 알아둘 단어</h2>
+      <dl>
+        <div class="row"><dt>중간선거</dt><dd>미국 대통령 임기 중간에 하원 전체와 상원 3분의 1을 뽑는 선거</dd></div>
+        <div class="row"><dt>분점정부</dt><dd>대통령 소속 정당과 의회 다수당이 다른 상태</dd></div>
+      </dl>
+    </section>
+
+    <article class="story" id="w1" data-min="4">
+      <div class="story-meta"><span class="n">1/3</span><span>미국, 약 4분</span></div>
+      <h2>미국 중간선거에서 민주당이 상하원 다수를 확보했습니다</h2>
+      <ul class="items">
+        <li>
+          <div class="item-head"><span class="tag plan">집계 중</span><strong>미국 중간선거, 민주당 상하원 다수</strong><span class="when">11월 3일 선거</span></div>
+          <p>집계 기관마다 의석수가 다릅니다. 로이터의 8일 집계로 하원은 민주당 250석, 공화당 157석이고, 한 국내 보도는 같은 시점 민주당 240석, 공화당 139석으로 전했습니다. 상원은 민주당 54석, 공화당 44석이고 미시시피와 알래스카는 개표가 이어지고 있습니다. 하원 과반은 218석, 상원 과반은 51석입니다. 공식 인증 전의 잠정 수치입니다.</p>
+        </li>
+      </ul>
+      <div class="concept">
+        <h3>알아둘 개념, 중간선거와 분점정부</h3>
+        <p>미국 대통령 임기 4년 중간에 치르는 선거로 하원 전체와 상원 3분의 1을 새로 뽑습니다. 대통령과 의회 다수당이 다르면 분점정부라고 부릅니다. 법안과 예산은 의회를 통과해야 해서 대통령 정책을 밀어붙이기 어려워지고, 행정명령에 기대는 경우가 늘어납니다.</p>
+      </div>
+      <p class="link">관세, 전쟁 비용, 감세처럼 의회 예산과 법이 필요한 정책은 새 의회가 열린 뒤 추진 방식이 달라질 수 있습니다. 한국 수출 기업도 영향을 받는 부분입니다.</p>
+      <div class="story-foot"><button type="button" class="done-btn" data-done="w1" aria-pressed="false">다 읽었어요</button></div>
+    </article>
+
+    <article class="story" id="w2" data-min="2">
+      <div class="story-meta"><span class="n">2/3</span><span>중국과 아시아, 약 2분</span></div>
+      <h2>중국과 아시아</h2>
+      <ul class="items">
+        <li>
+          <div class="item-head"><span class="tag plan">예정</span><strong>중국, 일본, 아시아 소식</strong></div>
+          <p>다음 아침 갱신부터 이 칸에 그날 기사가 들어갑니다.</p>
+        </li>
+      </ul>
+      <div class="story-foot"><button type="button" class="done-btn" data-done="w2" aria-pressed="false">다 읽었어요</button></div>
+    </article>
+
+    <article class="story" id="w3" data-min="4">
+      <div class="story-meta"><span class="n">3/3</span><span>전쟁과 협상, 약 4분</span></div>
+      <h2>러시아와 우크라이나가 아부다비에서 협상했고, 미국은 이란 추가 공격을 보류했습니다</h2>
+      <ul class="items">
+        <li>
+          <div class="item-head"><span class="tag plan">진행 중</span><strong>러시아와 우크라이나, 미국 중재로 아부다비 협상</strong><span class="when">10일부터 이틀</span></div>
+          <p>9개월 만에 열린 미국 중재 협상의 첫날 회담은 4시간 가까이 이어졌습니다. 젤렌스키 대통령은 첫날이 건설적이고 내용이 있었다고 했고, 포로 교환과 아이들 송환 같은 인도적 사안이 논의됐다고 우크라이나 고위 당국자가 전했습니다. 루비오 미 국무장관은 매우 생산적이었다면서도 인내가 필요하다고 했습니다. 양측 입장 차이가 커서 포괄적 합의를 기대하는 전망은 적습니다. 둘째 날인 오늘 결과는 확인하지 못했습니다.</p>
+        </li>
+        <li>
+          <div class="item-head"><span class="tag plan">예정</span><strong>미국, 이란 추가 공격 보류</strong><span class="when">9일과 10일 발언</span></div>
+          <p>트럼프 대통령은 9일 카타르 총리 등 중동 국가들의 요청을 받아 이란에 대한 새 군사 공격을 보류할 계획이라고 했고, 10일에는 재공격이 필요하지 않다며 전쟁 종식을 향한 진전이 있다고 밝혔습니다. 루비오 장관은 같은 목적을 경제적 수단으로 달성하고 있다고 설명했습니다. 이란 측 고위 관계자는 미국과 협상이 진행 중이라는 주장을 부인했습니다. 경제 탭의 유가 하락 기사와 이어지는 내용입니다.</p>
+        </li>
+      </ul>
+      <div class="story-foot"><button type="button" class="done-btn" data-done="w3" aria-pressed="false">다 읽었어요</button></div>
+    </article>
+
+    <section class="end-block sources" id="world-sources">
+      <h2>출처</h2>
+      <ul>
         <li><a href="https://www.munhwa.com/article/11628884" target="_blank" rel="noopener">문화일보, 미국 중간선거 개표 현황</a></li>
         <li><a href="https://kr.investing.com/news/economy-news/article-2157497" target="_blank" rel="noopener">Investing.com, 민주당 상하원 선두</a></li>
         <li><a href="https://www.pbs.org/newshour/world/russia-and-ukraine-hold-nearly-4-hours-of-u-s-mediated-talks-in-abu-dhabi" target="_blank" rel="noopener">PBS, 아부다비 협상 첫날</a></li>
         <li><a href="https://www.france24.com/en/europe/20261110-live-ukraine-russia-and-us-to-resume-peace-talks-in-abu-dhabi" target="_blank" rel="noopener">France 24, 아부다비 협상</a></li>
         <li><a href="https://www.etoday.co.kr/news/view/2646499" target="_blank" rel="noopener">이투데이, 이란 재공격 우려 완화</a></li>
-        <li><a href="https://www.korea.kr/news/policyNewsView.do?newsId=148922123" target="_blank" rel="noopener">정책브리핑, 11월부터 달라지는 정책</a></li>
-        <li><a href="http://www.sisunnews.co.kr/news/articleView.html?idxno=249441" target="_blank" rel="noopener">시선뉴스, 11월 11일 주요 정책</a></li>
-        <li><a href="https://www.ghnews.net/news/article.html?no=250580" target="_blank" rel="noopener">경기헤드뉴스, 전세사기 최소보장제 안내</a></li>
       </ul>
-      <p class="note">수치는 검색 결과를 교차 확인한 값입니다. 확인 전 표시는 한 매체 보도 기준입니다. 미국 의석수는 집계 기관마다 달라 두 값을 함께 적었습니다. 아부다비 협상 둘째 날 결과와 종부세 대통령 면담 결과는 확인하지 못했습니다.</p>
+      <p class="note">수치는 검색 결과를 교차 확인한 값입니다. 확인 전 표시는 한 매체 보도 기준입니다. 미국 의석수는 집계 기관마다 달라 두 값을 함께 적었습니다. 아부다비 협상 둘째 날 결과는 확인하지 못했습니다.</p>
+    </section>
+   </div>
+
+   <div id="view-tech" data-view="tech" data-base="2" data-end="tech-sources" hidden>
+    <div class="head">
+      <p class="date">2026년 11월 11일 수요일, 최근 1주 기사 기준</p>
+      <h1>IT와 과학 소식은 다음 아침 갱신부터 채워집니다</h1>
+      <p>AI, 반도체, 빅테크와 플랫폼, 과학과 우주 소식을 모았습니다. 단어 정리를 포함해 약 12분 분량입니다.</p>
+      <div class="legend">
+        <span><span class="tag fact">확정</span>결정되거나 발표된 일</span>
+        <span><span class="tag plan">진행 중</span>심사나 협상, 집계 중이거나 예정</span>
+        <span><span class="tag rule">시행 중</span>이미 적용되는 대책</span>
+      </div>
+    </div>
+
+    <section class="end-block glossary" id="tech-glossary">
+      <h2>먼저 알아둘 단어</h2>
+      <dl>
+        <div class="row"><dt>안내</dt><dd>그날 기사에 나오는 단어를 다음 갱신부터 정리합니다</dd></div>
+      </dl>
+    </section>
+
+    <article class="story" id="t1" data-min="3">
+      <div class="story-meta"><span class="n">1/4</span><span>AI, 약 3분</span></div>
+      <h2>AI</h2>
+      <ul class="items">
+        <li>
+          <div class="item-head"><span class="tag plan">예정</span><strong>AI 소식</strong></div>
+          <p>다음 아침 갱신부터 이 칸에 그날 기사가 들어갑니다.</p>
+        </li>
+      </ul>
+      <div class="story-foot"><button type="button" class="done-btn" data-done="t1" aria-pressed="false">다 읽었어요</button></div>
+    </article>
+
+    <article class="story" id="t2" data-min="3">
+      <div class="story-meta"><span class="n">2/4</span><span>반도체와 하드웨어, 약 3분</span></div>
+      <h2>반도체와 하드웨어</h2>
+      <ul class="items">
+        <li>
+          <div class="item-head"><span class="tag plan">예정</span><strong>반도체와 하드웨어 소식</strong></div>
+          <p>다음 아침 갱신부터 이 칸에 그날 기사가 들어갑니다.</p>
+        </li>
+      </ul>
+      <div class="story-foot"><button type="button" class="done-btn" data-done="t2" aria-pressed="false">다 읽었어요</button></div>
+    </article>
+
+    <article class="story" id="t3" data-min="2">
+      <div class="story-meta"><span class="n">3/4</span><span>빅테크와 플랫폼, 약 2분</span></div>
+      <h2>빅테크와 플랫폼</h2>
+      <ul class="items">
+        <li>
+          <div class="item-head"><span class="tag plan">예정</span><strong>빅테크와 플랫폼 소식</strong></div>
+          <p>다음 아침 갱신부터 이 칸에 그날 기사가 들어갑니다.</p>
+        </li>
+      </ul>
+      <div class="story-foot"><button type="button" class="done-btn" data-done="t3" aria-pressed="false">다 읽었어요</button></div>
+    </article>
+
+    <article class="story" id="t4" data-min="2">
+      <div class="story-meta"><span class="n">4/4</span><span>과학과 우주, 약 2분</span></div>
+      <h2>과학과 우주</h2>
+      <ul class="items">
+        <li>
+          <div class="item-head"><span class="tag plan">예정</span><strong>과학과 우주 소식</strong></div>
+          <p>다음 아침 갱신부터 이 칸에 그날 기사가 들어갑니다.</p>
+        </li>
+      </ul>
+      <div class="story-foot"><button type="button" class="done-btn" data-done="t4" aria-pressed="false">다 읽었어요</button></div>
+    </article>
+
+    <section class="end-block sources" id="tech-sources">
+      <h2>출처</h2>
+      <ul>
+      </ul>
+      <p class="note">수치는 검색 결과를 교차 확인한 값입니다. 확인 전 표시는 한 매체 보도 기준입니다. 이 탭은 11월 11일에 새로 만들어 다음 갱신부터 기사가 채워집니다.</p>
+    </section>
+   </div>
+
+   <div id="view-industry" data-view="industry" data-base="2" data-end="industry-sources" hidden>
+    <div class="head">
+      <p class="date">2026년 11월 11일 수요일, 최근 1주 기사 기준</p>
+      <h1>산업과 기업 소식은 다음 아침 갱신부터 채워집니다</h1>
+      <p>기업 실적과 공시, 자동차와 배터리, 조선과 중공업, 유통과 소비재 소식을 모았습니다. 단어 정리를 포함해 약 12분 분량입니다.</p>
+      <div class="legend">
+        <span><span class="tag fact">확정</span>결정되거나 발표된 일</span>
+        <span><span class="tag plan">진행 중</span>심사나 협상, 집계 중이거나 예정</span>
+        <span><span class="tag rule">시행 중</span>이미 적용되는 대책</span>
+      </div>
+    </div>
+
+    <section class="end-block glossary" id="industry-glossary">
+      <h2>먼저 알아둘 단어</h2>
+      <dl>
+        <div class="row"><dt>안내</dt><dd>그날 기사에 나오는 단어를 다음 갱신부터 정리합니다</dd></div>
+      </dl>
+    </section>
+
+    <article class="story" id="i1" data-min="3">
+      <div class="story-meta"><span class="n">1/4</span><span>실적과 공시, 약 3분</span></div>
+      <h2>실적과 공시</h2>
+      <ul class="items">
+        <li>
+          <div class="item-head"><span class="tag plan">예정</span><strong>실적과 공시 소식</strong></div>
+          <p>다음 아침 갱신부터 이 칸에 그날 기사가 들어갑니다.</p>
+        </li>
+      </ul>
+      <div class="story-foot"><button type="button" class="done-btn" data-done="i1" aria-pressed="false">다 읽었어요</button></div>
+    </article>
+
+    <article class="story" id="i2" data-min="3">
+      <div class="story-meta"><span class="n">2/4</span><span>자동차와 배터리, 약 3분</span></div>
+      <h2>자동차와 배터리</h2>
+      <ul class="items">
+        <li>
+          <div class="item-head"><span class="tag plan">예정</span><strong>자동차와 배터리 소식</strong></div>
+          <p>다음 아침 갱신부터 이 칸에 그날 기사가 들어갑니다.</p>
+        </li>
+      </ul>
+      <div class="story-foot"><button type="button" class="done-btn" data-done="i2" aria-pressed="false">다 읽었어요</button></div>
+    </article>
+
+    <article class="story" id="i3" data-min="2">
+      <div class="story-meta"><span class="n">3/4</span><span>조선과 중공업, 약 2분</span></div>
+      <h2>조선과 중공업</h2>
+      <ul class="items">
+        <li>
+          <div class="item-head"><span class="tag plan">예정</span><strong>조선과 중공업 소식</strong></div>
+          <p>다음 아침 갱신부터 이 칸에 그날 기사가 들어갑니다.</p>
+        </li>
+      </ul>
+      <div class="story-foot"><button type="button" class="done-btn" data-done="i3" aria-pressed="false">다 읽었어요</button></div>
+    </article>
+
+    <article class="story" id="i4" data-min="2">
+      <div class="story-meta"><span class="n">4/4</span><span>유통과 소비재, 약 2분</span></div>
+      <h2>유통과 소비재</h2>
+      <ul class="items">
+        <li>
+          <div class="item-head"><span class="tag plan">예정</span><strong>유통과 소비재 소식</strong></div>
+          <p>다음 아침 갱신부터 이 칸에 그날 기사가 들어갑니다.</p>
+        </li>
+      </ul>
+      <div class="story-foot"><button type="button" class="done-btn" data-done="i4" aria-pressed="false">다 읽었어요</button></div>
+    </article>
+
+    <section class="end-block sources" id="industry-sources">
+      <h2>출처</h2>
+      <ul>
+      </ul>
+      <p class="note">수치는 검색 결과를 교차 확인한 값입니다. 확인 전 표시는 한 매체 보도 기준입니다. 이 탭은 11월 11일에 새로 만들어 다음 갱신부터 기사가 채워집니다.</p>
+    </section>
+   </div>
+
+   <div id="view-realty" data-view="realty" data-base="2" data-end="realty-sources" hidden>
+    <div class="head">
+      <p class="date">2026년 11월 11일 수요일, 최근 1주 기사 기준</p>
+      <h1>부동산 소식은 다음 아침 갱신부터 채워집니다</h1>
+      <p>집값과 거래, 정책과 세제, 분양과 청약, 대출과 금리 소식을 모았습니다. 단어 정리를 포함해 약 12분 분량입니다.</p>
+      <div class="legend">
+        <span><span class="tag fact">확정</span>결정되거나 발표된 일</span>
+        <span><span class="tag plan">진행 중</span>심사나 협상, 집계 중이거나 예정</span>
+        <span><span class="tag rule">시행 중</span>이미 적용되는 대책</span>
+      </div>
+    </div>
+
+    <section class="end-block glossary" id="realty-glossary">
+      <h2>먼저 알아둘 단어</h2>
+      <dl>
+        <div class="row"><dt>안내</dt><dd>그날 기사에 나오는 단어를 다음 갱신부터 정리합니다</dd></div>
+      </dl>
+    </section>
+
+    <article class="story" id="r1" data-min="3">
+      <div class="story-meta"><span class="n">1/4</span><span>집값과 거래, 약 3분</span></div>
+      <h2>집값과 거래</h2>
+      <ul class="items">
+        <li>
+          <div class="item-head"><span class="tag plan">예정</span><strong>집값과 거래 소식</strong></div>
+          <p>다음 아침 갱신부터 이 칸에 그날 기사가 들어갑니다.</p>
+        </li>
+      </ul>
+      <div class="story-foot"><button type="button" class="done-btn" data-done="r1" aria-pressed="false">다 읽었어요</button></div>
+    </article>
+
+    <article class="story" id="r2" data-min="3">
+      <div class="story-meta"><span class="n">2/4</span><span>정책과 세제, 약 3분</span></div>
+      <h2>정책과 세제</h2>
+      <ul class="items">
+        <li>
+          <div class="item-head"><span class="tag plan">예정</span><strong>정책과 세제 소식</strong></div>
+          <p>다음 아침 갱신부터 이 칸에 그날 기사가 들어갑니다.</p>
+        </li>
+      </ul>
+      <div class="story-foot"><button type="button" class="done-btn" data-done="r2" aria-pressed="false">다 읽었어요</button></div>
+    </article>
+
+    <article class="story" id="r3" data-min="2">
+      <div class="story-meta"><span class="n">3/4</span><span>분양과 청약, 약 2분</span></div>
+      <h2>분양과 청약</h2>
+      <ul class="items">
+        <li>
+          <div class="item-head"><span class="tag plan">예정</span><strong>분양과 청약 소식</strong></div>
+          <p>다음 아침 갱신부터 이 칸에 그날 기사가 들어갑니다.</p>
+        </li>
+      </ul>
+      <div class="story-foot"><button type="button" class="done-btn" data-done="r3" aria-pressed="false">다 읽었어요</button></div>
+    </article>
+
+    <article class="story" id="r4" data-min="2">
+      <div class="story-meta"><span class="n">4/4</span><span>대출과 금리, 약 2분</span></div>
+      <h2>대출과 금리</h2>
+      <ul class="items">
+        <li>
+          <div class="item-head"><span class="tag plan">예정</span><strong>대출과 금리 소식</strong></div>
+          <p>다음 아침 갱신부터 이 칸에 그날 기사가 들어갑니다.</p>
+        </li>
+      </ul>
+      <div class="story-foot"><button type="button" class="done-btn" data-done="r4" aria-pressed="false">다 읽었어요</button></div>
+    </article>
+
+    <section class="end-block sources" id="realty-sources">
+      <h2>출처</h2>
+      <ul>
+      </ul>
+      <p class="note">수치는 검색 결과를 교차 확인한 값입니다. 확인 전 표시는 한 매체 보도 기준입니다. 이 탭은 11월 11일에 새로 만들어 다음 갱신부터 기사가 채워집니다.</p>
     </section>
    </div>
 
